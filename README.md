@@ -1,1 +1,0 @@
-# membership_past_election_data_react
