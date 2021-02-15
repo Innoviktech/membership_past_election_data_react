@@ -2,6 +2,7 @@ import React from 'react';
 import reactDom from 'react-dom';
 import Maindata from './maindata';
 import Member_count from './member_count';
+import Rough from './rough'
 import {BrowserRouter as Router,Link,Switch,Route,} from 'react-router-dom';
 class Sidebar extends React.Component
 {

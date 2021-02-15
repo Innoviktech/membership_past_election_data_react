@@ -1,6 +1,10 @@
 import React from 'react';
 import reactDom from 'react-dom';
 import axios from "axios";
+import MaterialTable from "material-table";
+import FilterList from '@material-ui/icons/FilterList';
+import { forwardRef } from 'react';
+import Select from 'react-select';
 class Member_count extends React.Component
 {
     constructor(props)
@@ -9,49 +13,75 @@ class Member_count extends React.Component
         this.state = {
             constituency_data : [],
             constituency_result : "",
+            constituency_count : [],
+            selectedOption: null,
+           
         }
     }
+
+    
     componentDidMount() {
         axios.get('http://localhost:8000/constituency/')
           .then(res => {
             const constituency_data = res.data;
             this.setState({ constituency_data });
           })
+          
       }
-
-      constituency = ({ target: { value } }) => {
-        
-        this.setState({
-            constituency_result:value
+      handleChange = selectedOption => {
+            this.setState({ selectedOption});
+            const vars =selectedOption.value;
+            console.log(vars)
+            axios.post('http://localhost:8000/constituency_count/', {
+          key1:vars
         })
-        console.log(value);
-        // axios.post('http://localhost:8000/university_filter/', {
-        //   key1:value
-        // })
-        // .then((testing) => {
-        //   const select_university=testing.data;
-        //     this.setState({ select_university });
-        // });
-        // $( "#reset" ).empty();
-        }
+        .then((testing) => {
+          const constituency_count=testing.data;
+            this.setState({ constituency_count });
+        });
+          };
     render()
+
     {
-        console.log(this.state.constituency_result)
+        const { selectedOption } = this.state;
+        const tableicons = {
+            Filter : forwardRef((props, ref) => <FilterList {...props} ref={ref} />)
+        };
+        console.log(this.state.constituency_count)
+        
         return(
            <div>
                <div>
-                <label>Constituency</label>
-                <select name="constituency"  onChange={this.constituency}>
-                    <option disabled="True" selected>Select Your Constituency</option>
-                    {this.state.constituency_data.map((option,index) => (
-                      <option value={option.id}>{option.constituency}</option>
-                      ))}
-                </select>
-              </div>
+                   <label>Constituency</label>
+                <Select
+        value={selectedOption}
+        onChange={this.handleChange}
+        options={this.state.constituency_data}
+/>
+</div>
+<div className="material">
+            <MaterialTable
+        icons={tableicons}
+        options={{}}
+    columns={[
+            {title:"Constituency",field:"name"},
+            { title: "Panchayat", field: "panchayat"},
+            { title: "Polling Booth Number", field: "booth_number"},
+            { title: "Male", field: "male"},
+            { title: "Female", field: "female"},
+            {title:"Other",field:"other"},
+            { title: "Total", field: "total"},
+           
+            ]}
+            data={this.state.constituency_count}
+            title="Member's Report"
+            />
+        </div>
             
            </div>
-            
-        );
+);
     }
+    
 }
+
 export default Member_count;
