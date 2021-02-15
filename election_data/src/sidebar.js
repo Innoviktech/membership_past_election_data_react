@@ -1,6 +1,7 @@
 import React from 'react';
 import reactDom from 'react-dom';
 import Maindata from './maindata';
+import Member_count from './member_count';
 import {BrowserRouter as Router,Link,Switch,Route,} from 'react-router-dom';
 class Sidebar extends React.Component
 {
@@ -13,12 +14,13 @@ class Sidebar extends React.Component
                   <div className="menu">
                       
                       <a><Link to="/Maindata">Election data</Link></a>
+                      <a><Link to="/member_report">Member Report</Link></a>
                      
                   </div>
                 <Switch>
                 
                 <Route path="/Maindata" component={Maindata} />
-                
+                <Route path="/member_report" component={Member_count} />
                 
             </Switch>
               

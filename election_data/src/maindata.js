@@ -13,7 +13,8 @@ class Maindata extends React.Component
         super(props);
         this.state = {
             items : [],
-            isLoaded : false
+            isLoaded : false,
+            
         };
     }
   componentDidMount() {
@@ -24,7 +25,7 @@ class Maindata extends React.Component
   } 
     render()
     {
-        console.log(this.state.items);
+        
         const tableicons = {
             Filter : forwardRef((props, ref) => <FilterList {...props} ref={ref} />)
         };
@@ -45,8 +46,9 @@ class Maindata extends React.Component
             {
               icon: 'save',
               tooltip: 'Save User',
-              onClick: (event, rowData) => {
-          
+              onClick: (event,rowData) => {
+               
+                
                 ReactDOM.render(
                 <div>
                   <Member element={rowData}/>
@@ -59,7 +61,7 @@ class Maindata extends React.Component
           ]}
          columns={[
             { title: "Election Type", field: "election_type"},
-            { title: "Year", field: "year",type: "numeric" },
+            { title: "Year", field: "year"},
           ]}
           data={this.state.items}
           title="Election Data"

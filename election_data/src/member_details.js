@@ -18,8 +18,8 @@ class Member extends React.Component
 componentWillReceiveProps=() =>
 { 
     this.setState({
-        election_type:this.props.element.election_type,
-        year:this.props.element.year
+        election_type:this.props.element.type_id,
+        year:this.props.element.year_id
         })
     const value1 = (this.state.election_type)
     const value2 = (this.state.year)
@@ -35,7 +35,10 @@ componentWillReceiveProps=() =>
 }
     render()
     {
-        console.log(this.state.items);
+        // console.log(this.state.election_type)
+        // console.log(this.state.year)
+        
+       
         const tableicons = {
             Filter : forwardRef((props, ref) => <FilterList {...props} ref={ref} />)
         };
@@ -51,14 +54,15 @@ componentWillReceiveProps=() =>
    
    }}
           columns={[
-            {title:"id",field:"id"},
-            { title: "name", field: "name"},
-            { title: "polling number", field: "polling number"},
-            {title:"panchayat",field:"panchayat"},
-            { title: "gender", field: "gender"},
-            { title: "constituency", field: "constituency"},
-            { title: "Election Type", field: "election_type"},
-            { title: "year", field: "year"}
+            {title:"District",field:"district"},
+            { title: "Union", field: "union"},
+            { title: "polling number", field: "polling_number"},
+             {title:"panchayat",field:"panchayat_name"},
+             { title: "gender", field: "gender"},
+            // { title: "constituency", field: "constituency"},
+             { title: "Election Type", field: "election_type"},
+             { title: "year", field: "year"},
+             { title: "party name", field: "party_name"},
             
            
           ]}
