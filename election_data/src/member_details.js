@@ -11,7 +11,7 @@ class Member extends React.Component
         super(props);
         this.state = {
             election_type : "",
-             year : "",
+             year : "1",
              member_data : [],
         };
     }
@@ -23,9 +23,7 @@ componentWillReceiveProps=() =>
         })
     const value1 = (this.state.election_type)
     const value2 = (this.state.year)
-    
-    
-    axios.post('http://localhost:8000/election_member/', {
+axios.post('http://localhost:8000/election_member/', {
               key1:value1,key2:value2
             })
             .then((testing) => {
@@ -35,10 +33,6 @@ componentWillReceiveProps=() =>
 }
     render()
     {
-        // console.log(this.state.election_type)
-        // console.log(this.state.year)
-        
-       
         const tableicons = {
             Filter : forwardRef((props, ref) => <FilterList {...props} ref={ref} />)
         };
@@ -51,27 +45,22 @@ componentWillReceiveProps=() =>
         filtering: true,
         grouping: true,
         actionsColumnIndex: -1,
-   
-   }}
-          columns={[
+    }}
+    columns={[
             {title:"District",field:"district"},
             { title: "Union", field: "union"},
             { title: "polling number", field: "polling_number"},
-             {title:"panchayat",field:"panchayat_name"},
-             { title: "gender", field: "gender"},
-            // { title: "constituency", field: "constituency"},
-             { title: "Election Type", field: "election_type"},
-             { title: "year", field: "year"},
-             { title: "party name", field: "party_name"},
-            
-           
-          ]}
-          data={this.state.member_data}
-          title="Member's Data"
-        />
+            {title:"panchayat",field:"panchayat_name"},
+            { title: "gender", field: "gender"},
+            { title: "Election Type", field: "election_type"},
+            { title: "year", field: "year"},
+            { title: "party name", field: "party_name"},
+            ]}
+            data={this.state.member_data}
+            title="Member's Data"
+            />
         </div>
         )
-       
     }
 }
 export default Member;

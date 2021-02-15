@@ -14,6 +14,9 @@ class Maindata extends React.Component
         this.state = {
             items : [],
             isLoaded : false,
+            election_type : "",
+            year : "",
+            member_data : [],
             
         };
     }
@@ -23,10 +26,24 @@ class Maindata extends React.Component
       this.setState({ items,isLoaded :true });
     });
   } 
+  // testfunction = () =>{
+  //  const value1 = (this.state.election_type)
+  //   const value2 = (this.state.year)
+  //    axios.post('http://localhost:8000/election_member/', {
+  //             key1:value1,key2:value2
+  //           })
+  //           .then((testing) => {
+  //             const member_data=testing.data;
+  //               this.setState({ member_data });
+  //           });
+    
+  // }
     render()
     {
-        
-        const tableicons = {
+      console.log(this.state.election_type)
+      console.log(this.state.year)
+      console.log(this.state.member_data)
+       const tableicons = {
             Filter : forwardRef((props, ref) => <FilterList {...props} ref={ref} />)
         };
         return(
@@ -47,13 +64,15 @@ class Maindata extends React.Component
               icon: 'save',
               tooltip: 'Save User',
               onClick: (event,rowData) => {
-               
-                
-                ReactDOM.render(
+                this.setState({
+                  election_type:rowData.type_id,
+                  year:rowData.year_id
+                });
+               //this.testfunction()
+               ReactDOM.render(
                 <div>
                   <Member element={rowData}/>
                 </div>,
-                  
                 document.getElementById('row')
                 );
               }
