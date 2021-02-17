@@ -38,7 +38,7 @@ axios.post('http://localhost:8000/election_member/', {
         };
         console.log(this.state.member_data);
         return(
-        <div>
+        <div className="table2">
             <MaterialTable
         icons={tableicons}
         options={{

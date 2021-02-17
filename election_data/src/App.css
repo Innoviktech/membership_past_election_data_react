@@ -35,12 +35,16 @@
   to {
     transform: rotate(360deg);
   }
+}*/
+body{
+  overflow-x: hidden;
 }
 .wrapper
 {
   height: 50px;
   width: 100%;
   background-color: black;
+ 
 }
 .wrapper a
 {
@@ -51,40 +55,73 @@
   position: relative;
   top: 5px;
   left: 10px;
+  
 } 
  .menu
 {
   background-color:darkgray;
-  height: 700px;
-  width: 300px;
-  
+  height: 1300px;
+  width: 200px;
+  padding: 10px;  
 } 
+
 .menu a{
   font-size: 20px;
   font-weight: 700;
   text-decoration: none;
-  float: left;
   color:black;
   position: relative;
-  top: 30px;
+  top: 15px;
   left: 10px;
-} */
- /* table, th, td
+
+} 
+.table{
+width: 80%;
+position: absolute;
+left: 250px;
+bottom: 50px;
+font-size: 15px;
+}  
+.table2
 {
-  border: 2px solid black;
-  border-collapse: collapse;
-  
+width: 100%;
+position: absolute;
+
+top: 700px;
 
 }
-.table{
-  width: 600px;
-  position: relative;
-  bottom: 550px;
-  left: 500px;
-}  */
 
 .material
 {
-  position: relative;
-  top: 100px;
+  width: 80%;
+position: absolute;
+left: 250px;
+bottom: 50px;
+}
+.drop_down_box1
+{
+  position: absolute;
+  top : 100px;
+  left: 300px;
+  width: 200px;
+
+
+}
+
+ .drop_down_box2
+{
+  position: absolute;
+  top : 100px;
+  left: 700px;
+  width: 200px;
+ 
+}
+
+.drop_down_box3
+{
+  position: absolute;
+  top : 100px;
+  left: 1200px;
+  width: 200px;
+
 }

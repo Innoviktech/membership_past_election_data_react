@@ -26,18 +26,7 @@ class Maindata extends React.Component
       this.setState({ items,isLoaded :true });
     });
   } 
-  // testfunction = () =>{
-  //  const value1 = (this.state.election_type)
-  //   const value2 = (this.state.year)
-  //    axios.post('http://localhost:8000/election_member/', {
-  //             key1:value1,key2:value2
-  //           })
-  //           .then((testing) => {
-  //             const member_data=testing.data;
-  //               this.setState({ member_data });
-  //           });
-    
-  // }
+  
     render()
     {
       console.log(this.state.election_type)
@@ -49,8 +38,8 @@ class Maindata extends React.Component
         return(
             
             <div>
-               <div style={{ maxWidth: "100%" }}>          
-        <MaterialTable
+               <div  className="table">          
+        <MaterialTable 
          icons={tableicons}
         options={{
             filtering: true,
