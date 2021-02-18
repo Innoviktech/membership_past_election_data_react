@@ -1,10 +1,11 @@
 import React from 'react';
-import reactDom from 'react-dom';
+import ReactDOM from 'react-dom';
 import axios from "axios";
 import MaterialTable from "material-table";
 import FilterList from '@material-ui/icons/FilterList';
 import { forwardRef } from 'react';
 import Select from 'react-select';
+import Member_name_list from './member_name_list';
 class Member_count extends React.Component
 {
     constructor(props)
@@ -18,11 +19,10 @@ class Member_count extends React.Component
             panchayat_drops : [],
             polling_booth_drops : [],
             polling_booth_value : null,
+            name_list : [],
            
         }
     }
-
-    
     componentDidMount() {
         axios.get('http://localhost:8000/constituency/')
           .then(res => {
@@ -92,13 +92,33 @@ class Member_count extends React.Component
         this.setState({ constituency_count });
     });
 };
+name_list = (event) =>
+{
+  const var1 = this.state.constituency_count[0].constituency_id
+  console.log(var1)
+  const vars2 = this.state.constituency_count[0].panchayat_id
+  console.log(vars2)
+  const vars3 = this.state.constituency_count[0].polling_booth_id
+  console.log(vars3)
+  axios.post('http://localhost:8000/constituency_member_name_list/', {
+      key1:var1,key2:vars2,key3:vars3
+    })
+    .then((testing) => {
+      const name_list=testing.data;
+        this.setState({ name_list });
+    });
+}
 render()
 
     {
+      console.log(this.state.name_list)
+      
+      
       // console.log(this.state.constituency_value2)
         // console.log(this.state.panchayat_drops)
       
         const { constituency_value } = this.state;
+        
         const { panchayat_value } = this.state;
         const { polling_booth_value } = this.state;
         const tableicons = {
@@ -109,7 +129,7 @@ render()
         return(
            <div>
                <div className="drop_down_box1">
-                   <label>Constituency</label>
+                   <label className="label">Constituency</label>
                 <Select 
         value={constituency_value}
         onChange={this.constituency_change}
@@ -117,7 +137,7 @@ render()
 /></div>
 <div className="drop_down_box2">
 
-<label>Panchayat</label>
+<label className="label">Panchayat</label>
 <Select 
         value={panchayat_value}
         onChange={this.panchayat_change}
@@ -125,7 +145,7 @@ render()
 />
 </div>
 <div className="drop_down_box3">
-<label>Polling Booth Number</label>
+<label className="label">Polling Booth Number</label>
 <Select
         value={polling_booth_value}
         onChange={this.polling_booth_change}
@@ -134,7 +154,7 @@ render()
 </div>
 
 <div className="material">
-            <MaterialTable
+            {/* <MaterialTable
         icons={tableicons}
         options={{}}
     columns={[
@@ -149,8 +169,67 @@ render()
             ]}
             data={this.state.constituency_count}
             title="Member's Report"
-            />
+           
+            /> */}
+
+<table>
+            <thead>
+            <tr>
+              <th>Constituency</th>
+              <th>Panchayat</th>
+              <th>Polling Booth Number</th>
+              <th>Male</th>
+              <th>Female</th>
+              <th>Other</th>
+              <th>Total</th>
+              <th>Name List</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+
+           {this.state.constituency_count.map((option,index) => (
+                  <tr>
+                  <td>{option.constituency}</td>
+                  <td>{option.panchayat}</td>
+                  <td>{option.booth_number}</td>
+                  <td>{option.male}</td>
+                  <td>{option.female}</td>
+                  <td>{option.other}</td>
+                  <td>{option.total}</td>
+                  <td><button id="name_list" onClick={this.name_list}>Click</button></td>
+                 </tr>
+                  
+                  ))}
+
+        </tbody>
+
+        </table> 
+        
         </div>
+        <div className="test">
+          
+        </div>
+        <div className = "Member_name_list">
+        <MaterialTable
+        icons={tableicons}
+        options={{
+        filtering: true,
+        grouping: true,
+        
+    }}
+    columns={[
+            {title:"Member Name",field:"name"},
+            { title: "Party Name", field: "party_name"},
+            { title: "Voter ID", field: "voter_id"},
+            
+            ]}
+            data={this.state.name_list}
+            title="Member Detail's"
+            />
+
+        </div>
+        
             
            </div>
 );
