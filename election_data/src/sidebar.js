@@ -14,7 +14,7 @@ class Sidebar extends React.Component
               
                   <div className="menu">
                       
-                      <a><Link to="/Maindata">Election data</Link></a>
+                      <a><Link to="/Maindata">Election data</Link></a><br></br>
                       <a><Link to="/member_report">Member Report</Link></a>
                      
                   </div>

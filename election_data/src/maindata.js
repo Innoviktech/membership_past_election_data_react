@@ -26,18 +26,7 @@ class Maindata extends React.Component
       this.setState({ items,isLoaded :true });
     });
   } 
-  // testfunction = () =>{
-  //  const value1 = (this.state.election_type)
-  //   const value2 = (this.state.year)
-  //    axios.post('http://localhost:8000/election_member/', {
-  //             key1:value1,key2:value2
-  //           })
-  //           .then((testing) => {
-  //             const member_data=testing.data;
-  //               this.setState({ member_data });
-  //           });
-    
-  // }
+  
     render()
     {
       console.log(this.state.election_type)
@@ -49,8 +38,8 @@ class Maindata extends React.Component
         return(
             
             <div>
-               <div style={{ maxWidth: "100%" }}>          
-        <MaterialTable
+               <div  className="table">          
+        <MaterialTable 
          icons={tableicons}
         options={{
             filtering: true,
@@ -64,18 +53,23 @@ class Maindata extends React.Component
               icon: 'save',
               tooltip: 'Save User',
               onClick: (event,rowData) => {
-                this.setState({
-                  election_type:rowData.type_id,
-                  year:rowData.year_id
-                });
-               //this.testfunction()
-               ReactDOM.render(
-                <div>
-                  <Member element={rowData}/>
-                </div>,
-                document.getElementById('row')
-                );
-              }
+                // this.setState({
+                //   election_type:rowData.type_id,
+                //   year:rowData.year_id
+                // });
+            const value1 = rowData.type_id
+            const value2 = rowData.year_id
+          axios.post('http://localhost:8000/election_member/', {
+                      key1:value1,key2:value2
+                    })
+                    .then((testing) => {
+                      const member_data=testing.data;
+                        this.setState({ member_data });
+                    });
+                    
+               }
+               
+               
             }
           ]}
          columns={[
@@ -85,11 +79,31 @@ class Maindata extends React.Component
           data={this.state.items}
           title="Election Data"
         />
-        <div id="row">
-
-        </div>
+        
 
       </div>
+      <div className="table2">
+            <MaterialTable
+        icons={tableicons}
+        options={{
+        filtering: true,
+        grouping: true,
+        actionsColumnIndex: -1,
+    }}
+    columns={[
+            {title:"District",field:"district"},
+            { title: "Union", field: "union"},
+            { title: "polling number", field: "polling_number"},
+            {title:"panchayat",field:"panchayat_name"},
+            { title: "gender", field: "gender"},
+            { title: "Election Type", field: "election_type"},
+            { title: "year", field: "year"},
+            { title: "party name", field: "party_name"},
+            ]}
+            data={this.state.member_data}
+            title="Member's Data"
+            />
+        </div>
     </div>
 
         );
