@@ -91,15 +91,34 @@ class Maindata extends React.Component
         actionsColumnIndex: -1,
     }}
     columns={[
-            {title:"District",field:"district"},
-            { title: "Union", field: "union"},
-            { title: "polling number", field: "polling_number"},
-            {title:"panchayat",field:"panchayat_name"},
-            { title: "gender", field: "gender"},
-            { title: "Election Type", field: "election_type"},
-            { title: "year", field: "year"},
-            { title: "party name", field: "party_name"},
-            ]}
+            {title:"Member",field:"member_id"},
+            {title:"LastName",field:"last_name"},
+            {title:"Election Type",field:"election_id"},
+            {title:"Year",field:"year_id"},
+            {title:"Voter List Part Number & Serial Number",field:"voter"},
+            {title:"Part Agent Election Identity Card",field:"election_id_card"},
+            {title:"District",field:"district_id"},
+            {title:"District Wing",field:"district_wing_id"},
+            { title: "Union", field: "union_id"},
+            {title:"Union Wing",field:"union_wing_id"},
+            { title: "Panchayat", field: "panchayat_id"},
+            { title: "Email", field: "email"},
+            { title: "Mobile", field: "mobile"},
+            { title: "Phone", field: "phone"},
+            { title: "Birth Date", field: "birth_date"},
+            { title: "Party name", field: "party_name"},
+            { title: "Constituancy Name", field: "constituancy_name"},
+            { title: "Polling Station Name", field: "polling_station_id"},
+            { title: "Gender", field: "gender"},
+            { title: "Age", field: "age"},
+            { title: "Caste", field: "caste"},
+            { title: "Ward Number", field: "ward_number"},
+            { title: "Door Number", field: "door_number"},
+            { title: "Street", field: "street"},
+            { title: "City", field: "city"},
+            { title: "State", field: "state"},
+            { title: "ZIP Code", field: "ZIP"},
+          ]}
             data={this.state.member_data}
             title="Member's Data"
             />
