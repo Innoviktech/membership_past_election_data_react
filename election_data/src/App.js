@@ -15,9 +15,9 @@ function App() {
           </div>
       <Switch>
         <Route path="/Sidebar" component={Sidebar} />
-        
       </Switch>
     </Router> 
+    
      </div>
      
    
