@@ -21,6 +21,7 @@ class Member_count extends React.Component
             polling_booth_value : null,
             name_list : [],
            
+           
         }
     }
     componentDidMount() {
@@ -41,6 +42,7 @@ class Member_count extends React.Component
         .then((testing) => {
           const constituency_count=testing.data;
             this.setState({ constituency_count });
+            
         });
 
 
@@ -51,7 +53,13 @@ class Member_count extends React.Component
           const panchayat_drops=testing.data;
             this.setState({ panchayat_drops });
         });
-          };
+        const holder = ""
+        const holder1 = []
+        this.setState({ panchayat_value : holder });
+        this.setState({ polling_booth_value : holder });
+        this.setState({ name_list : holder1 });
+       
+         };
 
           panchayat_change = panchayat_value => {
             this.setState({ panchayat_value});
@@ -74,6 +82,10 @@ class Member_count extends React.Component
           const polling_booth_drops=testing.data;
             this.setState({ polling_booth_drops });
         });
+        const holder = ""
+        const holder1 = []
+        this.setState({ polling_booth_value : holder });
+        this.setState({ name_list : holder1 });
       };
 
       polling_booth_change = polling_booth_value => {
@@ -90,6 +102,8 @@ class Member_count extends React.Component
     .then((testing) => {
       const constituency_count=testing.data;
         this.setState({ constituency_count });
+        const holder1 = []
+        this.setState({ name_list : holder1 });
     });
 };
 name_list = (event) =>
@@ -112,24 +126,17 @@ render()
 
     {
       console.log(this.state.name_list)
-      
-      
-      // console.log(this.state.constituency_value2)
-        // console.log(this.state.panchayat_drops)
-      
-        const { constituency_value } = this.state;
-        
-        const { panchayat_value } = this.state;
-        const { polling_booth_value } = this.state;
-        const tableicons = {
+      const { constituency_value } = this.state;
+      const { panchayat_value } = this.state;
+      const { polling_booth_value } = this.state;
+      const tableicons = {
             Filter : forwardRef((props, ref) => <FilterList {...props} ref={ref} />)
         };
-        // console.log(this.state.constituency_count)
-        
-        return(
-           <div>
-               <div className="drop_down_box1">
-                   <label className="label">Constituency</label>
+       
+  return(
+        <div>
+          <div className="drop_down_box1">
+          <label className="label">Constituency</label>
                 <Select 
         value={constituency_value}
         onChange={this.constituency_change}
@@ -138,7 +145,9 @@ render()
 <div className="drop_down_box2">
 
 <label className="label">Panchayat</label>
-<Select 
+<Select id="reset"
+        
+        
         value={panchayat_value}
         onChange={this.panchayat_change}
         options={this.state.panchayat_drops}
@@ -154,25 +163,8 @@ render()
 </div>
 
 <div className="material">
-            {/* <MaterialTable
-        icons={tableicons}
-        options={{}}
-    columns={[
-            {title:"Constituency",field:"constituency"},
-            { title: "Panchayat", field: "panchayat"},
-            { title: "Polling Booth Number", field: "booth_number"},
-            { title: "Male", field: "male"},
-            { title: "Female", field: "female"},
-            {title:"Other",field:"other"},
-            { title: "Total", field: "total"},
-           
-            ]}
-            data={this.state.constituency_count}
-            title="Member's Report"
-           
-            /> */}
-
-<table>
+            
+  <table>
             <thead>
             <tr>
               <th>Constituency</th>
@@ -183,7 +175,6 @@ render()
               <th>Other</th>
               <th>Total</th>
               <th>Name List</th>
-              
             </tr>
           </thead>
           <tbody>
