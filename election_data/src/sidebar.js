@@ -2,7 +2,6 @@ import React from 'react';
 import reactDom from 'react-dom';
 import Maindata from './maindata';
 import Member_count from './member_count';
-import Rough from './rough'
 import {BrowserRouter as Router,Link,Switch,Route,} from 'react-router-dom';
 class Sidebar extends React.Component
 {
@@ -16,12 +15,14 @@ class Sidebar extends React.Component
                       
                       <a><Link to="/Maindata">Election data</Link></a><br></br>
                       <a><Link to="/member_report">Member Report</Link></a>
-                     
-                  </div>
+                      
+                   </div>
                 <Switch>
                 
                 <Route path="/Maindata" component={Maindata} />
                 <Route path="/member_report" component={Member_count} />
+               
+               
                 
             </Switch>
               

@@ -4,8 +4,6 @@ import ReactDOM from 'react-dom';
 import MaterialTable from "material-table";
 import FilterList from '@material-ui/icons/FilterList';
 import { forwardRef } from 'react';
-import Member from './member_details';
-import {BrowserRouter as Router,Link,Switch,Route,} from 'react-router-dom';
 class Maindata extends React.Component
 {
     constructor(props)
@@ -26,6 +24,8 @@ class Maindata extends React.Component
       this.setState({ items,isLoaded :true });
     });
   } 
+
+  
   
     render()
     {
@@ -51,7 +51,7 @@ class Maindata extends React.Component
           actions={[
             {
               icon: 'save',
-              tooltip: 'Save User',
+              tooltip: 'save user',
               onClick: (event,rowData) => {
                 // this.setState({
                 //   election_type:rowData.type_id,
@@ -86,44 +86,46 @@ class Maindata extends React.Component
             <MaterialTable
         icons={tableicons}
         options={{
-        filtering: true,
+        filtering: false,
         grouping: true,
         actionsColumnIndex: -1,
     }}
     columns={[
-            {title:"Member",field:"member_id"},
-            {title:"LastName",field:"last_name"},
-            {title:"Election Type",field:"election_id"},
-            {title:"Year",field:"year_id"},
-            {title:"Voter List Part Number & Serial Number",field:"voter"},
-            {title:"Part Agent Election Identity Card",field:"election_id_card"},
-            {title:"District",field:"district_id"},
-            {title:"District Wing",field:"district_wing_id"},
-            { title: "Union", field: "union_id"},
-            {title:"Union Wing",field:"union_wing_id"},
-            { title: "Panchayat", field: "panchayat_id"},
-            { title: "Email", field: "email"},
-            { title: "Mobile", field: "mobile"},
-            { title: "Phone", field: "phone"},
-            { title: "Birth Date", field: "birth_date"},
-            { title: "Party name", field: "party_name"},
-            { title: "Constituancy Name", field: "constituancy_name"},
-            { title: "Polling Station Name", field: "polling_station_id"},
-            { title: "Gender", field: "gender"},
-            { title: "Age", field: "age"},
-            { title: "Caste", field: "caste"},
-            { title: "Ward Number", field: "ward_number"},
-            { title: "Door Number", field: "door_number"},
-            { title: "Street", field: "street"},
-            { title: "City", field: "city"},
-            { title: "State", field: "state"},
-            { title: "ZIP Code", field: "ZIP"},
+      {title:"Member",field:"name"},
+      {title:"LastName",field:"last_name"},
+      {title:"Election Type",field:"election_type"},
+      {title:"Year",field:"year"},
+      {title:"Voter List Part Number & Serial Number",field:"voter_id"},
+      {title:"Part Agent Election Identity Card",field:"part_agent"},
+      {title:"District",field:"district_id"},
+      {title:"District Wing",field:"district_wing_id"},
+      { title: "Union", field: "union_id"},
+      {title:"Union Wing",field:"union_wing_id"},
+      { title: "Panchayat", field: "panchayat_id"},
+      { title: "Email", field: "email"},
+      { title: "Mobile", field: "mobile"},
+      { title: "Phone", field: "phone"},
+      { title: "Birth Date", field: "birth_date"},
+      { title: "Party name", field: "party_name"},
+      { title: "Constituancy Name", field: "constituency"},
+      { title: "Polling Station Name", field: "polling_station_name"},
+      { title: "Polling Booth Number", field: "booth_number"},
+      { title: "Gender", field: "gender"},
+      { title: "Member Age", field: "age"},
+      { title: "Caste", field: "caste"},
+      { title: "Ward Number", field: "ward_number"},
+      { title: "Door Number", field: "door_number"},
+      { title: "Street", field: "street"},
+      { title: "Street2", field: "street2"},
+      { title: "City", field: "city"},
+      { title: "State", field: "state"},
+      { title: "ZIP Code", field: "zip"},
           ]}
             data={this.state.member_data}
             title="Member's Data"
             />
         </div>
-    </div>
+      </div>
 
         );
             

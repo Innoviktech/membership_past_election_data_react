@@ -219,9 +219,36 @@ render()
         
     }}
     columns={[
-            {title:"Member Name",field:"name"},
-            { title: "Party Name", field: "party_name"},
-            { title: "Voter ID", field: "voter_id"},
+      
+      {title:"Member",field:"name"},
+      {title:"LastName",field:"last_name"},
+      {title:"Election Type",field:"election_type"},
+      {title:"Year",field:"year"},
+      {title:"Voter List Part Number & Serial Number",field:"voter_id"},
+      {title:"Part Agent Election Identity Card",field:"part_agent"},
+      {title:"District",field:"district_id"},
+      {title:"District Wing",field:"district_wing_id"},
+      { title: "Union", field: "union_id"},
+      {title:"Union Wing",field:"union_wing_id"},
+      { title: "Panchayat", field: "panchayat_id"},
+      { title: "Email", field: "email"},
+      { title: "Mobile", field: "mobile"},
+      { title: "Phone", field: "phone"},
+      { title: "Birth Date", field: "birth_date"},
+      { title: "Party name", field: "party_name"},
+      { title: "Constituancy Name", field: "constituency"},
+      { title: "Polling Station Name", field: "polling_station_name"},
+      { title: "Polling Booth Number", field: "booth_number"},
+      { title: "Gender", field: "gender"},
+      { title: "Member Age", field: "age"},
+      { title: "Caste", field: "caste"},
+      { title: "Ward Number", field: "ward_number"},
+      { title: "Door Number", field: "door_number"},
+      { title: "Street", field: "street"},
+      { title: "Street2", field: "street2"},
+      { title: "City", field: "city"},
+      { title: "State", field: "state"},
+      { title: "ZIP Code", field: "zip"},
             
             ]}
             data={this.state.name_list}
