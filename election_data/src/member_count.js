@@ -5,7 +5,8 @@ import MaterialTable from "material-table";
 import FilterList from '@material-ui/icons/FilterList';
 import { forwardRef } from 'react';
 import Select from 'react-select';
-import Member_name_list from './member_name_list';
+import PeopleIcon from '@material-ui/icons/People';
+import $ from 'jquery';
 class Member_count extends React.Component
 {
     constructor(props)
@@ -25,12 +26,19 @@ class Member_count extends React.Component
         }
     }
     componentDidMount() {
+      
         axios.get('http://localhost:8000/constituency/')
           .then(res => {
             const constituency_data = res.data;
             this.setState({ constituency_data });
           })
+          const element = document.getElementById("dev");
+          element.classList.remove("MTableHeader-header-13");
           
+          
+          $("th").removeClass("MTableHeader-header-13");
+                
+            
       }
       constituency_change = constituency_value => {
             this.setState({constituency_value});
@@ -106,22 +114,7 @@ class Member_count extends React.Component
         this.setState({ name_list : holder1 });
     });
 };
-name_list = (event) =>
-{
-  const var1 = this.state.constituency_count[0].constituency_id
-  console.log(var1)
-  const vars2 = this.state.constituency_count[0].panchayat_id
-  console.log(vars2)
-  const vars3 = this.state.constituency_count[0].polling_booth_id
-  console.log(vars3)
-  axios.post('http://localhost:8000/constituency_member_name_list/', {
-      key1:var1,key2:vars2,key3:vars3
-    })
-    .then((testing) => {
-      const name_list=testing.data;
-        this.setState({ name_list });
-    });
-}
+
 render()
 
     {
@@ -134,68 +127,94 @@ render()
         };
        
   return(
-        <div>
-          <div className="drop_down_box1">
-          <label className="label">Constituency</label>
-                <Select 
-        value={constituency_value}
-        onChange={this.constituency_change}
-        options={this.state.constituency_data}
-/></div>
-<div className="drop_down_box2">
+  <div>
+    <div className="row">
+                <div className="text-center">
+                <h3>CURRENT VOTER DETAILS</h3>
+                </div>
+                </div>
+  <div className="row">
+      <div className="col-sm-4">
+      <label>Constituency</label>
+      <Select 
+            value={constituency_value}
+            onChange={this.constituency_change}
+            options={this.state.constituency_data}
+          />
+        </div>
 
-<label className="label">Panchayat</label>
-<Select id="reset"
-        
-        
-        value={panchayat_value}
-        onChange={this.panchayat_change}
-        options={this.state.panchayat_drops}
-/>
-</div>
-<div className="drop_down_box3">
-<label className="label">Polling Booth Number</label>
-<Select
-        value={polling_booth_value}
-        onChange={this.polling_booth_change}
-        options={this.state.polling_booth_drops}
-/>
-</div>
+        <div className="col-sm-4">
 
-<div className="material">
+        <label>Panchayat</label>
+        <Select id="reset"
+                value={panchayat_value}
+                onChange={this.panchayat_change}
+                options={this.state.panchayat_drops}
+        />
+        </div>
+          <div className="col-sm-4">
+          <label>Polling Booth Number</label>
+          <Select
+                  value={polling_booth_value}
+                  onChange={this.polling_booth_change}
+                  options={this.state.polling_booth_drops}
+          />
+          </div>
+</div><br></br>
+<div id="dev" className="material">
+          
+    <MaterialTable
+      icons={tableicons}
+      options={{
+         
+          actionsColumnIndex: -1,
+          headerStyle: {
+            backgroundColor: '#01579b',
+            color: '#FFF',
             
-  <table>
-            <thead>
-            <tr>
-              <th>Constituency</th>
-              <th>Panchayat</th>
-              <th>Polling Booth Number</th>
-              <th>Male</th>
-              <th>Female</th>
-              <th>Other</th>
-              <th>Total</th>
-              <th>Name List</th>
-            </tr>
-          </thead>
-          <tbody>
+          }
+        
+        }}
+      actions={[
+        {
+          icon: PeopleIcon,
+          
+          onClick: (event,rowData) => {
+            const var1 = this.state.constituency_count[0].constituency_id
+            console.log(var1)
+            const vars2 = this.state.constituency_count[0].panchayat_id
+            console.log(vars2)
+            const vars3 = this.state.constituency_count[0].polling_booth_id
+            console.log(vars3)
+            axios.post('http://localhost:8000/constituency_member_name_list/', {
+                key1:var1,key2:vars2,key3:vars3
+              })
+              .then((testing) => {
+                const name_list=testing.data;
+                  this.setState({ name_list });
+              });
+                
+           }
+           
+           
+        }
+      ]}
 
-           {this.state.constituency_count.map((option,index) => (
-                  <tr>
-                  <td>{option.constituency}</td>
-                  <td>{option.panchayat}</td>
-                  <td>{option.booth_number}</td>
-                  <td>{option.male}</td>
-                  <td>{option.female}</td>
-                  <td>{option.other}</td>
-                  <td>{option.total}</td>
-                  <td><button id="name_list" onClick={this.name_list}>Click</button></td>
-                 </tr>
-                  
-                  ))}
+    columns={[
+      
+      {title:"Constituency",field:"constituency"},
+      {title:"Panchayat",field:"panchayat"},
+      {title:"Polling Booth Number",field:"booth_number"},
+      {title:"Male",field:"male"},
+      {title:"Female",field:"female"},
+      {title:"Other", field: "other"},
+      {title:"Total",field:"total"},
+            
+            ]}
+            data={this.state.constituency_count}
+            title="Member Count"
+            />
 
-        </tbody>
-
-        </table> 
         
         </div>
         <div className="test">
@@ -213,8 +232,8 @@ render()
       
       {title:"Member",field:"name"},
       {title:"LastName",field:"last_name"},
-      {title:"Election Type",field:"election_type"},
-      {title:"Year",field:"year"},
+      // {title:"Election Type",field:"election_type"},
+      // {title:"Year",field:"year"},
       {title:"Voter List Part Number & Serial Number",field:"voter_id"},
       {title:"Part Agent Election Identity Card",field:"part_agent"},
       {title:"District",field:"district_id"},
@@ -247,9 +266,7 @@ render()
             />
 
         </div>
-        
-            
-           </div>
+        </div>
 );
     }
     
