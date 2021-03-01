@@ -1,180 +1,114 @@
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}*/
-body{
+/* 
+body {
+ min-height: 100vh;
   overflow-x: hidden;
 }
-.wrapper
-{
-  height: 50px;
+ .vertical-nav {
+  min-width: 21rem;
+  width: 21rem;
+  height: 100vh;
+  position: absolute;
+  top: 50px;
+  left: 0;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s;
+}
+.page-content {
+  width: calc(100% - 20rem);
+  margin-left: 22rem;
+  margin-top: -1rem;
+  
+  transition: all 0.4s;
+} 
+
+#sidebar.active {
+  margin-left: -21rem;
+}
+
+#content.active {
   width: 100%;
-  background-color: black;
- 
+  margin: 0;
+  margin-top: -1rem;
 }
-.wrapper a
-{
-  font-size: 20px;
+
+.separator {
+  margin: 3rem 0;
+  border-bottom: 1px dashed #fff;
+}
+
+.text-uppercase {
+  letter-spacing: 0.1em;
+}
+.text-gray {
+  color: #aaa;
+}
+.nav-link{
+    text-transform: capitalize;
+}
+.nav-link:hover{
+    background:#f3f2f2;
+}
+.text-primary{
+    color:#7579e7 !important;
+}
+@media (max-width: 768px) {
+  #sidebar {
+    margin-left: -21rem;
+  }
+  #sidebar.active {
+    margin-left: 0;
+  }
+  #content {
+    width: 100%;
+    margin: 0;
+  }
+  #content.active {
+    margin-left: 21rem;
+    width: calc(100% - 20rem);
+  }
+}
+a:link {
   text-decoration: none;
-  float: left;
-  color: white;
-  position: relative;
-  top: 5px;
-  left: 10px;
-  
-} 
- .menu
-{
-  background-color:darkgray;
-  height: 1300px;
-  width: 200px;
-  padding: 10px;  
-} 
-
-.menu a{
-  font-size: 20px;
-  font-weight: 700;
+}
+a:visited {
   text-decoration: none;
-  color:black;
-  position: relative;
-  top: 15px;
-  left: 10px;
-
-} 
-.table{
-width: 80%;
-position: absolute;
-left: 250px;
-top: 100px;
-font-size: 15px;
-}  
-.table2
-{
-width: 80%;
-position: absolute;
-top: 900px;
-left: 250px;
-
-}
-
-
-.drop_down_box1
-{
-  position: absolute;
-  top : 100px;
-  left: 300px;
-  width: 200px;
-
-
-}
-
- .drop_down_box2
-{
-  position: absolute;
-  top : 100px;
-  left: 700px;
-  width: 200px;
- 
-}
-
-.drop_down_box3
-{
-  position: absolute;
-  top : 100px;
-  left: 1200px;
-  width: 200px;
-}
-.material
-{
- 
-position: absolute;
-left: 300px;
-bottom: 350px;
-border: 5px solid #ddd;
-padding: 8px;
-height: 150px;
-background-color:#f2f2f2;
-  
-
-
-}
-th{
-  height: 50px;
-  width: 135px;
-  
- 
   
 }
-td{
-  height: 80px;
-  text-align: center;
-  background-color:  #f2f2f2;
- 
+a:hover {
+  text-decoration: none;
 }
-#name_list
+a:active {
+  text-decoration: none;
+  
+}
+a:focus
 {
-  height: 30px;
-  width: 80px;
+color: brown;
+}
+.heading
+{
   font-size: 18px;
-  border-radius: 10px;
-  background-color: white;
-  font-weight: 600;
+  font-weight:500;
 }
-#name_list:hover
+.text-center h3
 {
-  color: red;
-}
-.label
-{
- 
+  position: relative;
+  bottom: 25px;
   font-weight: 500;
-  position: relative;
-  bottom: 18px;
-  font-size: 20px;
-}
-
-.Member_name_list
+  color: #337ab7;
+}*/
+.MuiTableHead-root th
 {
-  position: relative;
-  bottom: 980px;
-  left: 300px;
-  width: 75%;
+  font-size: 12px;
 }
-.test
+.MuiToolbar-root span 
 {
-  border-top: 3px solid  #bbb;
+  font-size: 15px;
+}
+.MuiInputBase-root input
+{
+  font-size: 15px;
+}
+.MuiFormControl-root input{
+  font-size: 15px;
 }
