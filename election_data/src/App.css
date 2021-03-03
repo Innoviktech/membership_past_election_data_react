@@ -1,114 +1,45 @@
-/* 
-body {
- min-height: 100vh;
-  overflow-x: hidden;
-}
- .vertical-nav {
-  min-width: 21rem;
-  width: 21rem;
-  height: 100vh;
-  position: absolute;
-  top: 50px;
-  left: 0;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
-  transition: all 0.4s;
-}
-.page-content {
-  width: calc(100% - 20rem);
-  margin-left: 22rem;
-  margin-top: -1rem;
-  
-  transition: all 0.4s;
-} 
-
-#sidebar.active {
-  margin-left: -21rem;
+/* .logout{
+  left:1200px;
 }
 
-#content.active {
-  width: 100%;
-  margin: 0;
-  margin-top: -1rem;
-}
-
-.separator {
-  margin: 3rem 0;
-  border-bottom: 1px dashed #fff;
-}
-
-.text-uppercase {
-  letter-spacing: 0.1em;
-}
-.text-gray {
-  color: #aaa;
-}
-.nav-link{
-    text-transform: capitalize;
-}
-.nav-link:hover{
-    background:#f3f2f2;
-}
-.text-primary{
-    color:#7579e7 !important;
-}
-@media (max-width: 768px) {
-  #sidebar {
-    margin-left: -21rem;
-  }
-  #sidebar.active {
-    margin-left: 0;
-  }
-  #content {
-    width: 100%;
-    margin: 0;
-  }
-  #content.active {
-    margin-left: 21rem;
-    width: calc(100% - 20rem);
-  }
-}
-a:link {
-  text-decoration: none;
-}
-a:visited {
-  text-decoration: none;
-  
-}
-a:hover {
-  text-decoration: none;
-}
-a:active {
-  text-decoration: none;
-  
-}
-a:focus
-{
-color: brown;
-}
-.heading
-{
+.navbar-brand {
+  float: left;
+  height: 50px;
+  padding: 15px 15px;
   font-size: 18px;
-  font-weight:500;
-}
-.text-center h3
-{
-  position: relative;
-  bottom: 25px;
-  font-weight: 500;
-  color: #337ab7;
-}*/
+  line-height: 20px;
+} */
+
 .MuiTableHead-root th
 {
-  font-size: 12px;
+font-size: 12px;
 }
-.MuiToolbar-root span 
+.MuiToolbar-root span
 {
-  font-size: 15px;
+font-size: 15px;
 }
 .MuiInputBase-root input
 {
-  font-size: 15px;
+font-size: 15px;
 }
 .MuiFormControl-root input{
-  font-size: 15px;
+font-size: 15px;
+}
+a:link {
+text-decoration: none;
+}
+a:visited {
+text-decoration: none;
+
+}
+a:hover {
+text-decoration: none;
+}
+a:active {
+text-decoration: none;
+
+}
+a:focus
+{
+color: rgb(42, 99, 165);
 }

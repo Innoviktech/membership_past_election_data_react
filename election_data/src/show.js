@@ -1,4 +1,0 @@
-function Fun()
-{
-    return "hello ";
-}
