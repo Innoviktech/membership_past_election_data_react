@@ -7,7 +7,8 @@ import { forwardRef } from 'react';
 import Select from 'react-select';
 import PeopleIcon from '@material-ui/icons/People';
 import $ from 'jquery';
-class Member_count extends React.Component
+import axiosInstance from '../axios';
+class MemberCount extends React.Component
 {
     constructor(props)
     {
@@ -32,23 +33,21 @@ class Member_count extends React.Component
     }
     componentDidMount() {
       
-        axios.get('http://localhost:8000/constituency/')
+      axiosInstance.get(`constituancy_name/`)
           .then(res => {
+            console.log(res)
             const constituency_data = res.data;
             this.setState({ constituency_data });
           })
-          // const element = document.getElementById("dev");
-          // element.classList.remove("MTableHeader-header-13");
+         
            $("th").removeClass("MTableHeader-header-13");
-                
-            
       }
 
       constituency_change = constituency_value => {
         this.setState({constituency_value});
         const vars =constituency_value.value;
         console.log(vars)
-        axios.post('http://localhost:8000/polling_station_name/', {
+        axiosInstance.post(`polling_station_name/`, {
         key1:vars
     }).then((testing) => {
         const polling_station_name_result=testing.data;
@@ -66,7 +65,7 @@ polling_booth_change = polling_booth_value => {
         console.log(var1)
         const vars2 = polling_booth_value.value
         console.log(vars2)
-        axios.post('http://localhost:8000/constituency_member_name_list/', {
+        axiosInstance.post(`constituency_member_name_list/`, {
         key1:var1,key2:vars2
         }).then((testing) => {
         const member_data=testing.data;
@@ -102,7 +101,7 @@ polling_booth_change = polling_booth_value => {
 
         
           <div className="col-sm-6">
-          <label>Polling Booth Number</label>
+          <label>Polling Station Name</label>
           <Select
                   value={polling_booth_value}
                   onChange={this.polling_booth_change}
@@ -114,7 +113,7 @@ polling_booth_change = polling_booth_value => {
         
         <div className = "Member_name_list">
         <MaterialTable
-        icons={tableicons}
+        icons={PeopleIcon}
         options={{
         filtering: true,
         grouping: true,
@@ -164,4 +163,4 @@ polling_booth_change = polling_booth_value => {
     
 }
 
-export default Member_count;
+export default MemberCount;

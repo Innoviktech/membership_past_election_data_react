@@ -1,32 +1,40 @@
-//import logo from './logo.svg';
+import {BrowserRouter as Router,Link,Switch,Route,Redirect} from 'react-router-dom';
+import Login from './validation/login';
+import Register from './validation/register';
+import Home from './components/home';
+import ProtectedRoute from './validation/ProtectedRouter';
+
 import './App.css';
-import Member_count from './sidebar';
 
-
-import {BrowserRouter as Router,Link,Switch,Route,} from 'react-router-dom';
 function App() {
   return (
-     <div className="App">
-     
-     <Router>
-      <nav class="navbar navbar-default">
-          <div class="container-fluid">
-          <ul class="nav navbar-nav">
-
-                <li className="nav-link active heading" ><a ><Link to="/memberdetails">Election Data Management</Link></a></li>
+    <div className="App">
+      <Router>
+              <div>
+                  <div className="menu">
+                      <a><Link to="/register">Register</Link></a><br></br>
+                      <a><Link to="/login">Login</Link></a><br></br>
+                      {/* <a><Link to="/home">home</Link></a><br></br> */}
+                      
+                  </div>
+                <Switch>
+                <Route path="/register" component={Register} />
+                <Route path="/login" component={Login} />
+                <ProtectedRoute>
+                  <Route exact path='/home' component={Home} />
+                </ProtectedRoute>  
+                </Switch>
                 
-                
-          </ul>
-          </div>
-        </nav>
-      <Switch>
-        <Route path="/memberdetails" component={Member_count} />
-      </Switch>
-    </Router> 
-    
-     </div>
-     
-   
+              </div>
+            </Router>
+            {/* <Router>
+              <Switch>
+              <ProtectedRoute>
+                  <Route exact path='/home' component={Home} />
+                </ProtectedRoute>
+              </Switch>
+            </Router> */}
+    </div>
   );
 }
 
