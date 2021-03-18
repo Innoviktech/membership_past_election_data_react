@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from "axios";
 import MaterialTable from "material-table";
@@ -8,7 +8,12 @@ import Select from 'react-select';
 import PeopleIcon from '@material-ui/icons/People';
 import $ from 'jquery';
 import axiosInstance from '../axios';
-class MemberCount extends React.Component
+import { Hidden } from '@material-ui/core';
+import MemberView from './member_view';
+
+import reactDom from 'react-dom';
+import {BrowserRouter as Router,Link,Switch,Route,Redirect} from 'react-router-dom';
+class MemberCount extends Component
 {
     constructor(props)
     {
@@ -16,23 +21,21 @@ class MemberCount extends React.Component
         this.state = {
             constituency_data : [],
             polling_station_name_result : [],
-            polling_booth_value : null,
-            constituency_value : null,
+            polling_booth_value : [],
+            constituency_value : [],
             member_data : [],
-
-
-            constituency_result : "",
-            constituency_count : [],
-            
-            polling_booth_drops : [],
-            
-            name_list : [],
-           
+            edit:false,
            
         }
     }
     componentDidMount() {
-      
+      const role =localStorage.getItem('role')
+      console.log(role)
+      if (role == 'is_superuser'){
+        
+        this.setState({ edit: !this.state.edit });
+      }
+
       axiosInstance.get(`constituancy_name/`)
           .then(res => {
             console.log(res)
@@ -61,23 +64,30 @@ class MemberCount extends React.Component
      
 polling_booth_change = polling_booth_value => {
         this.setState({polling_booth_value});
-        const var1 = this.state.constituency_value.value
+        const booth = polling_booth_value.value
+        console.log(booth)
+        this.change(booth)
+            
+        }
+
+        change =(booth)=>{
+         
+        const var1 = JSON.stringify(this.state.constituency_value.value);
         console.log(var1)
-        const vars2 = polling_booth_value.value
+        const vars2 = booth
         console.log(vars2)
         axiosInstance.post(`constituency_member_name_list/`, {
         key1:var1,key2:vars2
         }).then((testing) => {
         const member_data=testing.data;
+        console.log(member_data)
           this.setState({ member_data });
         });
                 
                 const holder1 = []
                 this.setState({ member_data : holder1 });
-            
         }
  render()
-
     {
       console.log(this.state.name_list)
       const { constituency_value } = this.state;
@@ -85,9 +95,16 @@ polling_booth_change = polling_booth_value => {
       const tableicons = {
             Filter : forwardRef((props, ref) => <FilterList {...props} ref={ref} />)
         };
-       
+
+        // return this.state.edit ? (
+        //   <div>hello </div>
+        // ) : (
+        //   <div> hi</div>
+        // )
+  
   return(
   <div>
+    
   
   <div className="row">
       <div className="col-sm-6">
@@ -117,44 +134,84 @@ polling_booth_change = polling_booth_value => {
         options={{
         filtering: true,
         grouping: true,
-        
+        actionsColumnIndex: -1,
+         
     }}
+
+    
+    // editable={{
+    //   isEditable: (rowData) => this.state.edit,
+    //   onRowUpdate: (newData, oldData) =>
+      
+    //         new Promise((resolve, reject) => {
+                
+    //                 console.log(newData)
+    //                 axiosInstance.post(`update_member/`, {
+    //                   key1:newData
+    //               }).then((testing) => {
+    //                  console.log(testing)
+    //                  const booth = JSON.stringify(this.state.polling_booth_value.value);
+    //                 console.log(booth)
+    //                  this.change(booth)
+    //               });
+
+    //                 resolve();
+                
+    //         }),
+      
+    // }}
+    actions={[
+      {
+        icon: 'save',
+        tooltip: 'save user',
+        onClick: (event,rowData) => {
+      const value1 = rowData
+      //console.log(value1)
+      ReactDOM.render(
+        <div>
+        <MemberView  view = {rowData} />
+        </div>,
+         document.getElementById('roots')
+      );
+      
+        
+         }
+       }
+    ]}
+
     columns={[
       
-      {title:"Member",field:"name"},
-      {title:"LastName",field:"last_name"},
-      // {title:"Election Type",field:"election_type"},
-      // {title:"Year",field:"year"},
-      {title:"Voter List Part Number & Serial Number",field:"voter_id"},
-      {title:"Part Agent Election Identity Card",field:"part_agent"},
-      {title:"District",field:"district_id"},
-      {title:"District Wing",field:"district_wing_id"},
-      { title: "Union", field: "union_id"},
-      {title:"Union Wing",field:"union_wing_id"},
-      { title: "Panchayat", field: "panchayat_id"},
-      { title: "Email", field: "email"},
-      { title: "Mobile", field: "mobile"},
-      { title: "Phone", field: "phone"},
-      { title: "Birth Date", field: "birth_date"},
-      { title: "Party name", field: "party_name"},
-      { title: "Constituancy Name", field: "constituency"},
-      { title: "Polling Station Name", field: "polling_station_name"},
-      { title: "Polling Booth Number", field: "booth_number"},
-      { title: "Gender", field: "gender"},
-      { title: "Member Age", field: "age"},
-      { title: "Caste", field: "caste"},
-      { title: "Ward Number", field: "ward_number"},
-      { title: "Door Number", field: "door_number"},
+      { title: "First Name",field:"member_id"},
+      // { title: "Last Name",field:"last_name"},
+      // { title: "Constituancy Name", field: "constituancy_name"},
+      // { title: "Polling Station Name", field: "polling_station_id"},
+      // { title: "Voter Details Verified",field:"voter_details_verified"},
+      // { title: "Voting Done",field:"voting_done"},
+      { title: "Voter List Part Number & Serial Number",field:"voter_id"},
+      // { title: "Part Agent Election Identity Card",field:"election_id_card"},
+      // { title: "Party Name",field:"party_name"},
+      // { title: "Gender", field: "gender"},
+      // { title: "Member Age", field: "age"},
+      // { title: "Birth Date", field: "birth_date"},
+      // { title: "Social Classification", field: "caste"},
+      // { title: "Ward Number", field: "ward_number"},
+      // { title: "Door Number", field: "door_number"},
+      // { title: "Email", field: "email"},
+      // { title: "Mobile", field: "mobile"},
+      // { title: "Phone", field: "phone"},
       { title: "Street", field: "street"},
-      { title: "Street2", field: "street2"},
-      { title: "City", field: "city"},
-      { title: "State", field: "state"},
-      { title: "ZIP Code", field: "zip"},
-            
+      // { title: "City", field: "city"},
+      // { title: "State", field: "state"},
+      // { title: "ZIP Code", field: "zip"},
+      
+ 
             ]}
             data={this.state.member_data}
             title=""
             />
+
+        </div>
+        <div id="roots">
 
         </div>
         </div>
