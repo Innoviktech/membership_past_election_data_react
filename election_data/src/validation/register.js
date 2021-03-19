@@ -11,7 +11,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
+import Select from 'react-select';
+import axios from "axios";
 class Register extends React.Component{
 
     constructor(props) {
@@ -22,6 +23,12 @@ class Register extends React.Component{
               password : "",
               username : "",
               role : "",
+              first_name : "",
+              last_name : "",
+              constituency_name : [],
+              constituency_value : "",
+              polling_station_name : [],
+              polling_station_value : [],
           }
         }
     
@@ -42,24 +49,75 @@ class Register extends React.Component{
         })
         }
 
+    first_name = (event) =>{
+        this.setState({
+                first_name : event.target.value
+            })
+        }
+
+        last_name = (event) =>{
+            this.setState({
+                last_name : event.target.value
+            })
+        }
+
     
     handleSubmit = (event) => {
        
         const value1 = this.state.username
         const value2= this.state.role
         const value3 = this.state.password
-
-        axiosInstance.post(`create/`, {
-          username:value1, password:value3, role:value2
+        const value4 = this.state.first_name
+        const value5 = this.state.last_name
+        const value6 = this.state.constituency_value.value
+        const value7 = this.state.polling_station_value.value
+        axios.post('http://localhost:8000/create/', {
+          username:value1, password:value3, role:value2, first_name : value4, last_name : value5, constituency_name : value6, polling_station_value : value7
         })
         .then((testing) => {
-            window.location = './login';
+           window.location = './login';
         });
             event.preventDefault()
           }
 
+          
+    componentDidMount()
+         {
+             axios.get('http://localhost:8000/constituancy_name/')
+             .then(res=>
+                {
+                    console.log(res)
+                    const constituency_name = res.data
+                    console.log(constituency_name)
+                    this.setState({constituency_name})
+                    // console.log(constituency_name)
+                })
+         }
+         constituency_change = constituency_value =>
+         {
+             this.setState({constituency_value})
+             const value1 = constituency_value.value
+             axios.post('http://localhost:8000/polling_station_name/',{
+                 key1 : value1
+             })
+             .then(res=>
+                {
+                    const polling_station_name = res.data
+                    this.setState({polling_station_name})
+                    console.log(polling_station_name)
+                })
+
+         }
+         polling_station_change = polling_station_value => {
+            this.setState({polling_station_value});
+            const booth = polling_station_value.value
+            console.log(booth)
+            }
+
     render()
     {
+        const { constituency_value } = this.state;
+        const { polling_station_value } = this.state;
         return(
             <div class="signup-form">
                 <form onSubmit={this.handleSubmit}>
@@ -77,14 +135,43 @@ class Register extends React.Component{
                 </div>
 
                 <div  class="form-group">
-                <label> Username </label><br></br>
-                <input type="text" name="username" value={this.state.username} onChange={this.usernamehandler} placeholder="enter Your username" required></input><br></br>
+                <label> Email </label><br></br>
+                <input type="email" name="username" value={this.state.username} onChange={this.usernamehandler} placeholder="Enter Your Email" required></input><br></br>
                 </div>
 
 
                 <div  class="form-group">
                 <label> Password </label><br></br>
-                <input type="password" name="password" value={this.state.password} onChange={this.passwordhandler} placeholder="enter password" required></input><br></br>
+                <input type="password" name="password" value={this.state.password} onChange={this.passwordhandler} placeholder="Enter Password" required></input><br></br>
+                </div>
+
+                <div  class="form-group">
+                <label> First Name </label><br></br>
+                <input type="text" name="name" value={this.state.first_name} onChange={this.first_name} placeholder="Enter First Name" required></input><br></br>
+                </div>
+
+                <div  class="form-group">
+                <label> Last Name </label><br></br>
+                <input type="text" name="lname" value={this.state.last_name} onChange={this.last_name} placeholder="Enter Last name" required></input><br></br>
+                </div>
+
+                <div  class="form-group">
+                <label> Constituency </label><br></br>
+                <Select
+                    value={constituency_value}
+                    onChange={this.constituency_change}
+                    options={this.state.constituency_name}
+                  />
+               
+                </div>
+
+                <div  class="form-group">
+                <label> Polling Station </label><br></br>
+                <Select
+                     value={polling_station_value}
+                     onChange={this.polling_station_change}
+                    options={this.state.polling_station_name}
+                  />
                 </div>
 
                 <div class="form-group">
