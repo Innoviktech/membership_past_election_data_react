@@ -161,7 +161,28 @@ body {
 	  font-size: large;
   }
   
-  select {
+  /* select {
 	width: 150px;
 	margin: 10px;
+} */
+.form-view{
+	padding-left: 22px;
+	padding-top: 30px;
+}
+.select{
+	width: 210px;
+	
+}
+/* .css-107lb6w-singleValue{
+
+	color: red;
+} */
+.edit{
+	outline: none;
+	border: none;
+	
+
+}
+.row label{
+	color: #337ab7;
 }

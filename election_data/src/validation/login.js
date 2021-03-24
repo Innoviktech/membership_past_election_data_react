@@ -136,12 +136,12 @@ export default function Login() {
                  <p>Please fill in this form to login an account!</p>
                  <hr></hr>
                  <div class="form-group">
-                 <label> Email </label><br></br>
-                 <input type="email" name="username" id="username" onChange={handleChange} placeholder="Enter Email" required></input><br></br>
+                 <label> username </label><br></br>
+                 <input type="text" name="username" id="username" onChange={handleChange} placeholder="enter username" required></input><br></br>
                  </div>
                  <div class="form-group">
                  <label> Password </label><br></br>
-                <input type="password" name="password" id="password" onChange={handleChange} placeholder="Enter Password" required></input><br></br>
+                <input type="password" name="password" id="password" onChange={handleChange} placeholder="enter password" required></input><br></br>
                  </div>
                  <div class="form-group">
                      <button>Login</button>
