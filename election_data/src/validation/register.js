@@ -23,13 +23,17 @@ class Register extends React.Component{
               password : "",
               username : "",
               role : "",
+              image : null,
               first_name : "",
               last_name : "",
               constituency_name : [],
               constituency_value : "",
               polling_station_name : [],
               polling_station_value : [],
-          }
+            //   state : [],
+              state_value : [],
+              change_value : "",
+            }
         }
     
     usernamehandler = (event) => {
@@ -63,36 +67,53 @@ class Register extends React.Component{
 
     
     handleSubmit = (event) => {
-       
-        const value1 = this.state.username
-        const value2= this.state.role
-        const value3 = this.state.password
-        const value4 = this.state.first_name
-        const value5 = this.state.last_name
-        const value6 = this.state.constituency_value.value
-        const value7 = this.state.polling_station_value.value
-        axios.post('http://localhost:8000/create/', {
-          username:value1, password:value3, role:value2, first_name : value4, last_name : value5, constituency_name : value6, polling_station_value : value7
-        })
-        .then((testing) => {
-           window.location = './login';
-        });
-            event.preventDefault()
-          }
+        
+        let form_data = new FormData();
+        form_data.append('image', this.state.image, this.state.image.name);
+        form_data.append('role', this.state.role);
+        form_data.append('username', this.state.username);
+        form_data.append('password', this.state.password);
+        form_data.append('first_name', this.state.first_name);
+        form_data.append('last_name', this.state.last_name);
+        form_data.append('state',this.state.change_value.value)
+        form_data.append('constituency_value', this.state.constituency_value.value);
+        form_data.append('polling_station_value', this.state.polling_station_value.value);
+        
+        let url = 'http://localhost:8000/create/';
+          axios.post(url, form_data, {
+            headers: {
+              'content-type': 'multipart/form-data'
+            }
+          })
+              .then(res => {
+                //window.location = './login';
+                console.log(res.data);
+              })
+              .catch(err => console.log(err))
+              event.preventDefault()
 
-          
+        }      
+    
     componentDidMount()
          {
+             axios.get('http://localhost:8000/state_name/')
+             .then(res=>{
+                 const state_value = res.data
+                 console.log(state_value)
+                 this.setState({state_value})
+             })
+
              axios.get('http://localhost:8000/constituancy_name/')
              .then(res=>
                 {
                     console.log(res)
                     const constituency_name = res.data
-                    console.log(constituency_name)
+                    //console.log(constituency_name)
                     this.setState({constituency_name})
                     // console.log(constituency_name)
                 })
          }
+
          constituency_change = constituency_value =>
          {
              this.setState({constituency_value})
@@ -104,7 +125,7 @@ class Register extends React.Component{
                 {
                     const polling_station_name = res.data
                     this.setState({polling_station_name})
-                    console.log(polling_station_name)
+                    //console.log(polling_station_name)
                 })
 
          }
@@ -114,10 +135,28 @@ class Register extends React.Component{
             console.log(booth)
             }
 
+            state_change = change_value => {
+                this.setState({change_value});
+                }
+
+            handleImageChange = (e) => {
+                this.setState({
+                  image: e.target.files[0]
+                })
+              };
+
+    
+
     render()
     {
+        //console.log(this.state.state_value)
+        console.log(this.state.change_value.value)
+        // console.log(this.state.constituency_value.value)
+        // console.log(this.state.polling_station_value.value)
         const { constituency_value } = this.state;
         const { polling_station_value } = this.state;
+        const {change_value} = this.state;
+        //console.log(this.state.image)
         return(
             <div class="signup-form">
                 <form onSubmit={this.handleSubmit}>
@@ -133,26 +172,42 @@ class Register extends React.Component{
 
                 </select>
                 </div>
+                <div>
+                        <input type="file"
+                            id="image"
+                            accept="image/png, image/jpeg"  onChange={this.handleImageChange} required/>
+                </div>
 
                 <div  class="form-group">
                 <label> Email </label><br></br>
-                <input type="email" name="username" value={this.state.username} onChange={this.usernamehandler} placeholder="Enter Your Email" required></input><br></br>
+                <input type="email" name="username" value={this.state.username} onChange={this.usernamehandler} placeholder="Enter Your Email" ></input><br></br>
                 </div>
 
 
                 <div  class="form-group">
                 <label> Password </label><br></br>
-                <input type="password" name="password" value={this.state.password} onChange={this.passwordhandler} placeholder="Enter Password" required></input><br></br>
+                <input type="password" name="password" value={this.state.password} onChange={this.passwordhandler} placeholder="Enter Password" ></input><br></br>
                 </div>
 
                 <div  class="form-group">
                 <label> First Name </label><br></br>
-                <input type="text" name="name" value={this.state.first_name} onChange={this.first_name} placeholder="Enter First Name" required></input><br></br>
+                <input type="text" name="name" value={this.state.first_name} onChange={this.first_name} placeholder="Enter First Name" ></input><br></br>
                 </div>
 
                 <div  class="form-group">
                 <label> Last Name </label><br></br>
-                <input type="text" name="lname" value={this.state.last_name} onChange={this.last_name} placeholder="Enter Last name" required></input><br></br>
+                <input type="text" name="lname" value={this.state.last_name} onChange={this.last_name} placeholder="Enter Last name" ></input><br></br>
+                </div>
+
+                <div  class="form-group">
+                <label> State </label><br></br>
+                <Select
+                     value={change_value}
+                     onChange={this.state_change}
+                     options={this.state.state_value}
+                     
+                  />
+               
                 </div>
 
                 <div  class="form-group">
@@ -184,6 +239,7 @@ class Register extends React.Component{
     }
 }
 export default Register;
+
 
 
 

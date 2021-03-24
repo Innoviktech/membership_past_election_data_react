@@ -6,6 +6,7 @@ import Home from './components/home';
 import Demo from './components/demo';
 import ProtectedRoute from './validation/ProtectedRouter';
 import Digital_sign from './validation/digital_sign';
+import View from './validation/view';
 import './App.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
                       <a><Link to="/login">Login</Link></a><br></br>
                       <a><Link to="/demo">Demo</Link></a><br></br>
                       <a><Link to="/sign">Sign</Link></a><br></br>
+                      <a><Link to="/view">images</Link></a><br></br>
                       
                   </div>
                 <Switch>
@@ -25,6 +27,7 @@ function App() {
                 <Route path="/login" component={Login} />
                 <Route path="/demo" component={Demo} />
                 <Route path="/sign" component={Digital_sign} />
+                <Route path="/view" component={View} />
                 
                 <ProtectedRoute>
                   <Route  path="/home" to="/home" component={Home} />

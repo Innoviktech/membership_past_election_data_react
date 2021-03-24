@@ -1,8 +1,18 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-import SignaturePad from 'react-signature-canvas'
+import SignaturePad from 'react-signature-canvas';
+import axiosInstance from '../axios';
 
 class Digital_sign extends Component {
+  constructor(props) {
+    super(props)
+
+      this.state = {
+          
+          image: "",
+      }
+    }
+
     state = {trimmedDataURL: null}
     sigPad = {}
     clear = () => {
@@ -21,6 +31,13 @@ class Digital_sign extends Component {
         };
         reader.readAsDataURL(event.target.files[0]);
       }
+      const vars = this.state.image;
+      axiosInstance.post(`image/`, {
+       image:vars
+      })
+      .then((testing) => {
+         
+      });
     }
 
     render () {
@@ -46,8 +63,8 @@ class Digital_sign extends Component {
             <input type="file" onChange={this.onImageChange} className="filetype" id="group_image"/>
           </div>
           <div>
-          {/* <img id="target" src={this.state.image}/> */}
-          <embed id="target" src={this.state.image} type="application/pdf"   height="700px" width="500"></embed>
+          <img id="target" src={this.state.image}/>
+          {/* <embed id="target" src={this.state.image} type="application/pdf"   height="700px" width="500"></embed> */}
           </div>
        </div>
       )
