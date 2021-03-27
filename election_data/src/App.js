@@ -7,6 +7,7 @@ import Demo from './components/demo';
 import ProtectedRoute from './validation/ProtectedRouter';
 import Digital_sign from './validation/digital_sign';
 import View from './validation/view';
+import Admin from './validation/admin';
 import './App.css';
 
 function App() {
@@ -17,9 +18,9 @@ function App() {
                   <div id= "menus" className="menu">
                       <a><Link to="/register">Register</Link></a><br></br>
                       <a><Link to="/login">Login</Link></a><br></br>
-                      <a><Link to="/demo">Demo</Link></a><br></br>
-                      <a><Link to="/sign">Sign</Link></a><br></br>
-                      <a><Link to="/view">images</Link></a><br></br>
+                      {/* <a><Link to="/demo">Demo</Link></a><br></br>
+                      <a><Link to="/sign">Sign</Link></a><br></br> */}
+                      {/* <a><Link to="/view">images</Link></a><br></br> */}
                       
                   </div>
                 <Switch>
@@ -28,6 +29,7 @@ function App() {
                 <Route path="/demo" component={Demo} />
                 <Route path="/sign" component={Digital_sign} />
                 <Route path="/view" component={View} />
+                <Route path="/admin" component={Admin} />
                 
                 <ProtectedRoute>
                   <Route  path="/home" to="/home" component={Home} />

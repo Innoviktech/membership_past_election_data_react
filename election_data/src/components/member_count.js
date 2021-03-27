@@ -25,16 +25,17 @@ class MemberCount extends Component
             constituency_value : [],
             member_data : [],
             edit:false,
+            // show : false,
            
         }
     }
     componentDidMount() {
-      const role =localStorage.getItem('role')
-      console.log(role)
-      if (role == 'is_superuser'){
+      // const role =localStorage.getItem('role')
+      // console.log(role)
+      // if (role == 'is_superuser'){
         
-        this.setState({ edit: !this.state.edit });
-      }
+      //   this.setState({ edit: !this.state.edit });
+      // }
 
       axiosInstance.get(`constituancy_name/`)
           .then(res => {
@@ -44,6 +45,11 @@ class MemberCount extends Component
           })
          
            $("th").removeClass("MTableHeader-header-13");
+
+           
+          const show2 = localStorage.getItem('show1');
+          console.log(show2);
+          this.setState({show : show2});
       }
 
       constituency_change = constituency_value => {
@@ -130,11 +136,14 @@ polling_booth_change = polling_booth_value => {
         
         <div className = "Member_name_list">
         <MaterialTable
+   
         icons={PeopleIcon}
         options={{
         filtering: true,
         grouping: true,
-        actionsColumnIndex: -1,
+        
+       
+       actionsColumnIndex: -1,
          
     }}
 
@@ -165,11 +174,16 @@ polling_booth_change = polling_booth_value => {
         icon: 'save',
         tooltip: 'save user',
         onClick: (event,rowData) => {
+        // localStorage.setItem('show1', false); 
+        // const result = localStorage.getItem('show1')
+        // console.log(result)
+        this.setState({show:true})
       const value1 = rowData
       //console.log(value1)
       ReactDOM.render(
-        <div>
+        <div className="data">
         <MemberView  view = {rowData} />
+       
         </div>,
          document.getElementById('roots')
       );
@@ -182,30 +196,9 @@ polling_booth_change = polling_booth_value => {
     columns={[
       
       { title: "First Name",field:"member_id"},
-      // { title: "Last Name",field:"last_name"},
-      // { title: "Constituancy Name", field: "constituancy_name"},
-      // { title: "Polling Station Name", field: "polling_station_id"},
-      // { title: "Voter Details Verified",field:"voter_details_verified"},
-      // { title: "Voting Done",field:"voting_done"},
       { title: "Voter List Part Number & Serial Number",field:"voter_id"},
-      // { title: "Part Agent Election Identity Card",field:"election_id_card"},
-      // { title: "Party Name",field:"party_name"},
-      // { title: "Gender", field: "gender"},
-      // { title: "Member Age", field: "age"},
-      // { title: "Birth Date", field: "birth_date"},
-      // { title: "Social Classification", field: "caste"},
-      // { title: "Ward Number", field: "ward_number"},
-      // { title: "Door Number", field: "door_number"},
-      // { title: "Email", field: "email"},
-      // { title: "Mobile", field: "mobile"},
-      // { title: "Phone", field: "phone"},
       { title: "Street", field: "street"},
-      // { title: "City", field: "city"},
-      // { title: "State", field: "state"},
-      // { title: "ZIP Code", field: "zip"},
-      
- 
-            ]}
+    ]}
             data={this.state.member_data}
             title=""
             />
@@ -214,6 +207,7 @@ polling_booth_change = polling_booth_value => {
         <div id="roots">
 
         </div>
+       
         </div>
 );
     }
