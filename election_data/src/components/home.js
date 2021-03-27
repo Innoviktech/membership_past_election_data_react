@@ -34,7 +34,7 @@ class Home extends Component{
           <ul class="nav navbar-nav">
                
                 <li className="nav-link active heading" ><a ><Link to="/home/submenu/">Election Data Management</Link></a></li>
-                <li  ><a ><Link to="/home/import/">Import</Link></a></li>
+                {/* <li  ><a ><Link to="/home/import/">Import</Link></a></li> */}
                 <li className="nav navbar-nav navbar-right"><a ><Link to="/logout/">Logout</Link></a></li> 
           </ul>
           </div>

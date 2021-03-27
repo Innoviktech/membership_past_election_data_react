@@ -13,8 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Select from 'react-select';
 import axios from "axios";
-import $ from 'jquery';
-class Register extends React.Component{
+class Admin extends React.Component{
 
     constructor(props) {
         super(props)
@@ -23,7 +22,7 @@ class Register extends React.Component{
               
               password : "",
               username : "",
-              role : "staff",
+              role : "",
               image : "",
               first_name : "",
               last_name : "",
@@ -49,11 +48,11 @@ class Register extends React.Component{
         })
         }
     
-    // rolehandler = (event) => {
-    //     this.setState({
-    //         role: event.target.value
-    //     })
-    //     }
+    rolehandler = (event) => {
+        this.setState({
+            role: event.target.value
+        })
+        }
 
     first_name = (event) =>{
         this.setState({
@@ -66,11 +65,10 @@ class Register extends React.Component{
                 last_name : event.target.value
             })
         }
-        phone_change = (event)=>{
+        phone_change = (event) =>{
             this.setState({
                 phone : event.target.value
             })
-           
         }
 
     
@@ -102,10 +100,7 @@ class Register extends React.Component{
         form_data.append('constituency_value', this.state.constituency_value.value);
         form_data.append('polling_station_value', this.state.polling_station_value.value);
         }
-        const a = this.state.change_value
-        if(a == ''){
-            // $('.css-g1d714-ValueContainer').css('border-color','green')
-        }
+        
         let url = 'http://localhost:8000/create/';
           axios.post(url, form_data, {
             headers: {
@@ -117,7 +112,6 @@ class Register extends React.Component{
                 console.log(res.data);
                 const alert_msg = res.data
                 alert(alert_msg)
-                window.location = './login';
               })
               .catch(err => console.log(err))
               event.preventDefault()
@@ -142,7 +136,6 @@ class Register extends React.Component{
                     this.setState({constituency_name})
                     // console.log(constituency_name)
                 })
-                $('.formss').css('border-color','green')
          }
 
          constituency_change = constituency_value =>
@@ -180,8 +173,8 @@ class Register extends React.Component{
 
     render()
     {
-        //console.log(this.state.state_value)
-        console.log(this.state.change_value.value)
+        console.log(this.state.role)
+        //console.log(this.state.change_value.value)
         // console.log(this.state.constituency_value.value)
         // console.log(this.state.polling_station_value.value)
         const { constituency_value } = this.state;
@@ -190,49 +183,46 @@ class Register extends React.Component{
         //console.log(this.state.image)
         return(
             <div class="signup-form">
-                {/* <div>
-                        <input type="file"
-                            id="image"
-                            accept="image/png, image/jpeg"  onChange={this.handleImageChange} required/>
-                </div> */}
                 <form onSubmit={this.handleSubmit}>
                 <h2>Register</h2>
                 <p>Please fill in this form to create an account!</p>
                 <hr></hr>
 
-                {/* <div  class="form-group">
+                <div  class="form-group">
                 <label> Role </label><br></br>
                 <select onChange={this.rolehandler}>
+                <option disabled="True" selected>select</option>
                 <option value="superAdmin">Super Admin</option>
                 <option value="staff">Staff</option>
 
                 </select>
-                </div> */}
+                </div>
                 <div>
                         <input type="file"
                             id="image"
                             accept="image/png, image/jpeg"  onChange={this.handleImageChange} />
                 </div>
 
-                <div  className="form-group">
+                <div  class="form-group">
                 <label> Email <span>*</span></label><br></br>
                 <input type="email" name="username" value={this.state.username} onChange={this.usernamehandler} placeholder="Enter Your Email" required></input><br></br>
                 </div>
 
 
-                <div  className="form-group">
-                <label> Password<span>*</span> </label><br></br>
-                <input type="password" name="password" value={this.state.password} onChange={this.passwordhandler} placeholder="Enter Password" required ></input><br></br>
+                <div  class="form-group">
+                <label> Password <span>*</span></label><br></br>
+                <input type="password" name="password" value={this.state.password} onChange={this.passwordhandler} placeholder="Enter Password" required></input><br></br>
                 </div>
+                
 
-                <div  className="form-group">
+                <div  class="form-group">
                 <label> First Name <span>*</span></label><br></br>
-                <input type="text" name="name" value={this.state.first_name} onChange={this.first_name} placeholder="Enter First Name" required></input><br></br>
+                <input type="text" name="name" value={this.state.first_name} onChange={this.first_name} placeholder="Enter First Name" required ></input><br></br>
                 </div>
 
-                <div  className="form-group">
-                <label> Last Name/Initial <span>*</span></label><br></br>
-                <input type="text" name="lname" value={this.state.last_name} onChange={this.last_name} placeholder="Enter Last name" required></input><br></br>
+                <div  class="form-group">
+                <label> Last Name/ Initial <span>*</span></label><br></br>
+                <input type="text" name="lname" value={this.state.last_name} onChange={this.last_name} placeholder="Enter Last name" required ></input><br></br>
                 </div>
 
                 <div  className="form-group">
@@ -240,13 +230,15 @@ class Register extends React.Component{
                 <input type="number" name="phone" value={this.state.phone} onChange={this.phone_change} placeholder="Enter phone" ></input><br></br>
                 </div>
 
-                <div  className="form-group">
-                <label> State <span>*</span></label><br></br>
-                <Select className="test"
+                
+
+                <div  class="form-group">
+                <label> State<span>*</span> </label><br></br>
+                <Select
                      value={change_value}
                      onChange={this.state_change}
                      options={this.state.state_value}
-                   required={true}
+                     
                   />
                
                 </div>
@@ -279,156 +271,4 @@ class Register extends React.Component{
         );
     }
 }
-export default Register;
-
-
-
-
-// import React, { useState } from 'react';
-// import axiosInstance from '../axios';
-// import { useHistory } from 'react-router-dom';
-// import Avatar from '@material-ui/core/Avatar';
-// import Button from '@material-ui/core/Button';
-// import CssBaseline from '@material-ui/core/CssBaseline';
-// import TextField from '@material-ui/core/TextField';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import Checkbox from '@material-ui/core/Checkbox';
-// import Link from '@material-ui/core/Link';
-// import Grid from '@material-ui/core/Grid';
-// import Typography from '@material-ui/core/Typography';
-// import { makeStyles } from '@material-ui/core/styles';
-// import Container from '@material-ui/core/Container';
-
-// const useStyles = makeStyles((theme) => ({
-// 	paper: {
-// 		marginTop: theme.spacing(8),
-// 		display: 'flex',
-// 		flexDirection: 'column',
-// 		alignItems: 'center',
-// 	},
-// 	avatar: {
-// 		margin: theme.spacing(1),
-// 		backgroundColor: theme.palette.secondary.main,
-// 	},
-// 	form: {
-// 		width: '100%', // Fix IE 11 issue.
-// 		marginTop: theme.spacing(3),
-// 	},
-// 	submit: {
-// 		margin: theme.spacing(3, 0, 2),
-// 	},
-// }));
-
-// export default function Register() {
-// 	const history = useHistory();
-// 	const initialFormData = Object.freeze({
-// 		email: '',
-// 		username: '',
-// 		password: '',
-// 	});
-
-// 	const [formData, updateFormData] = useState(initialFormData);
-
-// 	const handleChange = (e) => {
-// 		updateFormData({
-// 			...formData,
-// 			// Trimming any whitespace
-// 			[e.target.name]: e.target.value.trim(),
-// 		});
-// 	};
-
-// 	const handleSubmit = (e) => {
-// 		e.preventDefault();
-// 		console.log(formData);
-
-// 		axiosInstance
-// 			.post(`user/create/`, {
-// 				email: formData.email,
-// 				user_name: formData.username,
-// 				password: formData.password,
-// 			})
-// 			.then((res) => {
-// 				history.push('/login');
-// 				console.log(res);
-// 				console.log(res.data);
-// 			});
-// 	};
-
-// 	const classes = useStyles();
-
-// 	return (
-// 		<Container component="main" maxWidth="xs">
-// 			<CssBaseline />
-// 			<div className={classes.paper}>
-// 				<Avatar className={classes.avatar}></Avatar>
-// 				<Typography component="h1" variant="h5">
-// 					Sign up
-// 				</Typography>
-// 				<form className={classes.form} noValidate>
-// 					<Grid container spacing={2}>
-// 						<Grid item xs={12}>
-// 							<TextField
-// 								variant="outlined"
-// 								required
-// 								fullWidth
-// 								id="email"
-// 								label="Email Address"
-// 								name="email"
-// 								autoComplete="email"
-// 								onChange={handleChange}
-// 							/>
-// 						</Grid>
-// 						<Grid item xs={12}>
-// 							<TextField
-// 								variant="outlined"
-// 								required
-// 								fullWidth
-// 								id="username"
-// 								label="Username"
-// 								name="username"
-// 								autoComplete="username"
-// 								onChange={handleChange}
-// 							/>
-// 						</Grid>
-// 						<Grid item xs={12}>
-// 							<TextField
-// 								variant="outlined"
-// 								required
-// 								fullWidth
-// 								name="password"
-// 								label="Password"
-// 								type="password"
-// 								id="password"
-// 								autoComplete="current-password"
-// 								onChange={handleChange}
-// 							/>
-// 						</Grid>
-// 						<Grid item xs={12}>
-// 							<FormControlLabel
-// 								control={<Checkbox value="allowExtraEmails" color="primary" />}
-// 								label="I want to receive inspiration, marketing promotions and updates via email."
-// 							/>
-// 						</Grid>
-// 					</Grid>
-// 					<Button
-// 						type="submit"
-// 						fullWidth
-// 						variant="contained"
-// 						color="primary"
-// 						className={classes.submit}
-// 						onClick={handleSubmit}
-// 					>
-// 						Sign Up
-// 					</Button>
-// 					<Grid container justify="flex-end">
-// 						<Grid item>
-// 							<Link href="#" variant="body2">
-// 								Already have an account? Sign in
-// 							</Link>
-// 						</Grid>
-// 					</Grid>
-// 				</form>
-// 			</div>
-// 		</Container>
-// 	);
-// }
+export default Admin;

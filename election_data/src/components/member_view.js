@@ -3,6 +3,20 @@ import axiosInstance from '../axios';
 import Select from 'react-select';
 import { colors } from '@material-ui/core';
 import $ from 'jquery';
+import { Link } from 'react-router-dom';
+
+const gender = [
+    { value: 'male', label: 'Male' },
+    { value: 'female', label: 'Female' },
+    { value: 'others', label: 'Others' },
+  ];
+
+  const votingdone_verified = [
+    { value: 'yes', label: 'Yes' },
+    { value: 'no', label: 'No' },
+    
+  ];
+  
 
 class MemberView extends React.Component
 {
@@ -13,11 +27,10 @@ class MemberView extends React.Component
 
             member_id :  this.props.view.member_id,
             last_name :  this.props.view.last_name,
-            voter_details_verified :  this.props.view.voter_details_verified,
-            voting_done :  this.props.view.voting_done,
+            
             voter :  this.props.view.voter,
             election_id_card : this.props.view.election_id_card,
-            gender :  this.props.view.gender,
+            //gender :  this.props.view.gender,
             age :  this.props.view.age,
             birth_date :  "2021-03-22",
             caste :  this.props.view.caste,
@@ -35,22 +48,41 @@ class MemberView extends React.Component
             polling_booth : { label: this.props.view.polling_station_id, value: this.props.view.polling_id},
             partyName : { label: this.props.view.party_name, value: this.props.view.party_name_id},
             stateName : { label: this.props.view.state, value: this.props.view.state_id},
+            gender : {label:this.props.view.gender},
+            voter_details_verified :{label:this.props.view.voter_details_verified},
+            voting_done : {label:this.props.view.voting_done},
             polling_booth_data : [],
             partyNameData : [],
             stateNameData : [],
             dropdown : true,
-            
+            edit : false,
+            cancel : true,
+            save : true,
+            imgs : false,
+            image_view : true,
+            span : false,
+            form : false,
+            admin_view : '',
+           
         }
     }
-    
-
-   componentDidMount()
+componentDidMount()
    {
        this.setState({member : this.props.view})
        $("div").removeClass("css-1fhf3k1-control");
        $("svg").remove(".css-tj5bde-Svg");
        //$(".css-107lb6w-singleValue").removeProp(colors);
        $(".css-107lb6w-singleValue").css("color","black");
+
+      const roles =  localStorage.getItem('role')
+      console.log(roles)
+      if(roles == 'is_staff'){
+          this.setState({admin_view:true})
+      }
+      else{
+          this.setState({admin_view:false})
+      }
+       
    }
 
    edit =()=>{
@@ -84,18 +116,24 @@ class MemberView extends React.Component
         this.setState({ stateNameData });
         })
         var i;
-        for (i = 0; i < 18; i++) {
+        for (i = 0; i < 15; i++) {
            document.getElementsByClassName("edit")[i].removeAttribute("disabled"); 
         }
         this.setState({dropdown:false})
+        this.setState({edit:true})
+        this.setState({cancel:false})
+        this.setState({save:false})
      }
 
    cancel =()=>{
     var i;
-    for (i = 0; i < 18; i++) {
+    for (i = 0; i < 15; i++) {
         document.getElementsByClassName("edit")[i].setAttribute('disabled', 'disabled');
     }
     this.setState({dropdown:true})
+    this.setState({edit:false})
+    this.setState({cancel:true})
+    this.setState({save:true})
    }
 
    handleChange(value) {
@@ -108,6 +146,10 @@ class MemberView extends React.Component
         const polling_booth_data=testing.data;
         this.setState({ polling_booth_data });
     });
+
+        const holder = ""
+       this.setState({ polling_booth : holder });
+        
 }   
 
     pollingBoothChange(value) {
@@ -121,12 +163,42 @@ class MemberView extends React.Component
     stateNameChange(value) {
         this.setState({ stateName: value })
     }
+    gender_change(value){
+        this.setState({gender:value})
+    }
+    voterdetails_verified_change(value){
+        this.setState({voter_details_verified:value})
+    }
+    votingdone_change(value){
+        this.setState({voting_done:value})
+    }
 
     inputChange = (event) =>{ 
         this.setState({ 
             [event.target.name] : event.target.value 
         }) 
       }
+
+      image_click = ()=>{
+        this.setState({imgs:true})
+         this.setState({image_view:false})
+        
+            document.getElementById("view_img")
+           
+     }
+     span = ()=>{
+        this.setState({image_view: true})
+        this.setState({imgs : false})
+     }
+     form_span = ()=>{
+         
+
+         this.setState({form:true})
+         localStorage.setItem('show1',false)
+        
+        
+     }
+    
     
       handleSubmit = (event) => {
        
@@ -171,6 +243,7 @@ class MemberView extends React.Component
             console.log(testing.data)
         });
             event.preventDefault()
+          
 }
     
     render()
@@ -183,29 +256,47 @@ class MemberView extends React.Component
         // console.log(this.state.stateName)
         return(
             <div id="view">
-                <div className="form-view">
+                <div id ="admin_view" hidden = {this.state.admin_view}>
+                <div className="form-view" hidden={this.state.form}>
                  <div className="row">
                     <div>
                     <div className="col-sm-1">
-                    <button className="btn btn-danger" onClick={this.edit}>Edit</button>
+                    <button onClick={this.edit} hidden={this.state.edit}>Edit</button>
+                    <button onClick={this.handleSubmit} hidden={this.state.save}>Save</button>
                     </div>
                     <div className="col-sm-1">
-                    <button onClick={this.cancel}>cancel</button> 
+                   <button onClick={this.cancel} hidden={this.state.cancel}>cancel</button>  
                     </div>
                     </div>
+                </div>
                 </div>
                 </div>
                 
-               <form onSubmit={this.handlesubmit} className="form-view">
+               <form onSubmit={this.handlesubmit} className="form-view" hidden={this.state.form}>
+               <span class="close" onClick={this.form_span}>&times;</span>
 
                    <div className="row">
-                       <div>
+                       {/* <div>
                        <label className="col-sm-3">Profile</label>
-                       </div>
-                       <div>
-                       <img src={`http://localhost:8000/media/${this.state.image}`} width="120px" height="80px"></img>  
-                       </div>
+                       </div> */}
+                       
                    </div><br></br>
+                   <div className="row" >
+                       <div className="image" hidden={this.state.imgs}>
+                       <img  src={`http://localhost:8000/media/${this.state.image}`}height="150px" width="150px" onClick={this.image_click} hidden={this.state.fimg}></img>
+                       {/* <img id="img" src={`http://localhost:8000/media/${this.state.image}`}  hidden={this.state.image_set}></img> */}
+                       </div>
+                       <div className="view_img" hidden={this.state.image_view}>
+                       <span class="close" onClick={this.span} hidden={this.state.span}>&times;</span>
+                      
+                      <img src={`http://localhost:8000/media/${this.state.image}`} height="500px" width="500px"></img>
+                      <img class="modal-content" id="img01"></img>
+                    <div id="caption"></div>
+                       </div>
+                      
+
+                   </div><br></br>
+                   
                    <div className="row">
                        <div className="col-sm-3">
                        <label>First Name</label>  
@@ -252,13 +343,25 @@ class MemberView extends React.Component
                        <label>Voter Details Verified</label>  
                        </div>
                        <div className="col-sm-3">
-                       <input type="text" className="edit" name='voter_details_verified' value={this.state.voter_details_verified} onChange={this.inputChange} disabled></input>
+                       {/* <input type="text" className="edit" name='voter_details_verified' value={this.state.voter_details_verified} onChange={this.inputChange} disabled></input> */}
+                       <Select className="select"
+                            value={this.state.voter_details_verified}
+                            onChange={value => this.voterdetails_verified_change(value)}
+                            options={votingdone_verified}
+                            isDisabled = {this.state.dropdown}
+                    />
                        </div>
                        <div className="col-sm-3">
                        <label>Voting Done</label>  
                        </div>
                        <div className="col-sm-3">
-                       <input type="text" className="edit" name='voting_done' value={this.state.voting_done} onChange={this.inputChange} disabled></input>
+                       {/* <input type="text" className="edit" name='voting_done' value={this.state.voting_done} onChange={this.inputChange} disabled></input> */}
+                       <Select className="select"
+                            value={this.state.voting_done}
+                            onChange={value => this.votingdone_change(value)}
+                            options={votingdone_verified}
+                            isDisabled = {this.state.dropdown}
+                    />
                        </div>
                    </div><br></br>
 
@@ -294,7 +397,13 @@ class MemberView extends React.Component
                        <label>Gender</label>  
                        </div>
                        <div className="col-sm-3">
-                       <input type="text" className="edit" name='gender' value={this.state.gender} onChange={this.inputChange} disabled></input>
+                       {/* <input type="text" className="edit" name='gender' value={this.state.gender} onChange={this.inputChange} disabled></input> */}
+                       <Select className="select"
+                            value={this.state.gender}
+                            onChange={value => this.gender_change(value)}
+                            options={gender}
+                            isDisabled = {this.state.dropdown}
+                    />
                        </div>
                    </div><br></br>
 
@@ -394,7 +503,7 @@ class MemberView extends React.Component
                    </div><br></br>
                    <div className="row">
                    <div className="text-center" >
-                       <button class="btn btn-success" onClick={this.handleSubmit}>submit</button>
+                       {/* <button class="btn btn-success" onClick={this.handleSubmit}>Save</button> */}
                    </div>
                    </div>
 
