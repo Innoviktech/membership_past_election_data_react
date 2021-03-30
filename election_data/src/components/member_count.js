@@ -45,6 +45,7 @@ class MemberCount extends Component
           })
          
            $("th").removeClass("MTableHeader-header-13");
+       
 
            
           const show2 = localStorage.getItem('show1');

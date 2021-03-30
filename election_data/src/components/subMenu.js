@@ -10,7 +10,7 @@ export default function subMenu(){
             <div className="row">
                 <div className="col-xs-4" align="center"><a><Link to="/home/submenu/candidate/">Candidate List</Link></a></div>
                 <div className="col-xs-4" align="center"><a><Link to="/home/submenu/member/">Member Details</Link></a></div>
-                <div className="col-xs-4" align="center"><a><Link to="/home/submenu/grievance/">Grievance</Link></a></div>
+                <div className="col-xs-4" align="center"><a><Link to="/home/submenu/grievance/">Survey</Link></a></div>
             </div><br></br>
                           
           </div>
