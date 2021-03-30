@@ -11,12 +11,21 @@ const gender = [
     { value: 'others', label: 'Others' },
   ];
 
-  const votingdone_verified = [
+  const voting_done = [
     { value: 'yes', label: 'Yes' },
     { value: 'no', label: 'No' },
+   
+];
+  
+
+  const voting_verified = [
+    { value: 'yes', label: 'Yes' },
+    { value: 'no', label: 'No' },
+    { value: 'Need Attention', label: 'Need Attention' },
     
   ];
   
+
 
 class MemberView extends React.Component
 {
@@ -32,7 +41,7 @@ class MemberView extends React.Component
             election_id_card : this.props.view.election_id_card,
             //gender :  this.props.view.gender,
             age :  this.props.view.age,
-            birth_date :  "2021-03-22",
+            birth_date :  this.props.view.birth_date,
             caste :  this.props.view.caste,
             ward_number :  this.props.view.ward_number,
             door_number :  this.props.view.door_number,
@@ -49,8 +58,8 @@ class MemberView extends React.Component
             partyName : { label: this.props.view.party_name, value: this.props.view.party_name_id},
             stateName : { label: this.props.view.state, value: this.props.view.state_id},
             gender : {label:this.props.view.gender},
-            voter_details_verified :{label:this.props.view.voter_details_verified},
-            voting_done : {label:this.props.view.voting_done},
+            voter_details_verified :{label:this.props.view.voter_details_verified,value: this.props.view.voter_details_verified},
+            voting_done : {label:this.props.view.voting_done,value:this.props.view.voting_done},
             polling_booth_data : [],
             partyNameData : [],
             stateNameData : [],
@@ -63,6 +72,8 @@ class MemberView extends React.Component
             span : false,
             form : false,
             admin_view : '',
+            Voter_attention : this.props.view.Voter_attention,
+            attention : '',
            
         }
     }
@@ -75,14 +86,23 @@ componentDidMount()
        $(".css-107lb6w-singleValue").css("color","black");
 
       const roles =  localStorage.getItem('role')
-      console.log(roles)
+      //console.log(roles)
       if(roles == 'is_staff'){
           this.setState({admin_view:true})
       }
       else{
           this.setState({admin_view:false})
       }
-       
+      const reason = this.state.voter_details_verified.value;
+      //console.log(reason)
+      if (reason == 'Need Attention'){
+          this.setState({attention : false})
+      }
+      else{
+       this.setState({attention : true})
+
+      }
+      //$("div").removeClass("abc")
    }
 
    edit =()=>{
@@ -115,6 +135,7 @@ componentDidMount()
         const stateNameData = res.data;
         this.setState({ stateNameData });
         })
+        document.getElementsByClassName("new")[0].removeAttribute("disabled"); 
         var i;
         for (i = 0; i < 15; i++) {
            document.getElementsByClassName("edit")[i].removeAttribute("disabled"); 
@@ -123,7 +144,7 @@ componentDidMount()
         this.setState({edit:true})
         this.setState({cancel:false})
         this.setState({save:false})
-     }
+       }
 
    cancel =()=>{
     var i;
@@ -134,6 +155,7 @@ componentDidMount()
     this.setState({edit:false})
     this.setState({cancel:true})
     this.setState({save:true})
+    document.getElementsByClassName("new")[0].setAttribute('disabled', 'disabled');
    }
 
    handleChange(value) {
@@ -168,6 +190,18 @@ componentDidMount()
     }
     voterdetails_verified_change(value){
         this.setState({voter_details_verified:value})
+        const reason = value.value
+        console.log(reason)
+        if (reason == 'Need Attention'){
+            this.setState({attention : false})
+        }
+        else if(reason == "yes" || "no"){
+         this.setState({attention : true})
+         this.setState({Voter_attention : ''})
+
+  
+        }
+        
     }
     votingdone_change(value){
         this.setState({voting_done:value})
@@ -232,12 +266,14 @@ componentDidMount()
         console.log(value22)
         const value23 = this.props.view.id
         console.log(value23)
+        const value24 = this.state.Voter_attention
+        console.log(value24)
 
         axiosInstance.post(`update_member/`, {
             id:value23,member_id:value1, last_name:value2, voter_details_verified:value3,voting_done:value4,voter:value5,election_id_card:value6,gender:value7,
             age:value8,birth_date:value9,caste:value10,ward_number:value11,door_number:value12,email:value13,mobile:value14,phone:value15,street:value16,
             city:value17,zip:value18,constituency_id:value19,polling_st_id:value20,
-            party_name_id:value21,state_id_val:value22,
+            party_name_id:value21,state_id_val:value22,Voter_attention:value24
         })
         .then((testing) => {
             console.log(testing.data)
@@ -248,7 +284,8 @@ componentDidMount()
     
     render()
     {   
-        console.log(this.state.birth_date)
+        console.log(this.state.Voter_attention)
+        //console.log(this.state.birth_date)
         // console.log(this.state.constituency)
         // console.log("error")
         // console.log(this.state.polling_booth)
@@ -347,11 +384,12 @@ componentDidMount()
                        <Select className="select"
                             value={this.state.voter_details_verified}
                             onChange={value => this.voterdetails_verified_change(value)}
-                            options={votingdone_verified}
+                            options={voting_verified}
                             isDisabled = {this.state.dropdown}
                     />
                        </div>
                        <div className="col-sm-3">
+                          
                        <label>Voting Done</label>  
                        </div>
                        <div className="col-sm-3">
@@ -359,10 +397,23 @@ componentDidMount()
                        <Select className="select"
                             value={this.state.voting_done}
                             onChange={value => this.votingdone_change(value)}
-                            options={votingdone_verified}
+                            options={voting_done}
                             isDisabled = {this.state.dropdown}
                     />
+                       
                        </div>
+                   </div><br></br>
+
+                   <div className="row" id ="attention" hidden = {this.state.attention}>
+                   <div>
+                        <div className="col-sm-3">
+                       <label>Reason For Need Attention</label>  
+                       </div>
+                       <div className="col-sm-3" >
+                       <textarea type="text" className="new" name='Voter_attention' value={this.state.Voter_attention} onChange={this.inputChange} disabled/>
+                       </div>
+                       </div>
+
                    </div><br></br>
 
                    <div className="row">

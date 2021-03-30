@@ -246,7 +246,8 @@ class Register extends React.Component{
                      value={change_value}
                      onChange={this.state_change}
                      options={this.state.state_value}
-                   required={true}
+                   
+
                   />
                
                 </div>
