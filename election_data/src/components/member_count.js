@@ -178,7 +178,8 @@ polling_booth_change = polling_booth_value => {
         // localStorage.setItem('show1', false); 
         // const result = localStorage.getItem('show1')
         // console.log(result)
-        this.setState({show:true})
+        // this.setState({show:true})
+        //alert("hello")
       const value1 = rowData
       //console.log(value1)
       ReactDOM.render(

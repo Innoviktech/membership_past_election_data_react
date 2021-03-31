@@ -236,9 +236,30 @@ body {
 }
 /* .new{
 	border: none;} */
-	/* textarea {
+	.area {
 		border: none;
 		background-color: transparent;
 		resize: none;
 		outline: none;
-	} */
+	}
+
+	.wizard {
+		position: absolute;
+		background-color:#bfd0df;
+		
+		width: 100%;
+		
+		
+		top: 0px;
+		left: 0px;
+		
+		font-size: 18px;
+		box-shadow: 10px 10px rgb(241, 246, 247);
+	  }
+	  .close{
+		
+		 position: absolute;
+		 right: 100px;
+		 color: black;
+		 
+	  }

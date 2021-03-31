@@ -13,6 +13,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Select from 'react-select';
 import axios from "axios";
+const gender= [
+    { value: 'Male', label: 'Male' },
+    { value: 'Female', label: 'Female' },
+    { value: 'Others', label: 'Others' },
+   ];
 class Admin extends React.Component{
 
     constructor(props) {
@@ -34,6 +39,10 @@ class Admin extends React.Component{
               state_value : [],
               change_value : "",
               phone : "",
+              gender : "",
+              dob : "",
+              voter_id : "",
+              street : "",
             }
         }
     
@@ -88,6 +97,10 @@ class Admin extends React.Component{
             form_data.append('state',this.state.change_value.value)
             form_data.append('constituency_value', this.state.constituency_value.value);
             form_data.append('polling_station_value', this.state.polling_station_value.value);
+            form_data.append('gender',this.state.gender.value);
+            form_data.append('dob',this.state.dob);
+            form_data.append('voter_id',this.state.voter_id);
+            form_data.append('street',this.state.street)
         }
         else{
         form_data.append('role', this.state.role);
@@ -99,6 +112,10 @@ class Admin extends React.Component{
         form_data.append('state',this.state.change_value.value)
         form_data.append('constituency_value', this.state.constituency_value.value);
         form_data.append('polling_station_value', this.state.polling_station_value.value);
+        form_data.append('gender',this.state.gender.value);
+        form_data.append('dob',this.state.dob);
+        form_data.append('voter_id',this.state.voter_id);
+        form_data.append('street',this.state.street)
         }
         
         let url = 'http://localhost:8000/create/';
@@ -169,6 +186,28 @@ class Admin extends React.Component{
                 })
               };
 
+              gender_change (value){
+                this.setState({
+                    gender:value
+                })
+            }
+
+            dob_change = (event)=>{
+                this.setState({
+                    dob:event.target.value
+                })
+            }
+            voter_change = (event)=>{
+                this.setState({
+                    voter_id : event.target.value
+                })
+            }
+            street_change = (event)=>{
+                this.setState({
+                    street : event.target.value
+                })
+            }
+
     
 
     render()
@@ -228,6 +267,31 @@ class Admin extends React.Component{
                 <div  className="form-group">
                 <label> Phone Number </label><br></br>
                 <input type="number" name="phone" value={this.state.phone} onChange={this.phone_change} placeholder="Enter phone" ></input><br></br>
+                </div>
+
+                <div  className="form-group">
+                <label> Gender </label><br></br>
+                <Select className="select"
+                            value={this.state.gender}
+                            onChange={value => this.gender_change(value)}
+                            options={gender}
+                            
+                    />
+                </div>
+
+                <div  className="form-group">
+                <label>Date Of  Birth</label><br></br>
+                <input type="date" name="dob" value={this.state.dob} onChange={this.dob_change}></input>
+                </div>
+
+                <div  className="form-group">
+                <label>Voter ID</label><br></br>
+                <input type="voter_id" name="voter_id" value={this.state.voter_id} onChange={this.voter_change}></input>
+                </div>
+
+                <div  className="form-group">
+                <label>Street</label><br></br>
+                <input type="text" name="street" value={this.state.street} onChange={this.street_change}></input>
                 </div>
 
                 
