@@ -102,7 +102,7 @@ componentDidMount()
        this.setState({attention : true})
 
       }
-      //$("div").removeClass("abc")
+      
    }
 
    edit =()=>{
@@ -144,6 +144,7 @@ componentDidMount()
         this.setState({edit:true})
         this.setState({cancel:false})
         this.setState({save:false})
+        $("textarea").removeClass("area")
        }
 
    cancel =()=>{
@@ -228,7 +229,7 @@ componentDidMount()
          
 
          this.setState({form:true})
-         localStorage.setItem('show1',false)
+         //localStorage.setItem('show1',false)
         
         
      }
@@ -278,7 +279,7 @@ componentDidMount()
         .then((testing) => {
             console.log(testing.data)
         });
-            event.preventDefault()
+            //event.preventDefault()
           
 }
     
@@ -292,7 +293,7 @@ componentDidMount()
         // console.log(this.state.partyName)
         // console.log(this.state.stateName)
         return(
-            <div id="view">
+            <div  className="wizard" id="view">
                 <div id ="admin_view" hidden = {this.state.admin_view}>
                 <div className="form-view" hidden={this.state.form}>
                  <div className="row">
@@ -301,8 +302,10 @@ componentDidMount()
                     <button onClick={this.edit} hidden={this.state.edit}>Edit</button>
                     <button onClick={this.handleSubmit} hidden={this.state.save}>Save</button>
                     </div>
-                    <div className="col-sm-1">
-                   <button onClick={this.cancel} hidden={this.state.cancel}>cancel</button>  
+                    
+                   
+                    <div className="col-sm-1" >
+                    <span   onClick={this.form_span}>&times;</span>
                     </div>
                     </div>
                 </div>
@@ -310,8 +313,9 @@ componentDidMount()
                 </div>
                 
                <form onSubmit={this.handlesubmit} className="form-view" hidden={this.state.form}>
-               <span class="close" onClick={this.form_span}>&times;</span>
-
+               <div className="col-sm-1">
+                   <button onClick={this.cancel} hidden={this.state.cancel}>cancel</button>  
+                    </div>
                    <div className="row">
                        {/* <div>
                        <label className="col-sm-3">Profile</label>
@@ -410,7 +414,7 @@ componentDidMount()
                        <label>Reason For Need Attention</label>  
                        </div>
                        <div className="col-sm-3" >
-                       <textarea type="text" className="new" name='Voter_attention' value={this.state.Voter_attention} onChange={this.inputChange} disabled/>
+                       <textarea type="text" className="new area" name='Voter_attention' value={this.state.Voter_attention} onChange={this.inputChange} disabled/>
                        </div>
                        </div>
 

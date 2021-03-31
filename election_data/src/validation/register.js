@@ -13,7 +13,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Select from 'react-select';
 import axios from "axios";
-import $ from 'jquery';
+import $, { event } from 'jquery';
+
+
+const gender= [
+    { value: 'Male', label: 'Male' },
+    { value: 'Female', label: 'Female' },
+    { value: 'Others', label: 'Others' },
+   ];
 class Register extends React.Component{
 
     constructor(props) {
@@ -35,6 +42,10 @@ class Register extends React.Component{
               state_value : [],
               change_value : "",
               phone : "",
+              gender : "",
+              dob : "",
+              voter_id : "",
+              street : "",
             }
         }
     
@@ -49,12 +60,6 @@ class Register extends React.Component{
         })
         }
     
-    // rolehandler = (event) => {
-    //     this.setState({
-    //         role: event.target.value
-    //     })
-    //     }
-
     first_name = (event) =>{
         this.setState({
                 first_name : event.target.value
@@ -72,6 +77,7 @@ class Register extends React.Component{
             })
            
         }
+        
 
     
     handleSubmit = (event) => {
@@ -90,6 +96,10 @@ class Register extends React.Component{
             form_data.append('state',this.state.change_value.value)
             form_data.append('constituency_value', this.state.constituency_value.value);
             form_data.append('polling_station_value', this.state.polling_station_value.value);
+            form_data.append('gender',this.state.gender.value);
+            form_data.append('dob',this.state.dob);
+            form_data.append('voter_id',this.state.voter_id);
+            form_data.append('street',this.state.street)
         }
         else{
         form_data.append('role', this.state.role);
@@ -101,6 +111,10 @@ class Register extends React.Component{
         form_data.append('state',this.state.change_value.value)
         form_data.append('constituency_value', this.state.constituency_value.value);
         form_data.append('polling_station_value', this.state.polling_station_value.value);
+        form_data.append('gender',this.state.gender.value);
+        form_data.append('dob',this.state.dob);
+        form_data.append('voter_id',this.state.voter_id);
+        form_data.append('street',this.state.street)
         }
         const a = this.state.change_value
         if(a == ''){
@@ -176,12 +190,33 @@ class Register extends React.Component{
                 })
               };
 
-    
+              gender_change (value){
+                  this.setState({
+                      gender:value
+                  })
+              }
+
+              dob_change = (event)=>{
+                  this.setState({
+                      dob:event.target.value
+                  })
+              }
+              voter_change = (event)=>{
+                  this.setState({
+                      voter_id : event.target.value
+                  })
+              }
+              street_change = (event)=>{
+                  this.setState({
+                      street : event.target.value
+                  })
+              }
 
     render()
     {
+        console.log(this.state.gender.value)
         //console.log(this.state.state_value)
-        console.log(this.state.change_value.value)
+        //console.log(this.state.change_value.value)
         // console.log(this.state.constituency_value.value)
         // console.log(this.state.polling_station_value.value)
         const { constituency_value } = this.state;
@@ -231,7 +266,7 @@ class Register extends React.Component{
                 </div>
 
                 <div  className="form-group">
-                <label> Last Name/Initial <span>*</span></label><br></br>
+                <label> Last Name/Father Name/Guardian Name <span>*</span></label><br></br>
                 <input type="text" name="lname" value={this.state.last_name} onChange={this.last_name} placeholder="Enter Last name" required></input><br></br>
                 </div>
 
@@ -241,14 +276,37 @@ class Register extends React.Component{
                 </div>
 
                 <div  className="form-group">
+                <label> Gender </label><br></br>
+                <Select className="select"
+                            value={this.state.gender}
+                            onChange={value => this.gender_change(value)}
+                            options={gender}
+                            
+                    />
+                </div>
+
+                <div  className="form-group">
+                <label>Date Of  Birth</label><br></br>
+                <input type="date" name="dob" value={this.state.dob} onChange={this.dob_change}></input>
+                </div>
+
+                <div  className="form-group">
+                <label>Voter ID</label><br></br>
+                <input type="voter_id" name="voter_id" value={this.state.voter_id} onChange={this.voter_change}></input>
+                </div>
+
+                <div  className="form-group">
+                <label>Street</label><br></br>
+                <input type="text" name="street" value={this.state.street} onChange={this.street_change}></input>
+                </div>
+
+                <div  className="form-group">
                 <label> State <span>*</span></label><br></br>
                 <Select className="test"
                      value={change_value}
                      onChange={this.state_change}
                      options={this.state.state_value}
-                   
-
-                  />
+                />
                
                 </div>
 
