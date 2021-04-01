@@ -9,20 +9,29 @@ import Digital_sign from './validation/digital_sign';
 import View from './validation/view';
 import Admin from './validation/admin';
 import './App.css';
+import background from './frieden-1600.jpg'
 
 function App() {
   return (
     <div className="App">
+      <div className="cont" >
+            <img className="imgs" src={background} />
       <Router>
-              <div>
-                  <div id= "menus" className="menu">
-                      <a><Link to="/register">Register</Link></a><br></br>
-                      <a><Link to="/login">Login</Link></a><br></br>
-                      {/* <a><Link to="/demo">Demo</Link></a><br></br>
-                      <a><Link to="/sign">Sign</Link></a><br></br> */}
-                      {/* <a><Link to="/view">images</Link></a><br></br> */}
-                      
+             
+      <div>
+                  <div  className="reg">
+                    <div className="row">
+                      <div className="col-sm-6 text-center">
+                      <a><Link to="/register">Register</Link></a>
+                      </div>
+                      <div className="col-sm-6 text-center">
+                      <a><Link to="/login">Login</Link></a>
+                      </div>
+                      </div>
+                     
+                   
                   </div>
+                      
                 <Switch>
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
@@ -36,10 +45,12 @@ function App() {
                 </ProtectedRoute> 
 
                 </Switch>
+                </div>
+
                 
-              </div>
+              
             </Router>
-            
+            </div>
     </div>
   );
 }

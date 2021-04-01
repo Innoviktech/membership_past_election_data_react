@@ -58,6 +58,10 @@ class PartyCandidateName extends Component
             this.setState({ constituency_data });
           })
           $("th").removeClass("MTableHeader-header-13");
+        //   $(".css-yk16xz-control").css("background-color","transparent");
+         
+        //   $(".css-1uccc91-singleValue").css("color","#337ab7");
+
     }
 
         constituency_change = constituency_value => {
@@ -82,13 +86,15 @@ class PartyCandidateName extends Component
         const { polling_booth_value } = this.state;
 
         return(<div>
-                   <div>
+            <div className="row">
+                   <div className="col-sm-12 lables">
                         <label>Constituency</label>
                         <Select 
                                 value={constituency_value}
                                 onChange={this.constituency_change}
                                 options={this.state.constituency_data}
                             />
+                        </div>
                         </div>
                     <div><br></br>
                     {/* <table>

@@ -331,8 +331,7 @@ componentDidMount()
                        <span class="close" onClick={this.span} hidden={this.state.span}>&times;</span>
                       
                       <img src={`http://localhost:8000/media/${this.state.image}`} height="500px" width="500px"></img>
-                      <img class="modal-content" id="img01"></img>
-                    <div id="caption"></div>
+                
                        </div>
                       
 
