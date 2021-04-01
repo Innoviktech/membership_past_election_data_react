@@ -131,7 +131,7 @@ export default function Login() {
 	// const classes = useStyles();
 
     return (
-        <div  class="signup-form">
+        <div  class="signup-form images">
                 
                <form onSubmit={handleSubmit}>
                 <h2>Login</h2>

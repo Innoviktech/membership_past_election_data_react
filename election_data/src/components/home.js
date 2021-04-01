@@ -29,16 +29,23 @@ class Home extends Component{
      
      <Router>
      
-      <nav class="navbar navbar-default">
+      {/* <nav class="navbar navbar-default heading">
           <div class="container-fluid">
           <ul class="nav navbar-nav">
                
-                <li className="nav-link active heading" ><a ><Link to="/home/submenu/">Election Data Management</Link></a></li>
-                {/* <li  ><a ><Link to="/home/import/">Import</Link></a></li> */}
-                <li className="nav navbar-nav navbar-right"><a ><Link to="/logout/">Logout</Link></a></li> 
+                <li className="nav-link heading menuss" ><a ><Link to="/home/submenu/">Election Data Management</Link></a></li>
+                <li className="nav navbar-nav navbar-right menuss"><a ><Link to="/logout/">Logout</Link></a></li> 
           </ul>
           </div>
-        </nav>
+        </nav> */}
+
+        <div className="row heading">
+         
+          <div className="col-sm-11 menuss" ><a ><Link to="/home/submenu/">Election Data Management</Link></a></div>
+          <div className="col-sm-1 logout"><a ><Link to="/logout/">Logout</Link></a></div> 
+         
+        </div>
+
       <Switch>
         
         <ProtectedRoute>
