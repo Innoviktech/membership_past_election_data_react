@@ -69,11 +69,15 @@ class Grievance extends React.Component {
 
     Question (){
       return this.state.dynamic.map((el, i) =>
+      <div className = "row survey">
 
-      <div className="ques" key={i}>{i+1}{")"}{" "}{el.question}
-       <textarea type="text" value={el.answer} onChange={this.AhandleChange.bind(this, i)} width="20px"/>
+     
+
+      <div className="col-sm-6 ques" key={i}>{i+1}{")"}{" "}{el.question}</div>
+      <div className="col-sm-6 text-right">
+       <textarea type="text" className="text_area" value={el.answer} onChange={this.AhandleChange.bind(this, i)} width="20px"/>
+       </div>
       </div>
-      
       
       )
 
@@ -160,9 +164,18 @@ class Grievance extends React.Component {
         <div >
               <div id ="admin_view" hidden = {this.state.admin_view}>
                 <form onSubmit={this.handleSubmit}>
-                    {this.createUI()}        
-                    <input type='button' value='Add More' onClick={this.addClick}/>
-                    <input type="submit" value="Submit" />
+                  <div className="row ">
+                    <div className="col-sm-4 ques_label">
+                      <label>Question</label>
+                    {this.createUI()} 
+                    </div> 
+                    <div className="col-sm-4"> 
+                   <input type='button' value='Add Your Questions' onClick={this.addClick}/>
+                    </div> 
+                    <div className="col-sm-4">
+                    <input type="submit" value="Submit Your Questions" />
+                    </div>
+                    </div>
                 </form>
                 </div>
             <div>
@@ -171,24 +184,29 @@ class Grievance extends React.Component {
                   
                       <div className="question">
                       {this.Question()}
-                      </div>
-                      
+                      </div><br></br>
+                      <div className="row">
+                        <div className="col-sm-12 text-center">
                       <input className="submit" type="submit" value="Submit" />
-
+                      </div>
+                      </div>
                   </form>
-              </div>
+              </div><br></br>
 
-              <div id ="admin_view" hidden = {this.state.admin_view}>
+              <div className="row" id ="admin_view" hidden = {this.state.admin_view}>
+                <div className="col-sm-12">
+                
 
-              <Select className="select"
+              <Select 
 
                         value={uservalue}
                         onChange={this.handleChange}
                         options={this.state.username}
                         
                         />
+                        </div>
 
-              </div>
+              </div><br></br>
           <div id ="admin_view" hidden = {this.state.admin_view}>
 
         <MaterialTable
