@@ -447,7 +447,7 @@ handleSubmit = (event) => {
 
 render()
     {
-      console.log(this.state.gender[0].value)
+      console.log(this.state.gender.value)
       //console.log(this.state.name_list)
       const { constituency_value } = this.state;
       const { polling_booth_value } = this.state;
@@ -523,22 +523,24 @@ render()
 
         </div>
         <div hidden={this.state.form_view} className="wizard">
-        <div id ="admin_view" hidden = {this.state.admin_view}>
+        <div id ="admin_view" >
                 <div className="form-view" hidden={this.state.form}>
+                <div className="row">
+                   
+                   <div className="col-sm-12 text-right" >
+                   <span   onClick={this.form_span}>&times;</span>
+                   </div>
+                   </div>
                  <div className="row">
-                    <div>
-                    <div className="col-sm-11">
+             
+                    <div className="col-sm-12" hidden = {this.state.admin_view}>
                     <button  onClick={this.edit} hidden={this.state.edit}>Edit</button>
                     <button  onClick={this.handleSubmit} hidden={this.state.save}>Save</button>
                     <button  hidden={this.state.cancel} onClick={this.cancel}>cancel</button>  
                     </div>
                     
-                   
-                    <div className="col-sm-1" >
-                    <span   onClick={this.form_span}>&times;</span>
-                    </div>
-                    </div>
-                </div>
+ </div>
+               
                 </div>
                 </div>
         <form onSubmit={this.handlesubmit} className="form-view">
@@ -570,7 +572,7 @@ render()
                        <input type="text" className="edit" name='last_name' value={this.state.last_name} onChange={this.inputChange} disabled></input>
                        </div>
                        
-                   </div>
+                   </div><br></br>
 
                    <div className="row">
                    <div className="col-sm-3">
@@ -596,7 +598,7 @@ render()
                             isDisabled = {this.state.dropdown}
                     />
                        </div>
-                   </div>
+                   </div><br></br>
 
                    <div className="row">
                    <div className="col-sm-3">
@@ -625,7 +627,7 @@ render()
                     />
                        
                        </div>
-                   </div>
+                   </div><br></br>
 
                    <div className="row" id ="attention" hidden = {this.state.attention}>
                    <div>
@@ -636,7 +638,7 @@ render()
                        <textarea type="text" className="new area" name='voter_attention' value={this.state.voter_attention} onChange={this.inputChange} disabled/>
                        </div>
                        </div>
-                   </div>
+                   </div><br></br>
                    <div className="row">
                    <div className="col-sm-3">
                        <label>Voter List Part Number & Serial Number</label>  
@@ -651,7 +653,7 @@ render()
                        <input type="text" className="edit" name='election_id_card' value={this.state.election_id_card} onChange={this.inputChange} disabled></input>
                        </div>
 
-                   </div>
+                   </div><br></br>
                    <div className="row">
                    <div className="col-sm-3">
                        <label>Party Name</label>  
@@ -676,7 +678,7 @@ render()
                             isDisabled = {this.state.dropdown}
                     />
                        </div>
-                   </div>
+                   </div><br></br>
                    <div className="row">
                    <div className="col-sm-3">
                        <label>Member Age</label>  
@@ -690,7 +692,7 @@ render()
                        <div className="col-sm-3">
                        <input type="date" className="edit" name='birth_date' value={this.state.birth_date} onChange={this.inputChange} disabled></input>
                        </div>
-                   </div>
+                   </div><br></br>
 
                    <div className="row">
                    <div className="col-sm-3">
@@ -705,7 +707,7 @@ render()
                        <div className="col-sm-3">
                        <input type="text" className="edit" name='ward_number' value={this.state.ward_number} onChange={this.inputChange} disabled ></input>
                        </div>
-                   </div>
+                   </div><br></br>
 
                    <div className="row">
                    <div className="col-sm-3">
@@ -720,7 +722,7 @@ render()
                        <div className="col-sm-3">
                        <input type="text" className="edit" name='email' value={this.state.email} onChange={this.inputChange} disabled></input>
                        </div>
-                   </div>
+                   </div><br></br>
                    <div className="row">
                    <div className="col-sm-3">
                        <label>Mobile</label>  
@@ -734,7 +736,7 @@ render()
                        <div className="col-sm-3">
                        <input type="text" className="edit" name='phone' value={this.state.phone} onChange={this.inputChange} disabled></input>
                        </div>
-                   </div>
+                   </div><br></br>
 
                    <div className="row">
                    <div className="col-sm-3">
@@ -749,7 +751,7 @@ render()
                        <div className="col-sm-3">
                        <input type="text" className="edit" name='city' value={this.state.city} onChange={this.inputChange} disabled></input>
                        </div>
-                   </div>
+                   </div><br></br>
 
                    <div className="row">
                    <div className="col-sm-3">
@@ -769,7 +771,7 @@ render()
                        <div className="col-sm-3">
                        <input type="text" className="edit" name='zip' value={this.state.zip} onChange={this.inputChange} disabled></input>
                        </div>
-                   </div>
+                   </div><br></br>
           </form>
 
         </div>

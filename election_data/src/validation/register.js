@@ -130,8 +130,14 @@ class Register extends React.Component{
                 //window.location = './login';
                 console.log(res.data);
                 const alert_msg = res.data
+                if(alert_msg == 'Register successfully'){
                 alert(alert_msg)
                 window.location = './login';
+                }
+                else{
+                    alert(alert_msg)
+                }
+
               })
               .catch(err => console.log(err))
               event.preventDefault()
