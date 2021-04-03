@@ -146,22 +146,22 @@ class Register extends React.Component{
     
     componentDidMount()
          {
-             axios.get('http://localhost:8000/state_name/')
+             axiosInstance.get(`state_name/`)
              .then(res=>{
                  const state_value = res.data
                  console.log(state_value)
                  this.setState({state_value})
              })
 
-             axios.get('http://localhost:8000/constituancy_name/')
-             .then(res=>
-                {
-                    console.log(res)
-                    const constituency_name = res.data
-                    //console.log(constituency_name)
-                    this.setState({constituency_name})
-                    // console.log(constituency_name)
-                })
+            //  axiosInstance.get(`http://localhost:8000/constituancy_name/`)
+            //  .then(res=>
+            //     {
+            //         console.log(res)
+            //         const constituency_name = res.data
+            //         //console.log(constituency_name)
+            //         this.setState({constituency_name})
+            //         // console.log(constituency_name)
+            //     })
                 $('.formss').css('border-color','green')
          }
 
@@ -178,6 +178,8 @@ class Register extends React.Component{
                     this.setState({polling_station_name})
                     //console.log(polling_station_name)
                 })
+                const holder = ""
+                this.setState({ polling_station_value : holder });
 
          }
          polling_station_change = polling_station_value => {
@@ -188,6 +190,21 @@ class Register extends React.Component{
 
             state_change = change_value => {
                 this.setState({change_value});
+                const value1 = change_value.value
+                axios.post('http://localhost:8000/constituancy_name_value/',{
+                 key1 : value1
+             })
+             .then(res=>
+                {
+                    const constituancy_name_value = res.data
+                    console.log(constituancy_name_value)
+                    this.setState({constituency_name : constituancy_name_value})
+                    //console.log(polling_station_name)
+                })
+                const holder = ""
+                this.setState({ constituency_value : holder });
+                this.setState({ polling_station_value : holder });
+
                 }
 
             handleImageChange = (e) => {
@@ -220,7 +237,7 @@ class Register extends React.Component{
 
     render()
     {
-        console.log(this.state.gender.value)
+        //console.log(this.state.gender.value)
         //console.log(this.state.state_value)
         //console.log(this.state.change_value.value)
         // console.log(this.state.constituency_value.value)
@@ -257,7 +274,7 @@ class Register extends React.Component{
 
                 <div  className="form-group">
                 <label> Email <span>*</span></label><br></br>
-                <input type="email" name="username" value={this.state.username} onChange={this.usernamehandler} placeholder="Enter Your Email" required></input><br></br>
+                <input type="email" name="username" value={this.state.username} onChange={this.usernamehandler} placeholder="Enter Your Email" required autocomplete="off"></input><br></br>
                 </div>
 
 
@@ -268,17 +285,17 @@ class Register extends React.Component{
 
                 <div  className="form-group">
                 <label> First Name <span>*</span></label><br></br>
-                <input type="text" name="name" value={this.state.first_name} onChange={this.first_name} placeholder="Enter First Name" required></input><br></br>
+                <input type="text" name="name" value={this.state.first_name} onChange={this.first_name} placeholder="Enter First Name" required autocomplete="off"></input><br></br>
                 </div>
 
                 <div  className="form-group">
                 <label> Last Name/Father Name/Guardian Name <span>*</span></label><br></br>
-                <input type="text" name="lname" value={this.state.last_name} onChange={this.last_name} placeholder="Enter Last name" required></input><br></br>
+                <input type="text" name="lname" value={this.state.last_name} onChange={this.last_name} placeholder="Enter Last name" required autocomplete="off"></input><br></br>
                 </div>
 
                 <div  className="form-group">
                 <label> Phone Number </label><br></br>
-                <input type="number" name="phone" value={this.state.phone} onChange={this.phone_change} placeholder="Enter phone" ></input><br></br>
+                <input type="number" name="phone" value={this.state.phone} onChange={this.phone_change} placeholder="Enter phone" autocomplete="off"></input><br></br>
                 </div>
 
                 <div  className="form-group">
@@ -298,12 +315,12 @@ class Register extends React.Component{
 
                 <div  className="form-group">
                 <label>Voter ID</label><br></br>
-                <input type="voter_id" name="voter_id" value={this.state.voter_id} onChange={this.voter_change}></input>
+                <input type="voter_id" name="voter_id" value={this.state.voter_id} onChange={this.voter_change} autocomplete="off"></input>
                 </div>
 
                 <div  className="form-group">
                 <label>Street</label><br></br>
-                <input type="text" name="street" value={this.state.street} onChange={this.street_change}></input>
+                <input type="text" name="street" value={this.state.street} onChange={this.street_change} autocomplete="off"></input>
                 </div>
 
                 <div  className="form-group">

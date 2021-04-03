@@ -118,6 +118,13 @@ class PartyCandidateName extends Component
          </table>  */}
 
             <MaterialTable
+             options={{
+                filtering: true,
+                grouping: true,
+                // actionsColumnIndex: -1,
+                 
+            }}
+            
                     columns={[
                         { title: "Party Name", field: "partyname" },
                         { title: "Candidate First Name", field: "candidatefirstname" },
@@ -126,6 +133,7 @@ class PartyCandidateName extends Component
                     ]}
                     data={this.state.partyCandidateName}
                     title=""
+                    
                     />
                     </div>
 

@@ -32,14 +32,15 @@ class Grievance extends React.Component {
         // console.log(question)
         this.setState({dynamic});
       })
+
       const user =localStorage.getItem('user')
       console.log(user)
       this.setState({user})
 
       axiosInstance.get(`username/`).then((testing) => {
 
-        const username = testing.data;
-        this.setState({ username})
+        const detailview = testing.data;
+        this.setState({ detailview})
 
       });
 
@@ -70,18 +71,24 @@ class Grievance extends React.Component {
     Question (){
       return this.state.dynamic.map((el, i) =>
       <div className = "row survey">
-
-     
-
-      <div className="col-sm-6 ques" key={i}>{i+1}{")"}{" "}{el.question}</div>
+      <div className="col-sm-6 ques" key={i}>{i+1}{")"}{" "}{el.question}<input type='button' value="delete" onClick={(event) => {this.clickMe(el.id, event)}}/></div>
       <div className="col-sm-6 text-right">
        <textarea type="text" className="text_area" value={el.answer} onChange={this.AhandleChange.bind(this, i)} width="20px"/>
        </div>
       </div>
-      
-      )
+      )}
 
-    }
+      clickMe =(parameter, event) =>{
+        axiosInstance.post(`surveyDelete/`, {
+          key1:parameter
+          }).then((testing) => {
+          console.log(testing)
+         console.log(testing.data);
+         const ques = testing.data;
+         this.setState({dynamic:ques})
+          
+          });
+      }
     
 
    AhandleChange = (i, event) => {
@@ -109,6 +116,7 @@ class Grievance extends React.Component {
        this.setState({ values });
     }
   
+
     handleSubmit = (event) => {
 
       const val = this.state.values
@@ -117,15 +125,15 @@ class Grievance extends React.Component {
       axiosInstance.post(`grievance/`, {
         key1:val
         }).then((testing) => {
-        // console.log(testing)
+        console.log(testing)
         const ques = testing.data;
-        // console.log(ques);
-        this.setState({question:ques})
+        console.log(ques);
+        this.setState({dynamic:ques})
         });
-      // event.preventDefault();
+      event.preventDefault();
     }
 
-    answerSubmit = () =>{
+    answerSubmit = (event) =>{
       const question = this.state.dynamic;
       // const answer = this.state.answer;
       const user = this.state.user;
@@ -133,37 +141,27 @@ class Grievance extends React.Component {
         key1:question,key2:user
         }).then((testing) => {
         // console.log(testing)
-        // const ques = testing.data;
-        // console.log(ques);
-        // this.setState({question:ques})
+        const alert_msg = testing.data;
+        alert(alert_msg)
+       
         });
+
+        event.preventDefault();
     }
 
-    handleChange = uservalue => {
 
-      this.setState({ uservalue });
-      const user = uservalue.value
-      axiosInstance.post(`username/`, {
-        key1:user
-        }).then((testing) => {
-        console.log(testing)
-        const detailview = testing.data;
-        console.log(detailview);
-        this.setState({detailview})
-        });
-
-  }
 
   
   
     render() {
-        console.log(this.state.user)
+      
+        console.log(this.state.dynamic)
         const { uservalue } = this.state;
       return (
         
         <div >
               <div id ="admin_view" hidden = {this.state.admin_view}>
-                <form onSubmit={this.handleSubmit}>
+                
                   <div className="row ">
                     <div className="col-sm-4 ques_label">
                       <label>Question</label>
@@ -173,10 +171,10 @@ class Grievance extends React.Component {
                    <input type='button' value='Add Your Questions' onClick={this.addClick}/>
                     </div> 
                     <div className="col-sm-4">
-                    <input type="submit" value="Submit Your Questions" />
+                    <input type='button' value='Submit Your Questions' onClick={this.handleSubmit}/>
                     </div>
                     </div>
-                </form>
+               
                 </div>
             <div>
 
@@ -193,20 +191,6 @@ class Grievance extends React.Component {
                   </form>
               </div><br></br>
 
-              <div className="row" id ="admin_view" hidden = {this.state.admin_view}>
-                <div className="col-sm-12">
-                
-
-              <Select 
-
-                        value={uservalue}
-                        onChange={this.handleChange}
-                        options={this.state.username}
-                        
-                        />
-                        </div>
-
-              </div><br></br>
           <div id ="admin_view" hidden = {this.state.admin_view}>
 
         <MaterialTable
