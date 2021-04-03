@@ -362,3 +362,10 @@ body {
 	.ques_label label{
 		font-size: 25px;
 	}
+	.login_input input{
+		background-color: transparent;
+		border: none;
+		outline: none;
+		border-bottom:2px solid white;
+		color: white;
+	}

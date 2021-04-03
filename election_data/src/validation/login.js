@@ -109,8 +109,11 @@ export default function Login() {
 				username: formData.username,
 				password: formData.password,
 			})
+			// .catch((error)=>{
+			// 	console.log(error.response.status)
+			// }) 
 			.then((res) => {
-				console.log(res.data)
+				// console.log(res.data.detail)
 				localStorage.setItem('access_token', res.data.access);
 				localStorage.setItem('refresh_token', res.data.refresh);
 				localStorage.setItem('role', res.data.role); 
@@ -126,7 +129,12 @@ export default function Login() {
                       role_id : res.data.role
                     }
                   });
-			});
+			})
+			.catch((error)=>{
+				console.log(error.response.status)
+				alert('Invalid Username Password')
+			}) 
+			
 	};
 
 	// const classes = useStyles();
@@ -138,13 +146,13 @@ export default function Login() {
                 <h2>Login</h2>
                  <p>Please fill in this form to login an account!</p>
                  <hr></hr>
-                 <div class="form-group">
+                 <div class="form-group login_input">
                  <label> username </label><br></br>
-                 <input type="text" name="username" id="username" onChange={handleChange} placeholder="enter username" required></input><br></br>
+                 <input type="text" name="username" id="username" onChange={handleChange} placeholder="Enter username" required autocomplete="off"></input><br></br>
                  </div>
-                 <div class="form-group">
+                 <div class="form-group login_input">
                  <label> Password </label><br></br>
-                <input type="password" name="password" id="password" onChange={handleChange} placeholder="enter password" required></input><br></br>
+                <input type="password" name="password" id="password" onChange={handleChange} placeholder="Enter password" required autocomplete="off"></input><br></br>
                  </div>
                  <div class="form-group">
                      <button>Login</button>

@@ -124,14 +124,21 @@ class Admin extends React.Component{
               'content-type': 'multipart/form-data'
             }
           })
-              .then(res => {
-                //window.location = './login';
-                console.log(res.data);
-                const alert_msg = res.data
+          .then(res => {
+            //window.location = './login';
+            console.log(res.data);
+            const alert_msg = res.data
+            if(alert_msg == 'Register successfully'){
+            alert(alert_msg)
+            window.location = './login';
+            }
+            else{
                 alert(alert_msg)
-              })
-              .catch(err => console.log(err))
-              event.preventDefault()
+            }
+
+          })
+          .catch(err => console.log(err))
+          event.preventDefault()
 
         }      
     
@@ -144,15 +151,7 @@ class Admin extends React.Component{
                  this.setState({state_value})
              })
 
-             axios.get('http://localhost:8000/constituancy_name/')
-             .then(res=>
-                {
-                    console.log(res)
-                    const constituency_name = res.data
-                    //console.log(constituency_name)
-                    this.setState({constituency_name})
-                    // console.log(constituency_name)
-                })
+            
          }
 
          constituency_change = constituency_value =>
@@ -168,6 +167,8 @@ class Admin extends React.Component{
                     this.setState({polling_station_name})
                     //console.log(polling_station_name)
                 })
+                const holder = ""
+                this.setState({ polling_station_value : holder });
 
          }
          polling_station_change = polling_station_value => {
@@ -178,6 +179,21 @@ class Admin extends React.Component{
 
             state_change = change_value => {
                 this.setState({change_value});
+                const value1 = change_value.value
+                axios.post('http://localhost:8000/constituancy_name_value/',{
+                 key1 : value1
+             })
+             .then(res=>
+                {
+                    const constituancy_name_value = res.data
+                    console.log(constituancy_name_value)
+                    this.setState({constituency_name : constituancy_name_value})
+                    //console.log(polling_station_name)
+                })
+                const holder = ""
+                this.setState({ constituency_value : holder });
+                this.setState({ polling_station_value : holder });
+
                 }
 
             handleImageChange = (e) => {
