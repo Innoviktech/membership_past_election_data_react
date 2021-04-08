@@ -6,14 +6,17 @@ import FilterList from '@material-ui/icons/FilterList';
 import { forwardRef } from 'react';
 import PeopleIcon from '@material-ui/icons/People';
 import $ from 'jquery';
+import { AiOutlineMinusCircle} from "react-icons/ai";
 // import User from './user';
 import {BrowserRouter as Router,Link,Switch,Route} from 'react-router-dom';
+import { icons } from 'react-icons/lib';
 
 class Grievance extends React.Component {
     constructor(props) {
       super(props);
       this.state = { 
         values: [],
+        question : [],
         dynamic : [],
         answer : [],
         user : "",
@@ -21,6 +24,7 @@ class Grievance extends React.Component {
         uservalue : [],
         detailview : [],
         admin_view : '',
+        test : []
       };
       this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -28,9 +32,8 @@ class Grievance extends React.Component {
     componentDidMount(){
 
       axiosInstance.get(`grievance/`).then((testing) => {
-        const dynamic = testing.data;
-        // console.log(question)
-        this.setState({dynamic});
+        const question = testing.data;
+        this.setState({question});
       })
 
       const user =localStorage.getItem('user')
@@ -55,71 +58,147 @@ class Grievance extends React.Component {
       $("th").removeClass("MTableHeader-header-13");
 
     }
-
-
-  
+    
     createUI(){
-       return this.state.values.map((el, i) => 
+
+       return this.state.test.map((el, i) => 
        
            <div key={i}>
-              <textarea type="text" value={el||''} onChange={this.handleChangequestion.bind(this, i)} required/>
-              <input type='button' value='remove' onClick={this.removeClick.bind(this, i)}/>
+             
+              <textarea type="text" value={el.question} onChange={this.Changequestion.bind(this, i)} required></textarea>
+              <span className="rm_icon" onClick={this.removeClick.bind(this, i)}><AiOutlineMinusCircle /></span>
+              {/* <input type='button' value='remove' onClick={this.removeClick.bind(this, i)}/> */}
+          <div>
+           <input type="button" value="choice" onClick={this.choice.bind(this, i)}></input>
+           
+           </div><br></br>
+           <div>
+           {el.choice.map((ell,ix) => (
+             <div key={ix}>
+                      <input type="text" value={ell} name={i} onChange={this.changechoice.bind(this, ix)}></input>
+                      {/* <span className="rm_icon" name={i} onClick={this.removeChoice.bind(this, ix)}>&times;</span> */}
+                      <button  name={i} onClick={this.removeChoice.bind(this, ix)}>&times;</button>
+                      </div>
+                    ))} 
+           </div>
            </div>          
        )
     }
 
-    Question (){
-      return this.state.dynamic.map((el, i) =>
-      <div className = "row survey">
-      <div className="col-sm-6 ques" key={i}>{i+1}{")"}{" "}{el.question}<input type='button' value="delete" onClick={(event) => {this.clickMe(el.id, event)}}/></div>
-      <div className="col-sm-6 text-right">
-       <textarea type="text" className="text_area" value={el.answer} onChange={this.AhandleChange.bind(this, i)} width="20px"/>
-       </div>
-      </div>
-      )}
+    removeChoice=(ix,event)=>{
+      
+      let questionIndex = event.target.name;
+      console.log(questionIndex)
+      console.log(ix)
 
-      clickMe =(parameter, event) =>{
-        axiosInstance.post(`surveyDelete/`, {
-          key1:parameter
-          }).then((testing) => {
-          console.log(testing)
-         console.log(testing.data);
-         const ques = testing.data;
-         this.setState({dynamic:ques})
-          
-          });
-      }
-    
+     let values =this.state.test;
+     values[questionIndex].choice.splice(ix,1);
+     this.setState({ test : values });
+  }
 
-   AhandleChange = (i, event) => {
+
+    AhandleChange = (i, event) => {
     
-    let dynamic = [...this.state.dynamic];
-      dynamic[i].answer = event.target.value;
-        this.setState({ dynamic });
- }
+      let dynamic = [...this.state.dynamic];
+        dynamic[i].answer = event.target.value;
+          this.setState({ dynamic });
+   }
   
+   
+
+
+    Changequestion = (i, event)=>{
+        let test = [...this.state.test];
+        test[i].question = event.target.value;
+        this.setState({test})
+}
+
+        changechoice = (ix,event)=>{
+        console.log(ix)
+        let questionIndex = event.target.name;
+        console.log(questionIndex)
+        let test = [...this.state.test];
+        test[questionIndex].choice[ix] = event.target.value;
+          this.setState({ test });
+
+        }
+
+
+choice = (i,event)=>{
+
+let array = this.state.test
+array[i].choice.push('')
+console.log(array)
+this.setState({test:array})
+
+}
+
+
+Question (){
+  return this.state.question.map((el, i) =>
+  <div className = "row survey">
+  <div className="col-sm-6 ques" key={i}>{i+1}{")"}{" "}{el.question}<span hidden = {this.state.admin_view} onClick={(event) => {this.clickMe(el.id, event)}}><AiOutlineMinusCircle/></span></div>
+
+  {(() => {
+          if (el.choice.length > 0) {
+            return (
+              <div className="col-sm-6 ques">
+              <select onChange={this.answerSubmit.bind(this, i)}>
+              <option disabled="True" selected>Select</option>
+                {el.choice.map((option,index) => (
+                  
+                    <option>{option}</option>
+                ))}
+                </select>
+            </div> 
+            )
+          } 
+          else {
+            return (
+              <div className="col-sm-6 ques"><textarea type="text" className="text_area" value={el.answer} onChange={this.answerSubmit.bind(this, i)} width="20px"/></div>
+            )
+          }
+        })()}
+
+  </div>
+  )}
+
+  clickMe =(parameter, event) =>{
+    console.log(parameter)
+    axiosInstance.post(`surveyDelete/`, {
+      key1:parameter
+      }).then((testing) => {
+      console.log(testing)
+     console.log(testing.data);
+     const question = testing.data;
+     this.setState({question})
+      
+      });
+  }
+
+   
  handleChangequestion = (i, event) => {
        let values = [...this.state.values];
        values[i] = event.target.value;
        this.setState({ values });
     }
-    
+    // test[i].choice = ;
+
     addClick = () =>{
-      this.setState(prevState => ({ values: [...prevState.values,'']}))
-      
+      this.setState(prevState => ({ test: [...prevState.test,{question : '',choice: []}]}))
     }
     
     removeClick=(i)=>{
         console.log(i)
-       let values = [...this.state.values];
-       values.splice(i,1);
-       this.setState({ values });
+       let test = [...this.state.test];
+       test.splice(i,1);
+       this.setState({ test });
     }
   
 
     handleSubmit = (event) => {
 
-      const val = this.state.values
+      const val = this.state.test
       console.log(val)
       // this.setState({question : val})
       axiosInstance.post(`grievance/`, {
@@ -128,25 +207,35 @@ class Grievance extends React.Component {
         console.log(testing)
         const ques = testing.data;
         console.log(ques);
-        this.setState({dynamic:ques})
+        this.setState({question:ques})
         });
       event.preventDefault();
     }
 
-    answerSubmit = (event) =>{
-      const question = this.state.dynamic;
+    answerSubmithandler = (event) =>{
+      const question = this.state.question;
+      console.log(question)
       // const answer = this.state.answer;
       const user = this.state.user;
       axiosInstance.post(`surveyAnswer/`, {
         key1:question,key2:user
         }).then((testing) => {
         // console.log(testing)
-        const alert_msg = testing.data;
-        alert(alert_msg)
+        const detailview = testing.data;
+        this.setState({ detailview})
        
         });
 
         event.preventDefault();
+    }
+
+    answerSubmit = (i,event) =>{
+      console.log(i)
+
+      let question = [...this.state.question];
+      question[i].answer = event.target.value;
+        this.setState({ question });
+
     }
 
 
@@ -155,7 +244,8 @@ class Grievance extends React.Component {
   
     render() {
       
-        console.log(this.state.dynamic)
+        console.log(this.state.test)
+        // console.log(this.state.test[0].choice)
         const { uservalue } = this.state;
       return (
         
@@ -178,17 +268,17 @@ class Grievance extends React.Component {
                 </div>
             <div>
 
-                  <form  onSubmit={this.answerSubmit}>
+             {/* <form  onSubmit={this.answerSubmit}>  */}
                   
-                      <div className="question">
-                      {this.Question()}
-                      </div><br></br>
-                      <div className="row">
-                        <div className="col-sm-12 text-center">
-                      <input className="submit" type="submit" value="Submit" />
-                      </div>
-                      </div>
-                  </form>
+                  <div className="question">
+                  {this.Question()}
+                  </div><br></br>
+                  <div className="row">
+                    <div className="col-sm-12 text-center">
+                  <input className="submit" type="submit" value="Submit"  onClick={this.answerSubmithandler}/>
+                  </div>
+                  </div>
+               {/* </form>  */}
               </div><br></br>
 
           <div id ="admin_view" hidden = {this.state.admin_view}>

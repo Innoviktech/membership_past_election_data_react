@@ -4,11 +4,13 @@ import ProtectedRoute from '../validation/ProtectedRouter';
 import {BrowserRouter as Router,Link,Switch,Route} from 'react-router-dom';
 import subMenu from './subMenu';
 import Import from './import';
+import { FaBars} from "react-icons/fa";
 class Home extends Component{
   constructor(props)
   {
       super(props);
       this.state = {
+        uname : "",
          
       }
   }
@@ -21,9 +23,25 @@ class Home extends Component{
 
   componentDidMount() {
     document.getElementById("menus").style.display = "none";
+   const  x = localStorage.getItem('uname')
+   this.setState({x})
+   console.log(x)
+ 
   }
-  render() {
+    
+   myFunction = ()=> {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "row heading topnav") {
+      x.className += " responsive";
+    } else {
+      x.className = "row heading";
+    }
+  }
 
+  render() {
+    
+  
+    
   return (
      <div className="App">
      
@@ -39,12 +57,23 @@ class Home extends Component{
           </div>
         </nav> */}
 
-        <div className="row heading">
+        <div className="row heading topnav" id="myTopnav">
+         {/* <div className="col-sm-1 " onClick={this.myFunction}><span className="icon"><FaBars /></span></div> */}
+          <div className="col-sm-9 menuss toggle" ><a><Link to="/home/submenu/">Election Data Management</Link></a></div>
+          <div className="col-sm-2 uname toggle">welcome,<span> {this.state.x}</span></div>
+          <div className="col-sm-1 logout toggle"><a ><Link to="/logout/">Logout</Link></a></div> 
+          
+          
          
-          <div className="col-sm-11 menuss" ><a ><Link to="/home/submenu/">Election Data Management</Link></a></div>
-          <div className="col-sm-1 logout"><a ><Link to="/logout/">Logout</Link></a></div> 
          
         </div>
+        {/* <div className="row">
+         
+          
+          <div className="col-sm-11 text-right logout"><a ><Link to="/logout/">Logout</Link></a></div> 
+         
+         
+        </div><br></br> */}
 
       <Switch>
         

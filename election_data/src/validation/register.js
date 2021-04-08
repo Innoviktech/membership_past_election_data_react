@@ -14,6 +14,8 @@ import Container from '@material-ui/core/Container';
 import Select from 'react-select';
 import axios from "axios";
 import $, { event } from 'jquery';
+import { length } from 'file-loader';
+import { BiHide} from "react-icons/bi";
 
 
 const gender= [
@@ -50,6 +52,8 @@ class Register extends React.Component{
         }
     
     usernamehandler = (event) => {
+
+
         this.setState({
             username: event.target.value
         })
@@ -73,9 +77,8 @@ class Register extends React.Component{
         }
         phone_change = (event)=>{
             this.setState({
-                phone : event.target.value
-            })
-           
+                phone : event.target.value,
+              })
         }
         
 
@@ -141,6 +144,8 @@ class Register extends React.Component{
               })
               .catch(err => console.log(err))
               event.preventDefault()
+
+             
 
         }      
     
@@ -234,9 +239,21 @@ class Register extends React.Component{
                       street : event.target.value
                   })
               }
+              show_password = ()=>{
+               const  x=  document.getElementById("password")
+               
+                 if(x.type === "password"){
+                    x.type="text"
+                 }
+                 else{
+                     x.type="password"
+                 }
+                
+              }
 
     render()
     {
+       
         //console.log(this.state.gender.value)
         //console.log(this.state.state_value)
         //console.log(this.state.change_value.value)
@@ -248,24 +265,13 @@ class Register extends React.Component{
         //console.log(this.state.image)
         return(
             <div class="signup-form">
-                {/* <div>
-                        <input type="file"
-                            id="image"
-                            accept="image/png, image/jpeg"  onChange={this.handleImageChange} required/>
-                </div> */}
+                
                 <form onSubmit={this.handleSubmit}>
                 <h2>Register</h2>
                 <p>Please fill in this form to create an account!</p>
                 <hr></hr>
 
-                {/* <div  class="form-group">
-                <label> Role </label><br></br>
-                <select onChange={this.rolehandler}>
-                <option value="superAdmin">Super Admin</option>
-                <option value="staff">Staff</option>
-
-                </select>
-                </div> */}
+                
                 <div>
                         <input type="file"
                             id="image"
@@ -274,13 +280,18 @@ class Register extends React.Component{
 
                 <div  className="form-group">
                 <label> Email <span>*</span></label><br></br>
-                <input type="email" name="username" value={this.state.username} onChange={this.usernamehandler} placeholder="Enter Your Email" required autocomplete="off"></input><br></br>
+                <input type="email" name="username" value={this.state.username} onChange={this.usernamehandler} placeholder="Enter Your Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required autocomplete="off"></input><br></br>
                 </div>
 
 
                 <div  className="form-group">
                 <label> Password<span>*</span> </label><br></br>
-                <input type="password" name="password" value={this.state.password} onChange={this.passwordhandler} placeholder="Enter Password" required ></input><br></br>
+                <input type="password" name="password" id="password" value={this.state.password} onChange={this.passwordhandler} pattern=".{8,}" placeholder="Enter Password" required></input> <spans onClick={this.show_password}> <BiHide /></spans><br></br>
+                 
+                </div>
+                <div >                
+                                                               
+                {/* <input type="checkbox" onClick={this.show_password}></input><label>Show password</label> */}
                 </div>
 
                 <div  className="form-group">
@@ -336,6 +347,7 @@ class Register extends React.Component{
                 <div  class="form-group">
                 <label> Constituency<span>*</span> </label><br></br>
                 <Select
+                
                     value={constituency_value}
                     onChange={this.constituency_change}
                     options={this.state.constituency_name}
@@ -362,155 +374,3 @@ class Register extends React.Component{
     }
 }
 export default Register;
-
-
-
-
-// import React, { useState } from 'react';
-// import axiosInstance from '../axios';
-// import { useHistory } from 'react-router-dom';
-// import Avatar from '@material-ui/core/Avatar';
-// import Button from '@material-ui/core/Button';
-// import CssBaseline from '@material-ui/core/CssBaseline';
-// import TextField from '@material-ui/core/TextField';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import Checkbox from '@material-ui/core/Checkbox';
-// import Link from '@material-ui/core/Link';
-// import Grid from '@material-ui/core/Grid';
-// import Typography from '@material-ui/core/Typography';
-// import { makeStyles } from '@material-ui/core/styles';
-// import Container from '@material-ui/core/Container';
-
-// const useStyles = makeStyles((theme) => ({
-// 	paper: {
-// 		marginTop: theme.spacing(8),
-// 		display: 'flex',
-// 		flexDirection: 'column',
-// 		alignItems: 'center',
-// 	},
-// 	avatar: {
-// 		margin: theme.spacing(1),
-// 		backgroundColor: theme.palette.secondary.main,
-// 	},
-// 	form: {
-// 		width: '100%', // Fix IE 11 issue.
-// 		marginTop: theme.spacing(3),
-// 	},
-// 	submit: {
-// 		margin: theme.spacing(3, 0, 2),
-// 	},
-// }));
-
-// export default function Register() {
-// 	const history = useHistory();
-// 	const initialFormData = Object.freeze({
-// 		email: '',
-// 		username: '',
-// 		password: '',
-// 	});
-
-// 	const [formData, updateFormData] = useState(initialFormData);
-
-// 	const handleChange = (e) => {
-// 		updateFormData({
-// 			...formData,
-// 			// Trimming any whitespace
-// 			[e.target.name]: e.target.value.trim(),
-// 		});
-// 	};
-
-// 	const handleSubmit = (e) => {
-// 		e.preventDefault();
-// 		console.log(formData);
-
-// 		axiosInstance
-// 			.post(`user/create/`, {
-// 				email: formData.email,
-// 				user_name: formData.username,
-// 				password: formData.password,
-// 			})
-// 			.then((res) => {
-// 				history.push('/login');
-// 				console.log(res);
-// 				console.log(res.data);
-// 			});
-// 	};
-
-// 	const classes = useStyles();
-
-// 	return (
-// 		<Container component="main" maxWidth="xs">
-// 			<CssBaseline />
-// 			<div className={classes.paper}>
-// 				<Avatar className={classes.avatar}></Avatar>
-// 				<Typography component="h1" variant="h5">
-// 					Sign up
-// 				</Typography>
-// 				<form className={classes.form} noValidate>
-// 					<Grid container spacing={2}>
-// 						<Grid item xs={12}>
-// 							<TextField
-// 								variant="outlined"
-// 								required
-// 								fullWidth
-// 								id="email"
-// 								label="Email Address"
-// 								name="email"
-// 								autoComplete="email"
-// 								onChange={handleChange}
-// 							/>
-// 						</Grid>
-// 						<Grid item xs={12}>
-// 							<TextField
-// 								variant="outlined"
-// 								required
-// 								fullWidth
-// 								id="username"
-// 								label="Username"
-// 								name="username"
-// 								autoComplete="username"
-// 								onChange={handleChange}
-// 							/>
-// 						</Grid>
-// 						<Grid item xs={12}>
-// 							<TextField
-// 								variant="outlined"
-// 								required
-// 								fullWidth
-// 								name="password"
-// 								label="Password"
-// 								type="password"
-// 								id="password"
-// 								autoComplete="current-password"
-// 								onChange={handleChange}
-// 							/>
-// 						</Grid>
-// 						<Grid item xs={12}>
-// 							<FormControlLabel
-// 								control={<Checkbox value="allowExtraEmails" color="primary" />}
-// 								label="I want to receive inspiration, marketing promotions and updates via email."
-// 							/>
-// 						</Grid>
-// 					</Grid>
-// 					<Button
-// 						type="submit"
-// 						fullWidth
-// 						variant="contained"
-// 						color="primary"
-// 						className={classes.submit}
-// 						onClick={handleSubmit}
-// 					>
-// 						Sign Up
-// 					</Button>
-// 					<Grid container justify="flex-end">
-// 						<Grid item>
-// 							<Link href="#" variant="body2">
-// 								Already have an account? Sign in
-// 							</Link>
-// 						</Grid>
-// 					</Grid>
-// 				</form>
-// 			</div>
-// 		</Container>
-// 	);
-// }
