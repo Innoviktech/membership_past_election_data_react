@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 // import { Redirect, Route } from "react-router";
 import {BrowserRouter as Router,Link,Switch,Route,Redirect} from 'react-router-dom';
 import axiosInstance from '../axios';
+import { BiHide} from "react-icons/bi";
 // class Login extends Component{
 
 //     constructor(props) {
@@ -116,7 +117,8 @@ export default function Login() {
 				// console.log(res.data.detail)
 				localStorage.setItem('access_token', res.data.access);
 				localStorage.setItem('refresh_token', res.data.refresh);
-				localStorage.setItem('role', res.data.role); 
+				localStorage.setItem('role', res.data.role);
+				localStorage.setItem('uname', res.data.uname);  
 				localStorage.setItem('user',res.data.user);
 				axiosInstance.defaults.headers['Authorization'] =
 					'JWT ' + localStorage.getItem('access_token');
@@ -136,6 +138,17 @@ export default function Login() {
 			}) 
 			
 	};
+	function show_password (){
+		const  x=  document.getElementById("password")
+		
+		  if(x.type === "password"){
+			 x.type="text"
+		  }
+		  else{
+			  x.type="password"
+		  }
+
+	}
 
 	// const classes = useStyles();
 
@@ -148,14 +161,17 @@ export default function Login() {
                  <hr></hr>
                  <div class="form-group login_input">
                  <label> username </label><br></br>
-                 <input type="text" name="username" id="username" onChange={handleChange} placeholder="Enter username" required autocomplete="off"></input><br></br>
+                 <input type="text" name="username" id="username" onChange={handleChange} placeholder="Enter username" required autoComplete="off"></input><br></br>
                  </div>
                  <div class="form-group login_input">
                  <label> Password </label><br></br>
-                <input type="password" name="password" id="password" onChange={handleChange} placeholder="Enter password" required autocomplete="off"></input><br></br>
-                 </div>
-                 <div class="form-group">
-                     <button>Login</button>
+                <input type="password" name="password" id="password" onChange={handleChange} placeholder="Enter password" required autoComplete="off"></input><spans onClick={show_password}> <BiHide /></spans>
+				</div>
+				 {/* <div class="form-group">                                                                  
+                <input type="checkbox" onClick={show_password}></input><label>Show password</label>
+                </div><br></br> */}
+                 <div class="form-group ">
+                     <button className="login_btn">Login</button>
                  </div>
                  </form>
              </div>

@@ -89,6 +89,7 @@ class MemberCount extends Component
             image_view : true,
             imgs : false,
             id : "",
+            material_view : false,
            
            
         }
@@ -238,9 +239,6 @@ polling_booth_change = polling_booth_value => {
           gender : values6,
           stateName: values7,
           image : rowData.image,
-          
-          
-          
          })
 
         }
@@ -249,7 +247,8 @@ polling_booth_change = polling_booth_value => {
         
         form_span = () =>{
           this.setState({
-            form_view:true
+            material_view : false,
+            form_view :true
           })
         }
 
@@ -487,9 +486,9 @@ render()
 </div><br></br>
 
         
-        <div className = "Member_name_list">
+        <div className = "Member_name_list" hidden={this.state.material_view}>
         <MaterialTable
-   
+        
         icons={PeopleIcon}
         options={{
         filtering: true,
@@ -502,10 +501,12 @@ render()
 
     actions={[
       {
+        
         icon: 'save',
         tooltip: 'save user',
         onClick: (event,rowData) => {
           this.wizard(rowData)
+          this.setState({material_view : true})
         }
        }
     ]}
@@ -538,8 +539,7 @@ render()
                     <button  onClick={this.handleSubmit} hidden={this.state.save}>Save</button>
                     <button  hidden={this.state.cancel} onClick={this.cancel}>cancel</button>  
                     </div>
-                    
- </div>
+                    </div>
                
                 </div>
                 </div>
@@ -547,15 +547,11 @@ render()
           <div className="row">
           <div className="imagess"  hidden={this.state.imgs}>
             <img className="profile" src={`http://localhost:8000/media/${this.state.image}`}height="150px" width="150px" onClick={this.image_click} hidden={this.state.fimg}></img>
-           
-            </div>
+           </div>
             <div className="view_img" hidden={this.state.image_view}>
-                       
-                      
-                      <img src={`http://localhost:8000/media/${this.state.image}`} height="500px" width="500px"></img>
-                      <span class="close" onClick={this.span} hidden={this.state.span}>&times;</span>
-                      
-                       </div>
+                <img src={`http://localhost:8000/media/${this.state.image}`} height="500px" width="500px"></img>
+                <span class="close" onClick={this.span} hidden={this.state.span}>&times;</span>
+            </div>
             </div><br></br>
 
         <div className="row">

@@ -9,8 +9,9 @@ import Digital_sign from './validation/digital_sign';
 import View from './validation/view';
 import Admin from './validation/admin';
 import './App.css';
+import PartyCandidateName from './components/partyCandidateName';
 import background from './frieden-1600.jpg'
-
+import { IconName } from "react-icons/";
 function App() {
   return (
     <div className="App">
@@ -35,6 +36,7 @@ function App() {
                 <Route path="/sign" component={Digital_sign} />
                 <Route path="/view" component={View} />
                 <Route path="/admin" component={Admin} />
+                <Route path="/home/submenu/candidate/" component={PartyCandidateName} />
                 
                 <ProtectedRoute>
                   <Route  path="/home" to="/home" component={Home} />
