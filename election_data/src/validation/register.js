@@ -6,7 +6,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
+// import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -16,6 +16,7 @@ import axios from "axios";
 import $, { event } from 'jquery';
 import { length } from 'file-loader';
 import { BiHide} from "react-icons/bi";
+import {BrowserRouter as Router,Link,Switch,Route,Redirect} from 'react-router-dom';
 
 
 const gender= [
@@ -286,7 +287,7 @@ class Register extends React.Component{
 
                 <div  className="form-group">
                 <label> Password<span>*</span> </label><br></br>
-                <input type="password" name="password" id="password" value={this.state.password} onChange={this.passwordhandler} pattern=".{8,}" placeholder="Enter Password" required></input> <spans onClick={this.show_password}> <BiHide /></spans><br></br>
+                <input type="password" name="password" id="password" value={this.state.password} onChange={this.passwordhandler} placeholder="Enter Password" required></input> <spans onClick={this.show_password}> <BiHide /></spans><br></br>
                  
                 </div>
                 <div >                
@@ -364,11 +365,18 @@ class Register extends React.Component{
                   />
                 </div>
 
+                <div className="row ">
                 <div class="form-group">
+                    
                     <button>Signup</button>
+                    <a className="reg_click"><Link to="/login">If You Already Have An Account</Link></a><br></br>
+                    
+                </div>
                 </div>
 
                 </form>
+                
+                
             </div>
         );
     }

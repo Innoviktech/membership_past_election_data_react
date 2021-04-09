@@ -143,8 +143,8 @@ Question (){
           if (el.choice.length > 0) {
             return (
               <div className="col-sm-6 ques">
-              <select onChange={this.answerSubmit.bind(this, i)}>
-              <option disabled="True" selected>Select</option>
+              <select onChange={this.answerSubmit.bind(this, i)} required>
+              <option disabled="True" value ="" selected>Select</option>
                 {el.choice.map((option,index) => (
                   
                     <option>{option}</option>
@@ -155,7 +155,7 @@ Question (){
           } 
           else {
             return (
-              <div className="col-sm-6 ques"><textarea type="text" className="text_area" value={el.answer} onChange={this.answerSubmit.bind(this, i)} width="20px"/></div>
+              <div className="col-sm-6 ques"><textarea type="text" className="text_area" value={el.answer} onChange={this.answerSubmit.bind(this, i)} width="20px" required/></div>
             )
           }
         })()}
@@ -164,6 +164,9 @@ Question (){
   )}
 
   clickMe =(parameter, event) =>{
+   const confirm =  window.confirm("Are you want to delete this question...?")
+   if(confirm==true){
+     
     console.log(parameter)
     axiosInstance.post(`surveyDelete/`, {
       key1:parameter
@@ -174,6 +177,7 @@ Question (){
      this.setState({question})
       
       });
+   }
   }
 
    
@@ -268,17 +272,17 @@ Question (){
                 </div>
             <div>
 
-             {/* <form  onSubmit={this.answerSubmit}>  */}
+             <form  onSubmit={this.answerSubmithandler}> 
                   
                   <div className="question">
                   {this.Question()}
                   </div><br></br>
                   <div className="row">
                     <div className="col-sm-12 text-center">
-                  <input className="submit" type="submit" value="Submit"  onClick={this.answerSubmithandler}/>
+                  <input className="submit" type="submit" value="Submit"/>
                   </div>
                   </div>
-               {/* </form>  */}
+               </form> 
               </div><br></br>
 
           <div id ="admin_view" hidden = {this.state.admin_view}>

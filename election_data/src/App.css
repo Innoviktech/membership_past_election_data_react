@@ -71,11 +71,18 @@ body {
 	position: relative;
 
 }
+.profiles{
+	width: 200px;
+	float: right;
+	position: relative;
+
+}
 .signup-form form {
 	color :#337ab7;
 	border-radius: 3px;
 	margin-bottom: 15px;
 	background: transparent;
+	
 	
 	
 }
@@ -118,12 +125,11 @@ body {
 	text-decoration: none;
 }
 .signup-form form a {
-	color: #3598dc;
+	color:#3598dc;
 	text-decoration: none;
+
 }	
-.signup-form form a:hover {
-	text-decoration: underline;
-}
+
 .signup-form .hint-text  {
 	padding-bottom: 15px;
 	text-align: center;
@@ -279,7 +285,7 @@ body {
 		height: 70px;
 		width: 100%;
 		background-color:transparent;
-		border: none;
+		/* border: none; */
 	}
 	
 	.menuss a{
@@ -288,6 +294,9 @@ body {
 		font-size: 20px;
 		color: white;
 		position: relative;
+	}
+	.menuss span{
+		color: white;
 	}
 	.uname{
 		color: white;
@@ -400,17 +409,15 @@ body {
 		background-color: #333;
 	  }
 	  
-	  .topnav .menuss, .logout, .uname {
+	  .topnav .toggle{
 		float: left;
 		display: block;
-		
-		
-		
-	  }
+	 }
 	  
 	  
 	  .topnav .icon {
 		display: none;
+		color: white;
 	  }
 	  
 	  @media screen and (max-width: 600px) {
@@ -418,6 +425,7 @@ body {
 		.topnav .icon {
 			float: right;
 		  display: block;
+		 
 		}
 	}
 	  
@@ -425,8 +433,7 @@ body {
 		.topnav {position: relative;}
 		.topnav .icon {
 		  position: absolute;
-		  right: 0;
-		  top: 0;
+		  color: white;
 		}
 		.toggle{
 		  float: none;
@@ -434,6 +441,48 @@ body {
 		  text-align: left;
 		}
 	  } */
+
+	  /* .Change_pass {
+		height: 150px;
+		width: 30%;
+		position: absolute;
+		background-color: rgb(255, 255, 255);
+		
+		top: 100px;
+		left: 400px;
+		color: rgb(25, 190, 219);
+		font-size: 18px;
+		box-shadow: 10px 10px rgb(13, 157, 182);
+	  }
+.Change_pass label{
+text-align: center;
+} */
+/* .Change_pass input {
+	position: relative;
+	left: 30px;
+
+} */
+.Change_pass {
+	
+	position: absolute;
+	background-color: white;
+	width: 380px;
+}
+.Change_pass #password{
+background-color: transparent;
+		border: none;
+		outline: none;
+		border-bottom:2px solid black;
+}
+
+.topnav span{
+	color: white;
+}
+
+.reg_click{
+	padding-left: 20px;
+	font-size: 15px;
+}
 
 
 

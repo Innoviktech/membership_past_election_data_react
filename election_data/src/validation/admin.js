@@ -6,13 +6,14 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
+// import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Select from 'react-select';
 import axios from "axios";
+import {BrowserRouter as Router,Link,Switch,Route,Redirect} from 'react-router-dom';
 const gender= [
     { value: 'Male', label: 'Male' },
     { value: 'Female', label: 'Female' },
@@ -341,9 +342,17 @@ class Admin extends React.Component{
                     options={this.state.polling_station_name}
                   />
                 </div>
-
+{/* 
                 <div class="form-group">
                     <button>Signup</button>
+                </div> */}
+                <div className="row ">
+                <div class="form-group">
+                    
+                    <button>Signup</button>
+                    <a className="reg_click"><Link to="/login">If You Already Have An Account</Link></a><br></br>
+                    
+                </div>
                 </div>
 
                 </form>

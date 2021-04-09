@@ -120,6 +120,7 @@ export default function Login() {
 				localStorage.setItem('role', res.data.role);
 				localStorage.setItem('uname', res.data.uname);  
 				localStorage.setItem('user',res.data.user);
+				localStorage.setItem('username',res.data.username);
 				axiosInstance.defaults.headers['Authorization'] =
 					'JWT ' + localStorage.getItem('access_token');
 				// history.push('/home');
@@ -154,6 +155,7 @@ export default function Login() {
 
     return (
         <div  class="signup-form images">
+			
                 
                <form onSubmit={handleSubmit}>
                 <h2>Login</h2>
@@ -170,10 +172,23 @@ export default function Login() {
 				 {/* <div class="form-group">                                                                  
                 <input type="checkbox" onClick={show_password}></input><label>Show password</label>
                 </div><br></br> */}
-                 <div class="form-group ">
+				<div className="row">
+                 <div className="form-group ">
                      <button className="login_btn">Login</button>
+					 <a className="reg_click"><Link to="/register">For Register Click Here</Link></a><br></br>
+					 {/* <a href='/register'>For Register Click Here</a> */}
+                     </div>
                  </div>
+
+
+				 <a href='http://3.139.183.87:9070/web#view_type=list&model=op.overall.summary&menu_id=143&action=149' target='_blank'>
+                    Voters Overall Summary</a><br></br>
+                <a href='http://3.139.183.87:9070/web#view_type=list&model=op.party.type&menu_id=140&action=146' target='_blank'>
+                    Alliance Party - Candidate List</a><br></br>
+                 <a href='/home/submenu/candidate/' target='_blank'>
+                    Candidate List</a><br></br>
                  </form>
+				 
              </div>
     );
 }
