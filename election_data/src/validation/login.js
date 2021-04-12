@@ -85,7 +85,7 @@ import { BiHide} from "react-icons/bi";
 // }
 // export default withRouter(Login);
 
-export default function Login() {
+ function Login() {
 	const history = useHistory();
 	const initialFormData = Object.freeze({
 		username: '',
@@ -127,10 +127,10 @@ export default function Login() {
 				//console.log(res);
 				//console.log(res.data);
                 history.push({
-                    pathname: '/home',
-                    appState: {
-                      role_id : res.data.role
-                    }
+                    pathname: '/',
+                    // appState: {
+                    //   role_id : res.data.role
+                    // }
                   });
 			})
 			.catch((error)=>{
@@ -169,9 +169,7 @@ export default function Login() {
                  <label> Password </label><br></br>
                 <input type="password" name="password" id="password" onChange={handleChange} placeholder="Enter password" required autoComplete="off"></input><spans onClick={show_password}> <BiHide /></spans>
 				</div>
-				 {/* <div class="form-group">                                                                  
-                <input type="checkbox" onClick={show_password}></input><label>Show password</label>
-                </div><br></br> */}
+				 
 				<div className="row">
                  <div className="form-group ">
                      <button className="login_btn">Login</button>
@@ -180,15 +178,24 @@ export default function Login() {
                      </div>
                  </div>
 
+				 <div className="row">
+					 <div className="form-group">
+						 <a><Link to="/forgotPassword">Forgot Password..?</Link></a>
+
+					 </div>
+
+				 </div>
+
 
 				 <a href='http://3.139.183.87:9070/web#view_type=list&model=op.overall.summary&menu_id=143&action=149' target='_blank'>
                     Voters Overall Summary</a><br></br>
                 <a href='http://3.139.183.87:9070/web#view_type=list&model=op.party.type&menu_id=140&action=146' target='_blank'>
                     Alliance Party - Candidate List</a><br></br>
-                 <a href='/home/submenu/candidate/' target='_blank'>
+                 <a href='/candidates' target='_blank'>
                     Candidate List</a><br></br>
                  </form>
 				 
              </div>
     );
 }
+export default Login

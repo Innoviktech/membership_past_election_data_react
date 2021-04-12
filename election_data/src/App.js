@@ -10,10 +10,10 @@ import View from './validation/view';
 import Admin from './validation/admin';
 import './App.css';
 import './components/home.css';
-
 import PartyCandidateName from './components/partyCandidateName';
 import background from './frieden-1600.jpg'
 import { IconName } from "react-icons/";
+import Forgotpassword from './validation/forgotpassword'
 function App() {
   return (
     <div className="App">
@@ -21,6 +21,9 @@ function App() {
       <div className="cont" >
            
       <img className="imgs" src={background} />
+      {/* <div>
+        <Login />
+      </div> */}
       <Router>
               <div >
                   <div id="menus" className=" row menu">
@@ -34,14 +37,14 @@ function App() {
                 <Switch>
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
-                <Route path="/demo" component={Demo} />
-                <Route path="/sign" component={Digital_sign} />
-                <Route path="/view" component={View} />
+                {/* <Route path="/demo" component={Demo} /> */}
+                {/* <Route path="/sign" component={Digital_sign} />
+                <Route path="/view" component={View} /> */}
                 <Route path="/admin" component={Admin} />
-                <Route path="/home/submenu/candidate/" component={PartyCandidateName} />
-                
+                <Route path="/candidates" component={PartyCandidateName} />
+                <Route path="/forgotPassword" component={Forgotpassword} />
                 <ProtectedRoute>
-                  <Route  path="/home" to="/home" component={Home} />
+                  <Route  path="/" to="/" component={Home} />
                 </ProtectedRoute> 
 
                 </Switch>
@@ -52,5 +55,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

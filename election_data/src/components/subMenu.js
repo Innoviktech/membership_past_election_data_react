@@ -8,16 +8,16 @@ export default function subMenu(){
       <Router>
             <div>
             <div className="row submenu">
-                <div className="col-xs-4" align="center"><a><Link to="/home/submenu/candidate/">Candidate List</Link></a></div>
-                <div className="col-xs-4" align="center"><a><Link to="/home/submenu/member/">Member Details</Link></a></div>
-                <div className="col-xs-4" align="center"><a><Link to="/home/submenu/grievance/">Survey</Link></a></div>
+                <div className="col-xs-4" align="center"><a><Link to="/submenu/candidate">Candidate List</Link></a></div>
+                <div className="col-xs-4" align="center"><a><Link to="/submenu/member">Member Details</Link></a></div>
+                <div className="col-xs-4" align="center"><a><Link to="/submenu/grievance">Survey</Link></a></div>
             </div><br></br>
                           
           </div>
           <Switch>
-          <Route path="/home/submenu/candidate/" component={PartyCandidateName} />
-          <Route path="/home/submenu/member/" component={MemberCount} />
-          <Route path="/home/submenu/grievance/" component={Grievance} />
+          <Route path="/submenu/candidate" component={PartyCandidateName} />
+          <Route path="/submenu/member" component={MemberCount} />
+          <Route path="/submenu/grievance" component={Grievance} />
           </Switch>
       </Router>
 

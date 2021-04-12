@@ -175,7 +175,7 @@ class Register extends React.Component{
          {
              this.setState({constituency_value})
              const value1 = constituency_value.value
-             axios.post('http://localhost:8000/polling_station_name/',{
+             axiosInstance.post(`polling_station_name/`,{
                  key1 : value1
              })
              .then(res=>
@@ -197,7 +197,7 @@ class Register extends React.Component{
             state_change = change_value => {
                 this.setState({change_value});
                 const value1 = change_value.value
-                axios.post('http://localhost:8000/constituancy_name_value/',{
+                axiosInstance.post(`constituancy_name_value/`,{
                  key1 : value1
              })
              .then(res=>

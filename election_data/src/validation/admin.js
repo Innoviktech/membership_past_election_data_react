@@ -13,6 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Select from 'react-select';
 import axios from "axios";
+import { BiHide} from "react-icons/bi";
 import {BrowserRouter as Router,Link,Switch,Route,Redirect} from 'react-router-dom';
 const gender= [
     { value: 'Male', label: 'Male' },
@@ -145,7 +146,7 @@ class Admin extends React.Component{
     
     componentDidMount()
          {
-             axios.get('http://localhost:8000/state_name/')
+             axiosInstance.get(`state_name/`)
              .then(res=>{
                  const state_value = res.data
                  console.log(state_value)
@@ -159,7 +160,7 @@ class Admin extends React.Component{
          {
              this.setState({constituency_value})
              const value1 = constituency_value.value
-             axios.post('http://localhost:8000/polling_station_name/',{
+             axiosInstance.post(`polling_station_name/`,{
                  key1 : value1
              })
              .then(res=>
@@ -181,7 +182,7 @@ class Admin extends React.Component{
             state_change = change_value => {
                 this.setState({change_value});
                 const value1 = change_value.value
-                axios.post('http://localhost:8000/constituancy_name_value/',{
+                axiosInstance.post(`constituancy_name_value/`,{
                  key1 : value1
              })
              .then(res=>
@@ -224,7 +225,17 @@ class Admin extends React.Component{
                     street : event.target.value
                 })
             }
-
+            show_password = ()=>{
+                const  x=  document.getElementById("password")
+                
+                  if(x.type === "password"){
+                     x.type="text"
+                  }
+                  else{
+                      x.type="password"
+                  }
+                 
+               }
     
 
     render()
@@ -267,7 +278,7 @@ class Admin extends React.Component{
 
                 <div  class="form-group">
                 <label> Password <span>*</span></label><br></br>
-                <input type="password" name="password" value={this.state.password} onChange={this.passwordhandler} placeholder="Enter Password" required></input><br></br>
+                <input type="password" name="password" id="password" value={this.state.password} onChange={this.passwordhandler} placeholder="Enter Password" required></input><spans onClick={this.show_password}> <BiHide /></spans><br></br>
                 </div>
                 
 
