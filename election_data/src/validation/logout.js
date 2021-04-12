@@ -1,44 +1,49 @@
+import { event } from 'jquery';
 import React from 'react';
 import axiosInstance from '../axios';
-class Logout extends React.Component{
+// class Logout extends React.Component{
 
-    componentDidMount() 
-    {
-        axiosInstance.post('logout/blacklist/', {
-			refresh_token: localStorage.getItem('refresh_token'),
-		});
-		localStorage.removeItem('access_token');
-		localStorage.removeItem('refresh_token');
-        localStorage.removeItem('role');
-        localStorage.removeItem('uname');
-        localStorage.removeItem('user')
-		axiosInstance.defaults.headers['Authorization'] = null;
-		window.location = './login';
+//     componentDidMount(event) 
+//     {
+//         axiosInstance.post('logout/blacklist/', {
+// 			refresh_token: localStorage.getItem('refresh_token'),
+// 		});
+// 		localStorage.removeItem('access_token');
+// 		localStorage.removeItem('refresh_token');
+//         localStorage.removeItem('role');
+//         localStorage.removeItem('uname');
+//         localStorage.removeItem('user');
+//         localStorage.removeItem('username');
+// 		axiosInstance.defaults.headers['Authorization'] = null;
+// 		window.location = './login';
+//         event.preventDefault();
 	
-         }
+//          }
          
-    render()
-    {
-        return(
-            <div>
+//     render()
+//     {
+//         return(
+//             <div>
                 
-            </div>
-        );
-    }
+//             </div>
+//         );
+//     }
+// }
+//export default Logout;
+
+function Logout(event) {
+                axiosInstance.post('logout/blacklist/', {
+        			refresh_token: localStorage.getItem('refresh_token'),
+        		});
+        		localStorage.removeItem('access_token');
+        		localStorage.removeItem('refresh_token');
+                localStorage.removeItem('role');
+                localStorage.removeItem('uname');
+                localStorage.removeItem('user');
+                localStorage.removeItem('username');
+        		axiosInstance.defaults.headers['Authorization'] = null;
+        		window.location = './login';
+                event.preventDefault()
+   
 }
 export default Logout;
-
-// function Logout() {
-//     useEffect(() => {
-        
-//         axiosInstance.post('logout/blacklist/', {
-//             			refresh_token: localStorage.getItem('refresh_token'),
-//             		});
-//             		localStorage.removeItem('access_token');
-//             		localStorage.removeItem('refresh_token');
-//             		axiosInstance.defaults.headers['Authorization'] = null;
-//             		// window.location = './login';
-        
-//     })
-// }
-// export default Logout;

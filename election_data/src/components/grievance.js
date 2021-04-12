@@ -6,7 +6,7 @@ import FilterList from '@material-ui/icons/FilterList';
 import { forwardRef } from 'react';
 import PeopleIcon from '@material-ui/icons/People';
 import $ from 'jquery';
-import { AiOutlineMinusCircle} from "react-icons/ai";
+import { TiDelete} from "react-icons/ti";
 // import User from './user';
 import {BrowserRouter as Router,Link,Switch,Route} from 'react-router-dom';
 import { icons } from 'react-icons/lib';
@@ -66,7 +66,7 @@ class Grievance extends React.Component {
            <div key={i}>
              
               <textarea type="text" value={el.question} onChange={this.Changequestion.bind(this, i)} required></textarea>
-              <span className="rm_icon" onClick={this.removeClick.bind(this, i)}><AiOutlineMinusCircle /></span>
+              <span className="rm_icon" onClick={this.removeClick.bind(this, i)}><TiDelete /></span>
               {/* <input type='button' value='remove' onClick={this.removeClick.bind(this, i)}/> */}
           <div>
            <input type="button" value="choice" onClick={this.choice.bind(this, i)}></input>
@@ -137,7 +137,7 @@ this.setState({test:array})
 Question (){
   return this.state.question.map((el, i) =>
   <div className = "row survey">
-  <div className="col-sm-6 ques" key={i}>{i+1}{")"}{" "}{el.question}<span hidden = {this.state.admin_view} onClick={(event) => {this.clickMe(el.id, event)}}><AiOutlineMinusCircle/></span></div>
+  <div className="col-sm-6 ques" key={i}>{i+1}{")"}{" "}{el.question}<span hidden = {this.state.admin_view} onClick={(event) => {this.clickMe(el.id, event)}}><TiDelete/></span></div>
 
   {(() => {
           if (el.choice.length > 0) {
@@ -213,6 +213,10 @@ Question (){
         console.log(ques);
         this.setState({question:ques})
         });
+        const holder = []
+        this.setState({
+          test:holder
+        })
       event.preventDefault();
     }
 

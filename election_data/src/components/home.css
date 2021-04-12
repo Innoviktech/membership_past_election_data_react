@@ -1,11 +1,11 @@
-
+/* 
   
   .topnav {
     overflow: hidden;
     background-color: #333;
   }
   
-  .topnav .toggle {
+  .topnav .toggles {
     float: left;
     display: block;
     color: #f2f2f2;
@@ -26,9 +26,9 @@
       float: left;
       display: block;
     }
-  }
+  } */
   
-  @media screen and (max-width: 600px) {
+  /* @media screen and (max-width: 600px) {
     .topnav.responsive {position: relative;}
     .topnav.responsive .icon {
       position: absolute;
@@ -40,4 +40,4 @@
       display: block;
       text-align: left;
     }
-  }
+  } */
