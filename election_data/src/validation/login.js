@@ -6,86 +6,7 @@ import { withRouter } from 'react-router-dom';
 import {BrowserRouter as Router,Link,Switch,Route,Redirect} from 'react-router-dom';
 import axiosInstance from '../axios';
 import { BiHide} from "react-icons/bi";
-// class Login extends Component{
-
-//     constructor(props) {
-//         super(props)
-  
-//           this.state = {
-              
-//               username : "",
-//               password: "",
-              
-//           }
-//       }
-
-//       passwordhandler = (event) => {
-//         this.setState({
-//             password: event.target.value
-//         })
-//         }
-
-//     usernamehandler = (event) => {
-//         this.setState({
-//             username : event.target.value
-//         })
-
-//     }
-
-//     handleSubmit = (event) => {
-//         // const history = useHistory();
-//         const value1 = this.state.username
-        
-//         const value2 = this.state.password
-
-//         axiosInstance
-// 			.post(`login/`, {
-// 				username: value1,
-// 				password: value2,
-// 			})
-// 			.then((res) => {
-// 				localStorage.setItem('access_token', res.data.access);
-// 				localStorage.setItem('refresh_token', res.data.refresh);
-//                 localStorage.setItem('role', res.data.role);
-// 				axiosInstance.defaults.headers['Authorization'] =
-// 					'JWT ' + localStorage.getItem('access_token');
-//                 window.location = './home';
-                
-
-// 			console.log(localStorage)
-//             console.log(res.data)
-// 			});
-//               event.preventDefault()
-//             }
-
-//     render(){
-        
-//         return(
-//             <div  class="signup-form">
-                
-//                 <form onSubmit={this.handleSubmit}>
-//                 <h2>Login</h2>
-//                 <p>Please fill in this form to login an account!</p>
-//                 <hr></hr>
-//                 <div class="form-group">
-//                 <label> username </label><br></br>
-//                 <input type="text" name="username" value={this.state.username} onChange={this.usernamehandler} placeholder="enter username" required></input><br></br>
-//                 </div>
-//                 <div class="form-group">
-//                 <label> Password </label><br></br>
-//                 <input type="password" name="password" value={this.state.password} onChange={this.passwordhandler} placeholder="enter password" required></input><br></br>
-//                 </div>
-//                 <div class="form-group">
-//                     <button>Login</button>
-//                 </div>
-//                 </form>
-//             </div>
-//         )
-//     }
-// }
-// export default withRouter(Login);
-
- function Login() {
+function Login() {
 	const history = useHistory();
 	const initialFormData = Object.freeze({
 		username: '',
@@ -170,21 +91,30 @@ import { BiHide} from "react-icons/bi";
                 <input type="password" name="password" id="password" onChange={handleChange} placeholder="Enter password" required autoComplete="off"></input><spans onClick={show_password}> <BiHide /></spans>
 				</div>
 				 
-				<div className="row">
-                 <div className="form-group ">
-                     <button className="login_btn">Login</button>
-					 <a className="reg_click"><Link to="/register">For Register Click Here</Link></a><br></br>
-					 {/* <a href='/register'>For Register Click Here</a> */}
-                     </div>
-                 </div>
 
-				 <div className="row">
+				<div className="row">
 					 <div className="form-group">
 						 <a><Link to="/forgotPassword">Forgot Password..?</Link></a>
 
 					 </div>
 
 				 </div>
+				 
+				<div className="row">
+                 <div className="form-group ">
+                     <button className="login_btn">Login</button>
+					 <span className="reg_click"><Link to="/register">For Register Click Here</Link></span><br></br>
+					
+                     </div>
+                 </div>
+
+				 {/* <div className="row">
+					 <div className="form-group">
+						 <a><Link to="/forgotPassword">Forgot Password..?</Link></a>
+
+					 </div>
+
+				 </div> */}
 
 
 				 <a href='http://3.139.183.87:9070/web#view_type=list&model=op.overall.summary&menu_id=143&action=149' target='_blank'>

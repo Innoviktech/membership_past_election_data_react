@@ -21,28 +21,23 @@ function App() {
       <div className="cont" >
            
       <img className="imgs" src={background} />
+    
       {/* <div>
-        <Login />
+        <Demo />
       </div> */}
       <Router>
               <div >
                   <div id="menus" className=" row menu">
-                    {/* <div className="col-sm-6 text-center">
-                      <a><Link to="/register">Register</Link></a><br></br>
-                      </div> */}
-                      {/* <div className="col-sm-6 text-center">
-                      <a><Link to="/login">Login</Link></a><br></br>
-                     </div> */}
+                    
                      </div>
                 <Switch>
                 <Route path="/register" component={Register} />
                 <Route path="/login" component={Login} />
-                {/* <Route path="/demo" component={Demo} /> */}
-                {/* <Route path="/sign" component={Digital_sign} />
-                <Route path="/view" component={View} /> */}
+               
                 <Route path="/admin" component={Admin} />
                 <Route path="/candidates" component={PartyCandidateName} />
                 <Route path="/forgotPassword" component={Forgotpassword} />
+               
                 <ProtectedRoute>
                   <Route  path="/" to="/" component={Home} />
                 </ProtectedRoute> 

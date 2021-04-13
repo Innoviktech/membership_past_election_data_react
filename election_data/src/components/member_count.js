@@ -467,7 +467,7 @@ render()
   <div className="row ">
       <div className="col-sm-6 lables">
       <label>Constituency</label>
-      <Select 
+      <Select className="selects"
             value={constituency_value}
             onChange={this.constituency_change}
             options={this.state.constituency_data}
@@ -477,16 +477,16 @@ render()
         
           <div className="col-sm-6 lables">
           <label>Polling Station Name</label>
-          <Select
+          <Select className="selects"
                   value={polling_booth_value}
                   onChange={this.polling_booth_change}
                   options={this.state.polling_station_name_result}
           />
           </div>
-</div><br></br>
+</div>
 
         
-        <div className = "Member_name_list" hidden={this.state.material_view}>
+        <div className = "Member_name_list material" hidden={this.state.material_view}>
         <MaterialTable
         
         icons={PeopleIcon}

@@ -24,6 +24,7 @@ class Grievance extends React.Component {
         uservalue : [],
         detailview : [],
         admin_view : '',
+        staff_view : '',
         test : []
       };
       this.handleSubmit = this.handleSubmit.bind(this);
@@ -50,10 +51,10 @@ class Grievance extends React.Component {
       const roles =  localStorage.getItem('role')
       console.log(roles)
       if(roles == 'is_staff'){
-          this.setState({admin_view:true})
+          this.setState({admin_view:true,staff_view:false})
       }
-      else{
-          this.setState({admin_view:false})
+      else if(roles == 'is_superuser'){
+          this.setState({admin_view:false,staff_view:true})
       }
       $("th").removeClass("MTableHeader-header-13");
 
@@ -230,9 +231,25 @@ Question (){
         }).then((testing) => {
         // console.log(testing)
         const detailview = testing.data;
-        this.setState({ detailview})
+        console.log(detailview)
+         if (typeof detailview == 'object') {
+          alert("Submitted Successfully")
+          // const holder = []
+          // this.setState({
+          //   answer : []
+          // })
+        }
+        else{
+          alert("Failed to Submit")
+        }
        
+        this.setState({ 
+          detailview,
+          //  question : holder,
+        })
+        
         });
+        
 
         event.preventDefault();
     }
@@ -245,12 +262,7 @@ Question (){
         this.setState({ question });
 
     }
-
-
-
-  
-  
-    render() {
+render() {
       
         console.log(this.state.test)
         // console.log(this.state.test[0].choice)
@@ -260,15 +272,15 @@ Question (){
         <div >
               <div id ="admin_view" hidden = {this.state.admin_view}>
                 
-                  <div className="row ">
+                  <div className="row ques">
                     <div className="col-sm-4 ques_label">
                       <label>Question</label>
                     {this.createUI()} 
                     </div> 
-                    <div className="col-sm-4"> 
+                    <div className="col-sm-4 "> 
                    <input type='button' value='Add Your Questions' onClick={this.addClick}/>
                     </div> 
-                    <div className="col-sm-4">
+                    <div className="col-sm-4 ">
                     <input type='button' value='Submit Your Questions' onClick={this.handleSubmit}/>
                     </div>
                     </div>
@@ -282,14 +294,14 @@ Question (){
                   {this.Question()}
                   </div><br></br>
                   <div className="row">
-                    <div className="col-sm-12 text-center">
+                    <div hidden={this.state.staff_view} className="col-sm-12 text-center">
                   <input className="submit" type="submit" value="Submit"/>
                   </div>
                   </div>
                </form> 
               </div><br></br>
 
-          <div id ="admin_view" hidden = {this.state.admin_view}>
+          <div  className="material" id ="admin_view" hidden = {this.state.admin_view}>
 
         <MaterialTable
         icons={PeopleIcon}

@@ -269,7 +269,7 @@ class Register extends React.Component{
                 
                 <form onSubmit={this.handleSubmit}>
                 <h2>Register</h2>
-                <p>Please fill in this form to create an account!</p>
+                <p> Fields Marked <span>*</span> are Required!</p>
                 <hr></hr>
 
                 
@@ -337,7 +337,7 @@ class Register extends React.Component{
 
                 <div  className="form-group">
                 <label> State <span>*</span></label><br></br>
-                <Select className="test"
+                <Select className="test select"
                      value={change_value}
                      onChange={this.state_change}
                      options={this.state.state_value}
@@ -347,7 +347,7 @@ class Register extends React.Component{
 
                 <div  class="form-group">
                 <label> Constituency<span>*</span> </label><br></br>
-                <Select
+                <Select className="select"
                 
                     value={constituency_value}
                     onChange={this.constituency_change}
@@ -358,7 +358,7 @@ class Register extends React.Component{
 
                 <div  class="form-group">
                 <label> Polling Station<span>*</span> </label><br></br>
-                <Select
+                <Select className="select"
                      value={polling_station_value}
                      onChange={this.polling_station_change}
                     options={this.state.polling_station_name}
@@ -368,7 +368,7 @@ class Register extends React.Component{
                 <div className="row ">
                 <div class="form-group">
                     
-                    <button>Signup</button>
+                    <button className="login_btn">Signup</button>
                     <a className="reg_click"><Link to="/login">If You Already Have An Account</Link></a><br></br>
                     
                 </div>

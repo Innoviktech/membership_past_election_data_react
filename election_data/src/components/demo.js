@@ -1,17 +1,76 @@
-import React, { useState } from 'react';
-import DemoReport from './demoreport';
-export function Demo() {
-  // Declare a new state variable, which we'll call "count"
-//   const [count, setCount] = useState(0);
+// import React from "react";
+// import {BrowserRouter as Router,Link,Switch,Route,Redirect} from 'react-router-dom';
 
-  return (
-    <div>
-      {/* <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>
-        Click me
-      </button> */}
-      <DemoReport name={'hello'}/>
-    </div>
-  );
-}
-export default Demo;
+// import reactDom from 'react-dom';
+// import { Dropdown } from "semantic-ui-react";
+// import axiosInstance from "../axios";
+
+
+
+//   const countryOptions = [
+//   {  text : 'Afghanistan' },
+  
+//   { key: 'am', value: 'am', flag: 'am', text: 'Armenia' },
+  
+//        ]
+
+// class Demo extends React.Component {
+
+//   constructor(props){
+//     super(props);
+//     this.state = {
+//       state_value : [],
+//       state_change_value : "",
+//     }
+//   }
+// componentDidMount(){
+//   axiosInstance.get(`state_name/`)
+//              .then(res=>{
+//                  const state_value = res.data
+//                  console.log(state_value)
+//                  this.setState({state_value})
+//              })
+// }
+// oc = state_change_value =>{
+//   this.setState({
+//     state_change_value
+//   });
+//   console.log(this.state.state_change_value)
+// }
+  
+//   render() {
+
+//     // console.log(this.state.state_change_value)
+    
+
+    
+//     return (
+//       <div>
+//         <div>
+//         <form>
+//         <Dropdown
+//         placeholder='Select Country'
+//         required
+//         fluid
+//         search
+//         selection
+//         onChange={this.oc}
+//         value={this.state.state_change_value}
+//         options={this.state.state_value}
+    
+//       />
+// <button onClick={this.demoSubmit}>submit</button>
+//         </form>
+
+//         </div>
+        
+        
+        
+        
+       
+     
+//       </div>
+//     );
+//   }
+// }
+// export default Demo;

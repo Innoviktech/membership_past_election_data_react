@@ -89,14 +89,14 @@ class PartyCandidateName extends Component
             <div className="row">
                    <div className="col-sm-12 lables">
                         <label>Constituency</label>
-                        <Select 
+                        <Select className="selects"
                                 value={constituency_value}
                                 onChange={this.constituency_change}
                                 options={this.state.constituency_data}
                             />
                         </div>
                         </div>
-                    <div><br></br>
+                    <div className="material">
                     {/* <table>
              <thead>
              <tr>
@@ -117,7 +117,7 @@ class PartyCandidateName extends Component
 
          </table>  */}
 
-            <MaterialTable
+            <MaterialTable 
              options={{
                 filtering: true,
                 grouping: true,
