@@ -523,12 +523,12 @@ render()
             />
 
         </div>
-        <div hidden={this.state.form_view} className="wizard">
+        <div hidden={this.state.form_view} className="col-sm-12 wizard">
         <div id ="admin_view" >
                 <div className="form-view" hidden={this.state.form}>
                 <div className="row">
                    
-                   <div className="col-sm-12 text-right" >
+                   <div className="col-sm-12 text-right wiz_cross" >
                    <span   onClick={this.form_span}>&times;</span>
                    </div>
                    </div>
@@ -546,11 +546,13 @@ render()
         <form onSubmit={this.handlesubmit} className="form-view">
           <div className="row">
           <div className="imagess"  hidden={this.state.imgs}>
-            <img className="profile" src={`http://localhost:8000/media/${this.state.image}`}height="150px" width="150px" onClick={this.image_click} hidden={this.state.fimg}></img>
+            <img className="profile" src={`http://localhost:8000/media/${this.state.image}`} onClick={this.image_click} hidden={this.state.fimg}></img>
            </div>
+           </div>
+           <div className="row">
             <div className="view_img" hidden={this.state.image_view}>
                 <img src={`http://localhost:8000/media/${this.state.image}`} height="500px" width="500px"></img>
-                <span class="close" onClick={this.span} hidden={this.state.span}>&times;</span>
+                <span class="close  " onClick={this.span} hidden={this.state.span}>&times;</span>
             </div>
             </div><br></br>
 

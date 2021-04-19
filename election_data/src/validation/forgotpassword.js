@@ -2,6 +2,8 @@ import { event } from 'jquery';
 import React, { useState } from 'react';
 import { BiHide} from "react-icons/bi";
 import axiosInstance from '../axios';
+import {BrowserRouter as Router,Link,Switch,Route,Redirect} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 class Forgotpassword extends React.Component{
     constructor(props){
         super(props);
@@ -19,6 +21,9 @@ class Forgotpassword extends React.Component{
         input6Change : "",
         email : "",
         password : "",
+        referrer : null,
+        count : "",
+        resend : true,
         
         
        
@@ -46,7 +51,10 @@ class Forgotpassword extends React.Component{
             OTP_wizard : false,
             new_pass_wizard : true,
             prev : false,
+            resend : true,
+        
         })
+        this.resendCode()
             }
 
             else if(value1 == 500){
@@ -57,71 +65,45 @@ class Forgotpassword extends React.Component{
 
         event.preventDefault()
     }
-//   otpprev = (event)=>{
-//       alert('hello')
-//       event.preventDefault()
-    //   this.setState({
-    //     OTP_wizard : true,
-    //     mail_wizard: false,
-    //     new_pass_wizard : true,
-    //   })
-    
-//   }
-
-// test = ()=>{
-//   document.getElementById("test").focus()
-// }
-
     otp_next = (event)=>{
          
-       
-        
-            let str1 = this.state.input1Change;
-            let str2 = this.state.input2Change;
-            let str3 = this.state.input3Change;
-            let str4 = this.state.input4Change;
-            let str5 = this.state.input5Change;
-            let str6 = this.state.input6Change;
-            let res = str1+str2+str3+str4+str5+str6
-            console.log(res)
+        let str1 = this.state.input1Change;
+        let str2 = this.state.input2Change;
+        let str3 = this.state.input3Change;
+        let str4 = this.state.input4Change;
+        let str5 = this.state.input5Change;
+        let str6 = this.state.input6Change;
+        let res = str1+str2+str3+str4+str5+str6
+        console.log(res)
 
-         const emailValue = this.state.email
+     const emailValue = this.state.email
 
-        axiosInstance.post(`otp_verification/` ,{
-                email : emailValue , code : res
-        })
-        .then(res=>{
+    axiosInstance.post(`otp_verification/` ,{
+            email : emailValue , code : res
+    })
+    .then(res=>{
 
-            const value1 = res.data.status;
-            console.log(value1)
-            const value2 = res.data.mycheck
-            if (value1 == 200){
-                alert(value2)
+        const value1 = res.data.status;
+        console.log(value1)
+        const value2 = res.data.mycheck
+        if (value1 == 200){
+            alert(value2)
 
-                this.setState({
-                    OTP_wizard:true,
-                    new_pass_wizard : false,
-                    mail_wizard : true,
-                })
-            }
-            else if(value1 == 400){
-                alert(value2);
-                const holder = "";
-                // this.setState({
-                //     input1Change : holder,
-                //     input2Change : holder,
-                //     input3Change : holder,
-                //     input4Change : holder,
-                //     input5Change : holder,
-                //     input6Change : holder,
-                    
-                // })
-            }
-        })
+            this.setState({
+                OTP_wizard:true,
+                new_pass_wizard : false,
+                mail_wizard : true,
+            })
+        }
+        else if(value1 == 400){
+            alert(value2);
+           
+        }
+    })
 
-        event.preventDefault()
-       
-    }
+    event.preventDefault()
+   
+}
     
     inputChange = (event)=>{
        const input1 = event.target.id
@@ -204,9 +186,10 @@ document.getElementById("1").focus();
             }
             else if(value1 == 200){
                 alert(value2)
-                // window.location.href = '/login';
-                window.location = './login';
-                
+                this.setState({
+                    referrer : true
+                })
+        
             
             }
 
@@ -218,9 +201,63 @@ document.getElementById("1").focus();
         event.preventDefault()
 
     }
+    
+    cancel=()=> {
+        this.setState({
+            referrer : true
+        })
+
+      }
+
+
+resendCode = () =>{
+var counter = 120;
+var looper = setInterval(function(){ 
+    counter--;
+    console.log("Counter is: " + counter);
+    
+    this.setState({ count : counter})
+     if (counter == 0)
+    {
+        clearInterval(looper);
+        this.setState({resend : false})
+
+
+        const val1 = this.state.email
+        axiosInstance.post(`deleteOTP/` ,{
+            email : val1
+        })
+        .then(res=>{
+            console.log(res)
+
+        })
+    }
+
+}.bind(this), 1000);
+
+    }
+
+
+     show_password =  (event)=>{
+		const  x=  document.getElementById("password")
+		
+		  if(x.type === "password"){
+			 x.type="text"
+		  }
+		  else{
+			  x.type="password"
+		  }
+    
+
+	}
 
     render(){
-        console.log(this.state.password)
+        console.log(this.state.count)
+        //console.log(this.state.referrer)
+        const {referrer} = this.state;
+        if (referrer) return <Redirect to="/login" />;
+
+        //console.log(this.state.password)
         // console.log(this.state.input1Change)
         // console.log(this.state.input2Change)
         // console.log(this.state.input3Change)
@@ -233,16 +270,26 @@ document.getElementById("1").focus();
 
                 
                 <div className="forgotPassword" hidden={this.state.mail_wizard}>
-                <form onSubmit={this.mail_next}>              
+               
+                <form onSubmit={this.mail_next}>
                 <div ><h3>Forgot Password</h3></div>
                 <div ><label>Email</label></div>
-                <div className="forgotPassword_input"><input type="email" id="email" onChange={this.email} placeholder="Enter Your Registered Email" autoComplete="off" required></input></div>
-                        <div className="row next">
-                        <a className="cancel_btns" href="/login">Cancel</a>
-                           <div className="next_btn"> <button>Next</button></div>
+                <div className="forgotPassword_input">
+                    <input type="email" id="email" onChange={this.email} placeholder="Enter Your Registered Email" autoComplete="off" required ></input>
+                
+               
+                </div>
+                
+                <div className="row next">
+                        
+                <button className="cancel_btns" onClick={this.cancel}>Cancel</button>   
+                          <button className="next_btn">Next</button>
                            
                         </div>
+                
                 </form>   
+               
+               
                   </div>
 
 
@@ -251,9 +298,9 @@ document.getElementById("1").focus();
                   <div hidden={this.state.OTP_wizard}>
                   <div className="forgotPassword">
                 <div ><h3>Forgot Password</h3></div>
-                  <div ><label>Enter Your 6 Digit OTP</label></div>
+                 <div className="row"><label>Enter Your 6 Digit OTP</label><span className="timer">00:{this.state.count}</span></div>
                <div className="row">
-               <input className="forgotPassword_input1" type="text" min="1" max="1" name="input1Change" id="1"onChange={this.inputChange}></input>
+                <input className="forgotPassword_input1" type="number" min="1" max="1" name="input1Change" maxLength="1" id="1"onChange={this.inputChange}></input>
                  <input className="forgotPassword_input2" type="number" name = "input2Change" id="2" onChange={this.inputChange} ></input>
                  <input className="forgotPassword_input3"  type="number" name= "input3Change" id="3" onChange={this.inputChange} ></input>
                  <input className="forgotPassword_input4" type="number" name = "input4Change" id="4" onChange={this.inputChange}></input>
@@ -262,7 +309,9 @@ document.getElementById("1").focus();
                  
 					  </div>
                      <div className="row otp_next">
-                        <button id= "otp_next"onClick={this.otp_next}>Next</button>
+                     <button className= "resend" hidden={this.state.resend} onClick={this.mail_next}>Resend OTP</button>
+                        <button className= "otp"onClick={this.otp_next}>Next</button>
+                        
                             
                          </div>
                           </div>
@@ -270,18 +319,18 @@ document.getElementById("1").focus();
 
 
 
-                 <div hidden={this.state.new_pass_wizard}>
+                        <div hidden={this.state.new_pass_wizard}>
                   <div className="forgotPassword">
                   <div ><h3>Forgot Password</h3></div>
                   <div ><label>New Password</label></div>
                   {/* <div className="forgotPassword_input"><input type="password" placeholder="Enter Your New Password"></input><spans onClick={this.show_password}> <BiHide /></spans></div> */}
-                  <input className="input" id = "password" type="password" placeholder="Enter Your New Password" onChange={this.passwordChange}></input><br></br><span onClick={this.show_password} ><BiHide /></span>
+                  <input className="input" id = "password" type="password" placeholder="Enter Your New Password" onChange={this.passwordChange}></input><span onClick={this.show_password}><BiHide/></span>
                   <div className="row submit_next">
                             <button onClick={this.passwordSubmit}>Submit</button>
                             
                         </div>
                       </div>
-                    </div>
+                      </div>
             </div>
         )
     }

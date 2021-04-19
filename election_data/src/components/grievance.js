@@ -7,6 +7,8 @@ import { forwardRef } from 'react';
 import PeopleIcon from '@material-ui/icons/People';
 import $ from 'jquery';
 import { TiDelete} from "react-icons/ti";
+import { IoIosAddCircleOutline} from "react-icons/io";
+
 // import User from './user';
 import {BrowserRouter as Router,Link,Switch,Route} from 'react-router-dom';
 import { icons } from 'react-icons/lib';
@@ -25,7 +27,8 @@ class Grievance extends React.Component {
         detailview : [],
         admin_view : '',
         staff_view : '',
-        test : []
+        test : [],
+        sub_ques : true,
       };
       this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -191,7 +194,11 @@ Question (){
 
     addClick = () =>{
       this.setState(prevState => ({ test: [...prevState.test,{question : '',choice: []}]}))
-    }
+   this.setState({
+     sub_ques : false
+   })
+  
+  }
     
     removeClick=(i)=>{
         console.log(i)
@@ -274,13 +281,13 @@ render() {
                 
                   <div className="row ques">
                     <div className="col-sm-4 ques_label">
-                      <label>Question</label>
+                      <label >Question<span onClick={this.addClick}><IoIosAddCircleOutline /> </span> </label>
                     {this.createUI()} 
                     </div> 
-                    <div className="col-sm-4 "> 
-                   <input type='button' value='Add Your Questions' onClick={this.addClick}/>
-                    </div> 
-                    <div className="col-sm-4 ">
+                    {/* <div className="col-sm-4 "> 
+                   <input type='button' value='Add Your Questions' />
+                    </div>  */}
+                    <div className="col-sm-4 " id="sques" hidden={this.state.sub_ques}>
                     <input type='button' value='Submit Your Questions' onClick={this.handleSubmit}/>
                     </div>
                     </div>
