@@ -108,14 +108,7 @@ function Login() {
                      </div>
                  </div>
 
-				 {/* <div className="row">
-					 <div className="form-group">
-						 <a><Link to="/forgotPassword">Forgot Password..?</Link></a>
-
-					 </div>
-
-				 </div> */}
-
+				
 
 				 <a href='http://3.139.183.87:9070/web#view_type=list&model=op.overall.summary&menu_id=143&action=149' target='_blank'>
                     Voters Overall Summary</a><br></br>

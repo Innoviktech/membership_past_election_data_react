@@ -181,6 +181,8 @@ body {
 .form-view{
 	padding-left: 22px;
 	padding-top: 30px;
+	
+
 }
 .select{
 	width: 250px;
@@ -200,19 +202,25 @@ body {
 .row label{
 	color: #337ab7;
 }
- .profile{
+.imagess{
+	height: 200px;
+	width: 200px;
+
+	margin: auto;
+}
+ .imagess .profile{
+	
 	height: 150px;
 	width: 150px; 
 	background-color: white;
+	border: #333;
 	border-radius: 50%;
-	position: relative;
-	margin: auto;
 	overflow: hidden;
-	
-	cursor: pointer;
 }
- .imagess .profile:hover{
+
+.profile:hover{
 	opacity: 0.7;
+	
 }
 .view_img{
 	height: 500px;
@@ -258,15 +266,21 @@ body {
 	}
 
 	.wizard {
-		position: absolute;
+		
+		margin-top: 20px;
 		background-color:#bfd0df;
-		width: 100%;
+	
+		
+		
 		}
 	  .close{
 		
 		 position: absolute;
 		
 		 color: black;
+	font-size: 35px;
+	cursor: pointer;
+	
 		 
 	  }
 
@@ -298,9 +312,12 @@ body {
 		font-size: 20px;
 		color: white;
 		position: relative;
+		
 	}
 	.menuss span{
 		color: white;
+		margin-right: 10px;
+		cursor: pointer;
 	}
 	.uname{
 		color: white;
@@ -332,9 +349,11 @@ body {
 		padding-top: 20px;
 		}
 	.logout a{
-		font-weight: 500;
+		
 		font-size: 15px;
 		color: #df2525;
+		margin-right: 10px;
+		cursor: pointer;
 		
 	}
 	div.heading{
@@ -388,8 +407,15 @@ body {
 		color: white;
 	}
 	.ques_label label{
-		font-size: 25px;
-	
+		font-size: 20px;
+		font-weight: 700;
+		
+	}
+	.ques_label span{
+		color: white;
+		cursor: pointer;
+		padding-left: 8px;
+		
 	}
 	.ques{
 		padding-left: 10px;
@@ -473,7 +499,7 @@ background-color: transparent;
 .forgotPassword label{
 	color: #337ab7;
 	font-size: 20px;
-	padding-left: 15px;
+	margin-left: 25px;
 	padding-top: 15px;
 }
 .forgotPassword_input input{
@@ -553,15 +579,69 @@ background-color: transparent;
 		left: 135px;
 		
 	}
+
+	.forgotPassword span{
+		color: #337ab7;
+		cursor: pointer;
+		margin-left: 20px;
+	}
+	
+	/* .change_password_input [type=password]{
+		background-color: transparent;
+		border: none;
+		outline: none;
+		border-bottom:2px solid white;
+		color: white;
+		margin-top: 35px;
+		margin-left: 30px;
+} */
+
+.change_password_input{
+	margin-top: 40px;
+	margin-left: 30px;
+	
+}
+.change_password_input input{
+	border: none;
+	outline: none;
+	background-color: transparent;
+	color: white;
+	border-bottom:2px solid white;
+
+}
+
+.change_password_input span{
+	color: #3598dc;
+	cursor: pointer;
+}
+.oldpass_change .next{
+	margin-top: 50px;
+	margin-left: 260px;
 	
 
+}
+
+
+.newpass_change .cancel{
+	margin-left: 50px;
+	margin-top: 50px;
+	
+}
+.newpass_change .submit{
+	margin-left: 100px;
+	
+}
+
+
+
 .forgotPassword .next_btn{
-padding-left: 250px;
-padding-top: 30px;
+margin-left: 250px;
+margin-top: 30px;
+/* position: absolute; */
 }
 .forgotPassword .cancel_btns{
-	padding-left: 20px;
-	padding-top: 30px;
+	margin-left: 45px;
+	margin-top: 30px;
 	position: absolute;
 	
 }
@@ -586,13 +666,22 @@ padding-top: 30px;
 		
 	}
 
-	.forgotPassword .otp_next{
-		padding-left: 250px;
-		padding-top: 30px;
+	.otp_next .resend{
 		
-		
-		
+		margin-left: 30px;
+		margin-top: 30px;
+		position: absolute;
+	
 	}
+
+	.otp{
+		
+		margin-left: 250px;
+	margin-top: 30px;
+	
+	}
+
+ 
 
 	.forgotPassword .submit_next{
 		padding-left: 250px;
@@ -610,6 +699,20 @@ input[type=number] {
   -moz-appearance: textfield;
 }
 
+
+.wiz_cross{
+	color: black;
+	font-size: 28px;
+	cursor: pointer;
+	padding-right: 20px;
+
+
+}
+
+.timer{
+	color: white;
+	padding-left: 30px;
+}
 
 
 

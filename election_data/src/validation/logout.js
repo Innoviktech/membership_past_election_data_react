@@ -1,6 +1,7 @@
 import { event } from 'jquery';
 import React from 'react';
 import axiosInstance from '../axios';
+import { useHistory } from 'react-router-dom';
 // class Logout extends React.Component{
 
 //     componentDidMount(event) 
@@ -32,7 +33,9 @@ import axiosInstance from '../axios';
 //export default Logout;
 
 function Logout(event) {
-                axiosInstance.post('logout/blacklist/', {
+    
+   
+                axiosInstance.post(`logout/blacklist/`, {
         			refresh_token: localStorage.getItem('refresh_token'),
         		});
         		localStorage.removeItem('access_token');
@@ -42,8 +45,16 @@ function Logout(event) {
                 localStorage.removeItem('user');
                 localStorage.removeItem('username');
         		axiosInstance.defaults.headers['Authorization'] = null;
-        		window.location = './login';
-                event.preventDefault()
+             
+                    // let path = "/login";
+                    // let history = useHistory();
+                    // history.push("/login");
+                    window.location = "/login"
+                    // const history = useHistory();
+                    // history.push({
+                    //     pathname: '/login',
+                        
+                    //   });
    
 }
 export default Logout;
