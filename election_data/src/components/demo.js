@@ -74,3 +74,28 @@
 //   }
 // }
 // export default Demo;
+// import React from "react";
+// class Demo extends React.Component{
+
+
+//     componentDidMount(){
+//         const divi = document.createElement("div")
+//         divi.className = 'block-2';
+//         document.getElementById("division").appendChild(divi)
+//         //document.getElementsByClassName("abc").setAttribute("id","idval")
+//         document.getElementsByClassName("abc").setAttribute("id","idval")
+//     }
+//     render(){
+//         return(
+//             <div id="division">
+//                 <div className="abc">
+
+//                 </div>
+//                 <div className="xyz">
+
+//                 </div>
+//             </div>
+//         )
+//     }
+// }
+// export default Demo;

@@ -6,11 +6,11 @@ import FilterList from '@material-ui/icons/FilterList';
 import { forwardRef } from 'react';
 import Select from 'react-select';
 import PeopleIcon from '@material-ui/icons/People';
-import $ from 'jquery';
+import $, { event } from 'jquery';
 import axiosInstance from '../axios';
 import { Hidden } from '@material-ui/core';
 import MemberView from './member_view';
-
+import { FiFilter} from "react-icons/fi";
 import reactDom from 'react-dom';
 import {BrowserRouter as Router,Link,Switch,Route,Redirect} from 'react-router-dom';
 
@@ -33,6 +33,16 @@ const voting_verified = [
   { value: 'no', label: 'No' },
   { value: 'Need Attention', label: 'Need Attention' },
   
+];
+
+const ageFilter = [
+  { value: '==', label: 'Equal' },
+  { value: '!=', label: 'Not Equal' },
+  { value: '<', label: 'Less than' },
+  { value: '>', label: 'Greater than' },
+  { value: '<=', label: 'Less than or Equal' },
+  { value: '>=', label: 'Greater than or Equal' },
+  { value: '&&', label: 'In Between' },
 ];
 
 class MemberCount extends Component
@@ -90,18 +100,19 @@ class MemberCount extends Component
             imgs : false,
             id : "",
             material_view : false,
-           
+            ageFilterWizard : true,
+            ageFilter1 : true,
+            ageFilter2 : true,
+            ageFilterValue : [{label : '', value : ''}],
+            ageFilterInput1 : "",
+            ageFilterInput2 : "",
+            min : "",
+            member_data2 : [],
+            agefilterhide : true,
            
         }
     }
     componentDidMount() {
-      // const role =localStorage.getItem('role')
-      // console.log(role)
-      // if (role == 'is_superuser'){
-        
-      //   this.setState({ edit: !this.state.edit });
-      // }
-
       axiosInstance.get(`constituancy_name/`)
           .then(res => {
             console.log(res)
@@ -138,7 +149,8 @@ class MemberCount extends Component
       else{
           this.setState({admin_view:false})
       }
-
+      
+      
       }
 
       constituency_change = constituency_value => {
@@ -154,16 +166,15 @@ class MemberCount extends Component
         const holder = ""
         const holder1 = []
         this.setState({ polling_booth_value : holder });
-        this.setState({ member_data : holder1 });
-}
+        this.setState({ member_data : holder1,agefilterhide : true });
+      }
      
 polling_booth_change = polling_booth_value => {
-        this.setState({polling_booth_value});
+        this.setState({polling_booth_value,agefilterhide : false});
         const booth = polling_booth_value.value
         console.log(booth)
         this.change(booth)
-            
-        }
+      }
         
       
         change =(booth)=>{
@@ -177,7 +188,7 @@ polling_booth_change = polling_booth_value => {
         }).then((testing) => {
         const member_data=testing.data;
         console.log(member_data)
-          this.setState({ member_data });
+          this.setState({ member_data : member_data, member_data2 : member_data });
         });
                 
                 const holder1 = []
@@ -208,7 +219,7 @@ polling_booth_change = polling_booth_value => {
         let state1= rowData.state
          let state2 = rowData.state_id
          let values7 = [{label : state1, value : state2}]
-
+         
        
 
          this.setState({
@@ -443,10 +454,207 @@ handleSubmit = (event) => {
     
 }
 
+ageFilterChange = (value) =>{
+ this.setState({
+    ageFilterValue : value
+    
+  })
+  const vall = value.value
+  console.log(vall)
+  if(vall == '&&')
+  {
+   this.setState({
+     ageFilter1 : false,
+
+     ageFilter2  : false
+   })
+  }
+  else{
+    this.setState({
+      ageFilter1 : false,
+
+      ageFilter2  : true
+    })
+    
+  }
+const state1 = this.state.member_data2
+const holder  = ""
+this.setState({
+  
+  member_data : state1,
+  ageFilterInput1 : holder,
+  ageFilterInput2 : holder
+})
+document.getElementById("inputval1").value=""
+document.getElementById("inputval2").value=""
+  
+}
+
+
+
+
+ageFilter = ()=>{
+this.setState({
+  ageFilterWizard : false
+})
+}
+
+
+
+
+
+
+ageFilterInputChange = (event)=>{
+this.setState({
+  [event.target.name] : event.target.value
+})
+if(event.target.name == 'ageFilterInput1')
+{
+const val = event.target.value
+const strr = parseInt(val)
+console.log(typeof(strr))
+const minOne = strr+1;
+const state1 = this.state.member_data2
+this.setState({
+  min : minOne,
+  member_data : state1
+})
+}
+}
+
+ageFilterSubmit = (event)=>{
+  const ageFilterInputResult = this.state.ageFilterValue.value
+  console.log(ageFilterInputResult)
+  const materialResult = this.state.member_data
+  //console.log(materialResult.length)
+  const input1 = this.state.ageFilterInput1
+  const input1str = parseInt(input1)
+  console.log(typeof(input1str))
+  const input2 = this.state.ageFilterInput2
+  const input2str = parseInt(input2)
+  console.log(input2str)
+  const arr = []
+  for(var i = 0; i < materialResult.length; i++)
+  {
+    const results = materialResult[i]
+    const resAge = results.age
+    const resAgestr = parseInt(resAge)
+    console.log(typeof(resAgestr))
+    if(ageFilterInputResult == '==')
+  {
+    if(input1str == resAgestr)
+    {
+     arr.push(results)
+    }
+
+  }
+  if(ageFilterInputResult == '<=')
+  {
+   
+    if( resAgestr <= input1str)
+    {
+     arr.push(results)
+    }
+
+  }
+
+  if(ageFilterInputResult == '>=')
+  {
+   
+    if( resAgestr >= input1str)
+    {
+     arr.push(results)
+    }
+
+  }
+
+  if(ageFilterInputResult == '<')
+  {
+   
+    if( resAgestr < input1str)
+    {
+    arr.push(results)
+    
+    }
+
+  }
+
+  if(ageFilterInputResult == '>')
+  {
+   
+    if( resAgestr > input1str)
+    {
+     arr.push(results)
+    }
+
+  }
+
+  if(ageFilterInputResult == '!=')
+  {
+   
+    if( resAgestr != input1str)
+    {
+     arr.push(results)
+    }
+
+  }
+
+
+  if(ageFilterInputResult == '&&')
+  {
+   
+   
+    if( resAgestr >= input1str && resAgestr <= input2str)
+    {
+      // alert("fgb")
+     arr.push(results)
+    }
+
+  }
+
+  }
+  console.log(arr)
+  this.setState({member_data : arr})
+  //console.log(ageFilterInputResult)
+  event.preventDefault()
+}
+
+ageCancel = ()=>{
+  const data = this.state.member_data2
+  const holder = ""
+  this.setState({
+member_data : data,
+ageFilterWizard : true,
+ageFilter1 : true,
+ageFilter2 : true,
+ageFilterValue : holder
+  })
+
+}
+//compo = () =>{
+  // const age = this.state.polling_booth_value
+  // console.log(age)
+  //     console.log( age.length)
+  //       if(age.length == 0)
+  //       {
+  //        this.setState({
+  //          agefilterhide : true
+  //        })
+  //       }
+  //       else{
+  //         this.setState({
+  //           agefilterhide : false
+  //         })
+  //       }
+//}
 
 render()
     {
-      console.log(this.state.gender.value)
+      
+      console.log(this.state.polling_booth_value.label)
+      //console.log(this.state.member_data2)
+      //console.log(this.state.ageFilterValue)
+      //console.log(this.state.gender.value)
       //console.log(this.state.name_list)
       const { constituency_value } = this.state;
       const { polling_booth_value } = this.state;
@@ -484,6 +692,100 @@ render()
           />
           </div>
 </div>
+<div className="row">
+<div className="col-sm-12 lables">
+<button onClick={this.ageFilter} hidden={this.state.agefilterhide}>Age Filter<FiFilter /></button>
+</div>
+</div>
+
+<div className="row">
+  <div className="ageFilterWizard">
+
+  
+  <div className="col-sm-3 " hidden={this.state.ageFilterWizard}>
+  {/* <label>Age</label> */}
+  <Select className="age"
+            value={this.state.ageFilterValue}
+            onChange={value => this.ageFilterChange(value)}
+            options={ageFilter}
+            
+            
+          />
+</div>
+<form onSubmit={this.ageFilterSubmit}>
+<div  hidden={this.state.ageFilter1}>
+<div className="col-sm-3 lables">
+<input className="age" type="number"  id= "inputval1" name= "ageFilterInput1" placeholder="Enter Your Age" min="1" max="200" onChange={this.ageFilterInputChange}></input>
+</div>
+</div>
+
+
+<div hidden={this.state.ageFilter2}>
+<div className="col-sm-3 lables">
+
+<input className="age" type="number" id= "inputval2" name = "ageFilterInput2" placeholder="Enter your age" min="1" max="200"  onChange={this.ageFilterInputChange}></input>
+</div>
+</div>
+<div className="col-sm-1 lables" hidden={this.state.ageFilter1}>
+  <button>Submit</button>
+</div>
+</form>
+<div className="col-sm-1 lables" hidden={this.state.ageFilter1}>
+  <button onClick={this.ageCancel}>cancel</button>
+</div>
+{/* <div className="col-sm-4 lables" hidden={this.state.ageFilter1}>
+<input type="text"></input>
+</div>
+
+<div hidden={this.state.ageFilter2}>
+<div className="col-sm-4 lables">
+<input type="text"></input>
+<input type="text"></input>
+</div>
+</div> */}
+
+  
+  {/* <div  hidden={this.state.ageFilter1}>
+<div className="col-sm-12 lables">
+<input type="text"></input>
+</div>
+</div>
+
+
+<div className="row" hidden={this.state.ageFilter2}>
+<div className="col-sm-12 lables">
+
+<input type="text"></input>
+</div>
+</div> */}
+</div>
+</div>
+{/* <div className="row">
+  <div className="col-sm-12 lables" >
+  <label>Age</label>
+  <Select className="selects"
+            value={this.state.ageFilterValue}
+           onChange={this.ageFilterChange}
+            options={ageFilter}
+          />
+  </div>
+</div> */}
+
+
+{/* <div className="row" hidden={this.state.ageFilter1}>
+<div className="col-sm-12 lables">
+<input type="text"></input>
+</div>
+</div>
+
+
+<div className="row" hidden={this.state.ageFilter2}>
+<div className="col-sm-12 lables">
+<input type="text"></input>
+<input type="text"></input>
+</div>
+</div> */}
+
 
         
         <div className = "Member_name_list material" hidden={this.state.material_view}>
@@ -516,6 +818,7 @@ render()
       { title: "First Name",field:"member_id"},
       { title: "Voter List Part Number & Serial Number",field:"voter_id"},
       { title: "Street", field: "street"},
+      { title: "Age", field: "age"},
     
     ]}
             data={this.state.member_data}

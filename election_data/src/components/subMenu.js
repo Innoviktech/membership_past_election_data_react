@@ -18,7 +18,7 @@ export default function subMenu(){
           <Route path="/submenu/candidate" component={PartyCandidateName} />
           <Route path="/submenu/member" component={MemberCount} />
           <Route path="/submenu/grievance" component={Grievance} />
-          </Switch>
+         </Switch>
       </Router>
 
     </div>
