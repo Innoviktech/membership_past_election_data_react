@@ -1,0 +1,51 @@
+/* Firefox support */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #2c3e50 #f1f1f1;
+}
+
+body {
+  overflow-y: scroll;
+  scroll-snap-align: start; /* Ensures page starts at top */
+}
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 16px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Thumb */
+::-webkit-scrollbar-thumb {
+  background: #2c3e50;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #03065e;
+}
+
+/* Scrollbar buttons (up/down arrows) */
+::-webkit-scrollbar-button {
+  height: 16px;
+  background-color: #2c3e50;
+  display: block;
+}
+
+/* Top arrow */
+::-webkit-scrollbar-button:single-button:decrement {
+  background: #2c3e50 url("data:image/svg+xml;utf8,<svg fill='white' height='10' width='10' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M7 14l5-5 5 5z'/></svg>") no-repeat center;
+  background-size: 8px;
+  border-radius: 10px 10px 0 0;
+}
+
+/* Bottom arrow */
+::-webkit-scrollbar-button:single-button:increment {
+  background: #2c3e50 url("data:image/svg+xml;utf8,<svg fill='white' height='10' width='10' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>") no-repeat center;
+  background-size: 8px;
+  border-radius: 0 0 10px 10px;
+}
