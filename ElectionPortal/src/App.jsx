@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.scss'
 import SpinnerProvider from './Components/Spinner/SpinnerProvider'
 import { Outlet } from 'react-router-dom'
+import { MessageProvider } from './Components/MessageModel/MessageContext'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -25,7 +26,9 @@ function App() {
   return (
     <>
       <SpinnerProvider>
-        <Outlet />
+        <MessageProvider>
+          <Outlet />
+        </MessageProvider>
       </SpinnerProvider>
     </>
   )
