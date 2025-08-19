@@ -14,6 +14,10 @@ const url = {
     method: "GET",
     url: `${BASE_URL}/get_constituancy_by_district`,
   },
+  get_polling_booth_by_constituancy: {
+    method: "GET",
+    url: `${BASE_URL}/get_polling_booth_by_constituancy`,
+  },
   get_polling_booth: {
     method: "GET",
     url: `${BASE_URL}/get_polling_booth`,
