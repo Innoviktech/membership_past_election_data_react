@@ -81,6 +81,12 @@ const HeaderNavbar = () => {
             >
               Election Info
             </Link>
+            <Link 
+              to="/manifesto-promises" 
+              className={isActive('/manifesto-promises') ? 'active' : ''}
+            >
+              Manifesto Promises
+            </Link>
             {/* <Link 
               to="/results" 
               className={isActive('/results') ? 'active' : ''}
@@ -129,6 +135,13 @@ const HeaderNavbar = () => {
             onClick={() => setIsMobileMenuOpen(false)}
           >
             Election Info
+          </Link>
+          <Link 
+            to="/manifesto-promises" 
+            className={isActive('/manifesto-promises') ? 'active' : ''}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Manifesto Promises
           </Link>
           {/* <Link 
             to="/results" 

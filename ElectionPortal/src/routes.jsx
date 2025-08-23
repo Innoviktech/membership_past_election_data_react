@@ -1,5 +1,6 @@
 import { createHashRouter } from "react-router-dom";
 import VoterServices from "./Pages/VoterServices";
+import ManifestoPromises from "./Pages/ManifestoPromises";
 import { useEffect } from "react";
 import App from "./App";
 
@@ -24,6 +25,10 @@ const router = createHashRouter([
       {
         path: '/voter-services',
         element: <PageWithTitle element={<VoterServices />} title="Voter Services" />
+      },
+      {
+        path: '/manifesto-promises',
+        element: <PageWithTitle element={<ManifestoPromises />} title="Manifesto Promises" />
       }
     ]
   }

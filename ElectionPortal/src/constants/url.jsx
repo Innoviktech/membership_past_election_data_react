@@ -26,6 +26,26 @@ const url = {
     method: "GET",
     url: `${BASE_URL}/polling_station_editable_pdf`,
   },
+  getAllParty: {
+    method: "GET",
+    url: `${BASE_URL}/get_all_party`,
+  },
+  getAllElectionType: {
+    method: "GET",
+    url: `${BASE_URL}/get_all_election_type`,
+  },
+  getYearByElectionType: {
+    method: "GET",
+    url: `${BASE_URL}/get_year_by_election_type`,
+  },
+  getManifestoPromisesByParty: {
+    method: "POST",
+    url: `${BASE_URL}/get_manifesto_promises_by_party`,
+  },
+  getAllManifestoPromises: {
+    method: "POST",
+    url: `${BASE_URL}/get_all_manifesto_promises`,
+  },
   
 };
 
