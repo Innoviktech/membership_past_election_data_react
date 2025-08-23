@@ -13,10 +13,10 @@ const TreeItem = ({ label, count, children }) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="ml-4 mt-1">
+    <div className="ml-4 mt-1" style={{"margin-left":"30px"}}>
       <div
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1 cursor-pointer p-1 rounded hover:bg-gray-100"
+        className="flex items-center gap-1 cursor-pointer p-1 rounded hover:bg-gray-100" style={{"margin-left":"30px"}}
       >
         {children ? (
           open ? <ChevronDown size={16} /> : <ChevronRight size={16} />
@@ -78,97 +78,117 @@ const ManifestoPromises = () => {
             <div className="tree-view bg-white shadow-md rounded p-4">
               {manifesto.length === 0 && <p>No manifesto promises found.</p>}
               {manifesto.map((m) => (
-			  <TreeItem key={m.id} label={m.party_type} count={m.total_count}>
-				{m.elections?.map((e) => (
-				  <TreeItem key={e.id} label={e.election_type} count={e.count}>
-					{e.years?.map((y) => {
-					  // ✅ define datasource & columns inside for each y
-					  const dataSource = y.promises?.map((p, index) => ({
-						key: p.id,
-						no: index + 1,
-						title: p.title,
-						description: p.detail_description || "-",
-						status: p.status,
-					  }));
+				  <TreeItem key={m.id} label={m.party_type} count={m.total_count}>
+					{m.elections?.map((e) => (
+					  <TreeItem key={e.id} label={e.election_type} count={e.count} className="ml-4" >
+						{e.years?.map((y) => {
+						  // ✅ define datasource & columns inside for each y
+						  const dataSource = y.promises?.map((p, index) => ({
+							key: p.id,
+							no: index + 1,
+							title: p.title,
+							description: p.detail_description || "-",
+							status: p.status,
+						  }));
 
+							const groupedData = Object.values(
+							  y.promises?.reduce((acc, p, index) => {
+								if (!acc[p.title]) {
+								  acc[p.title] = {
+									key: p.title,
+									title: p.title,
+									children: [],
+								  };
+								}
+								acc[p.title].children.push({
+								  key: p.id,
+								  no: index + 1,
+								  description: p.detail_description || "-",
+								  status: p.status,
+								});
+								return acc;
+							  }, {})
+							);
+						  const columns = isMobile
+							? [
+								{
+								  title: "Details",
+								  key: "details",
+								  render: (_, record) => (
+									<div className="p-3 border rounded-lg shadow-sm bg-white mb-3">
+									  <p><strong>ID:</strong> {record.no}</p>
+									  <p><strong>Title:</strong> {record.title}</p>
+									  <p><strong>Description:</strong> {record.description}</p>
+									  <p>
+										<strong>Status:</strong>{" "}
+										<Tag
+										  color={
+											record.status === "Completed"
+											  ? "green"
+											  : record.status === "In Progress"
+											  ? "gold"
+											  : "gray"
+										  }
+										>
+										  {record.status}
+										</Tag>
+									  </p>
+									</div>
+								  ),
+								},
+							  ]
+							: [
+								{
+								  title: "ID",
+								  dataIndex: "no",
+								  key: "no",
+								},
+								{
+								  title: "Title",
+								  dataIndex: "title",
+								  key: "title",
+								},
+								{
+								  title: "Description",
+								  dataIndex: "description",
+								  key: "description",
+								},
+								{
+								  title: "Status",
+								  dataIndex: "status",
+								  key: "status",
+								  render: (status) => {
+									let color = "default";
+									if (status === "Completed") color = "green";
+									else if (status === "In Progress") color = "gold";
+									else color = "gray";
+									return <Tag color={color}>{status}</Tag>;
+								  },
+								},
+							  ];
 
-					  const columns = isMobile
-						? [
-							{
-							  title: "Details",
-							  key: "details",
-							  render: (_, record) => (
-								<div className="p-3 border rounded-lg shadow-sm bg-white mb-3">
-								  <p><strong>ID:</strong> {record.no}</p>
-								  <p><strong>Title:</strong> {record.title}</p>
-								  <p><strong>Description:</strong> {record.description}</p>
-								  <p>
-									<strong>Status:</strong>{" "}
-									<Tag
-									  color={
-										record.status === "Completed"
-										  ? "green"
-										  : record.status === "In Progress"
-										  ? "gold"
-										  : "gray"
-									  }
-									>
-									  {record.status}
-									</Tag>
-								  </p>
-								</div>
-							  ),
-							},
-						  ]
-						: [
-							{
-							  title: "ID",
-							  dataIndex: "no",
-							  key: "no",
-							},
-							{
-							  title: "Title",
-							  dataIndex: "title",
-							  key: "title",
-							},
-							{
-							  title: "Description",
-							  dataIndex: "description",
-							  key: "description",
-							},
-							{
-							  title: "Status",
-							  dataIndex: "status",
-							  key: "status",
-							  render: (status) => {
-								let color = "default";
-								if (status === "Completed") color = "green";
-								else if (status === "In Progress") color = "gold";
-								else color = "gray";
-								return <Tag color={color}>{status}</Tag>;
-							  },
-							},
-						  ];
-
-					  return (
-						<TreeItem key={y.id} label={y.year} count={y.count}>
-						  <Table
-							dataSource={dataSource}
-							columns={columns}
-							pagination={{
-							  responsive: true,
-							  showSizeChanger: false,
-							  className: "px-2 sm:px-4",
-							}}
-							className="mt-4 sm:mt-6"
-							scroll={{ x: true }}
-						  />
-						</TreeItem>
-					  );
-					})}
+						  return (
+							<TreeItem key={y.id} label={y.year} count={y.count}>
+							  <Table
+								dataSource={groupedData}
+								columns={columns}
+								pagination={{
+								  responsive: true,
+								  showSizeChanger: true,
+								  pageSize: 20,
+								  className: "px-2 sm:px-4",
+									showQuickJumper: true,
+									showTotal: (total, range) => `${range[0]}-${range[1]} of ${total} items`
+								}}
+								className="mt-4 sm:mt-6"
+								scroll={{ x: true }}
+							  />
+							</TreeItem>
+						  );
+						})}
+					  </TreeItem>
+					))}
 				  </TreeItem>
-				))}
-			  </TreeItem>
 			))}
 
             </div>
