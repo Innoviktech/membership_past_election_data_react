@@ -1,0 +1,23 @@
+
+/* Example for Material-UI TreeItem 
+tr:nth-child(odd) {
+  background-color: pink; 
+}
+
+tr:nth-child(even) {
+  background-color: #e0e0e0; 
+}*/
+/* Section header (title row) */
+.section-header td {
+  background-color: #dbeafe !important; /* light blue */
+  font-weight: bold;
+}
+
+/* Inside the section alternate rows */
+.section-row-light td {
+  background-color: #ffffff !important; /* white */
+}
+.section-row-dark td {
+  background-color: lightgray !important; /* light gray */
+}
+
