@@ -94,3 +94,69 @@ export const getPolingStationEditablePdf = createAsyncThunk(
         }
     }
 )
+
+export const getPdfPageCount = createAsyncThunk(
+    'dashboard/getPdfPageCount',
+    async (formData, { rejectWithValue }) => {
+        try {
+            const response = await axios.post(
+                url.pdf_page_count.url,
+                formData, // This should be FormData object
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                    timeout: 30000,
+                }
+            );
+            return response.data;
+        } catch (err) {
+            const error = err.response?.data?.error || 
+                         err.response?.data?.message || 
+                         err.message || 
+                         'Failed to get PDF page count';
+            return rejectWithValue(error);
+        }
+    }
+);
+
+export const convertUploadedPdf = createAsyncThunk(
+    'dashboard/convertUploadedPdf',
+    async (formData, { rejectWithValue }) => {
+        try {
+            const response = await axios.post(
+                url.upload_and_convert_pdfs.url,
+                formData, // This should be FormData object
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                    // timeout: 30000,
+                }
+            );
+            return response.data;
+        } catch (err) {
+            const error = err.response?.data?.error || 
+                         err.response?.data?.message || 
+                         err.message || 
+                         'Failed to get PDF page count';
+            return rejectWithValue(error);
+        }
+    }
+);
+
+// export const convertUploadedPdf = createAsyncThunk(
+//     'dashboard/convertUploadedPdf',
+//     async (arg, { rejectWithValue }) => {
+//         try {
+//             const response = await axios.post(
+//                 url.upload_and_convert_pdfs.url,
+//                 { data: arg }
+//             );
+//             return response.data;
+//         } catch (err) {
+//             const error = err.response?.data?.error || err.message;
+//             return rejectWithValue(error);
+//         }
+//     }
+// )

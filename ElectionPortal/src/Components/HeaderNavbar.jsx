@@ -69,17 +69,11 @@ const HeaderNavbar = () => {
         {/* Navigation Links - Desktop */}
         {isDesktop && (
           <nav className="navbar-links">
-            {/* <Link 
-              to="/voter-services" 
-              className={isActive('/voter-services') ? 'active' : ''}
+            <Link
+              to="/voter-services"
+              className={isActive('/') || isActive('/voter-services') ? 'active' : ''}
             >
-              Voter Services
-            </Link> */}
-            <Link 
-              to="/election-info" 
-              className={isActive('/election-info') ? 'active' : ''}
-            >
-              Election Info
+              Home
             </Link>
             <Link 
               to="/manifesto-promises" 
@@ -87,18 +81,24 @@ const HeaderNavbar = () => {
             >
               Manifesto Promises
             </Link>
-            {/* <Link 
-              to="/results" 
-              className={isActive('/results') ? 'active' : ''}
+            <Link 
+              to="/services" 
+              className={isActive('/services') ? 'active' : ''}
             >
-              Results
-            </Link> */}
-            {/* <Link 
-              to="/contact" 
-              className={isActive('/contact') ? 'active' : ''}
+              Services
+            </Link>
+            <Link 
+              to="/about" 
+              className={isActive('/about') ? 'active' : ''}
             >
-              Contact
-            </Link> */}
+              About
+            </Link>
+            <Link 
+              to="/help" 
+              className={isActive('/help') ? 'active' : ''}
+            >
+              Help
+            </Link>
           </nav>
         )}
 
@@ -122,19 +122,12 @@ const HeaderNavbar = () => {
           ref={mobileMenuRef}
           className="mobile-menu"
           aria-hidden={!isMobileMenuOpen}>
-          {/* <Link 
-            to="/voter-services" 
-            className={isActive('/voter-services') ? 'active' : ''}
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Voter Services
-          </Link> */}
-          <Link 
-            to="/election-info" 
-            className={isActive('/election-info') ? 'active' : ''}
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Election Info
+          <Link
+              to="/voter-services"
+              className={isActive('/') || isActive('/voter-services') ? 'active' : ''}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+            Home
           </Link>
           <Link 
             to="/manifesto-promises" 
@@ -143,20 +136,27 @@ const HeaderNavbar = () => {
           >
             Manifesto Promises
           </Link>
-          {/* <Link 
-            to="/results" 
-            className={isActive('/results') ? 'active' : ''}
+          <Link 
+            to="/services" 
+            className={isActive('/services') ? 'active' : ''}
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Results
-          </Link> */}
-          {/* <Link 
-            to="/contact" 
-            className={isActive('/contact') ? 'active' : ''}
+            Services
+          </Link>
+          <Link 
+            to="/about" 
+            className={isActive('/about') ? 'active' : ''}
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Contact
-          </Link> */}
+            About
+          </Link>
+          <Link 
+            to="/help" 
+            className={isActive('/help') ? 'active' : ''}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            Help
+          </Link>
         </nav>
       )}
       {/* Overlay for mobile */}

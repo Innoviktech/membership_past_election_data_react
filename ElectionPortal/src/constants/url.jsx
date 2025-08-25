@@ -26,6 +26,14 @@ const url = {
     method: "GET",
     url: `${BASE_URL}/polling_station_editable_pdf`,
   },
+  pdf_page_count: {
+    method: "POST",
+    url: `${BASE_URL}/pdf_page_count`,
+  },
+  upload_and_convert_pdfs: {
+    method: "POST",
+    url: `${BASE_URL}/upload_and_convert_pdfs`,
+  },
   getAllParty: {
     method: "GET",
     url: `${BASE_URL}/get_all_party`,
