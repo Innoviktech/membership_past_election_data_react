@@ -1,0 +1,741 @@
+/* .logout{
+  left:1200px;
+}
+
+.navbar-brand {
+  float: left;
+  height: 50px;
+  padding: 15px 15px;
+  font-size: 18px;
+  line-height: 20px;
+} */
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+	
+}
+.MuiTableHead-root th
+{
+font-size: 12px;
+}
+.MuiToolbar-root span
+{
+font-size: 15px;
+}
+.MuiInputBase-root input
+{
+font-size: 15px;
+}
+.MuiFormControl-root input{
+font-size: 15px;
+}
+a:link {
+text-decoration: none;
+}
+a:visited {
+text-decoration: none;
+
+}
+a:hover {
+text-decoration: none;
+}
+a:active {
+text-decoration: none;
+
+}
+a:focus
+{
+color: rgb(42, 99, 165);
+
+}
+
+
+body {
+	
+	
+	font-family: 'Roboto', sans-serif;
+	color: black;
+	
+}
+.form-control {
+	height: 41px;
+	background: #f2f2f2;
+	box-shadow: none !important;
+	border: none;
+}
+.form-control:focus {
+	background: #e2e2e2;
+}
+.form-control, .btn {        
+	border-radius: 3px;
+}
+.signup-form {
+	width: 400px;
+	margin: auto;
+	position: relative;
+
+}
+.profiles{
+	width: 200px;
+	float: right;
+	position: relative;
+
+}
+.signup-form form {
+	color :#337ab7;
+	background: transparent;
+	padding-left: 15px;
+}
+.signup-form form span{
+	color: red;
+}
+
+.signup-form h2  {
+	color: white;
+	font-weight: bold;
+	margin-top: 0;
+	
+}
+
+
+.signup-form hr  {
+	margin: 0 -10px 20px;
+} 
+
+.signup-form .form-group {
+	margin-bottom: 20px;
+}
+
+.signup-form .row div:first-child {
+	padding-right: 10px;
+}
+.signup-form .row div:last-child {
+	padding-left: 10px;
+}
+.signup-form .btn {        
+	font-size: 16px;
+	font-weight: bold;
+	background: #3598dc;
+	border: none;
+	min-width: 140px;
+}
+.signup-form .btn:hover, .signup-form .btn:focus {
+	background: #2389cd !important;
+	outline: none;
+}
+.signup-form a {
+	color: #fff;
+	text-decoration: underline;
+}
+.signup-form a:hover {
+	text-decoration: none;
+}
+.signup-form form a {
+	color:#3598dc;
+	text-decoration: none;
+
+}	
+
+.signup-form .hint-text  {
+	padding-bottom: 15px;
+	text-align: center;
+}
+
+  
+  .container {
+	width: 65%;
+	height: 25vh;
+	top: 10%;
+	left: 10%;
+  }
+  
+  .sigContainer {
+	width: 30%;
+	height: 80%;
+	margin: 0 auto;
+	background-color: #fff;
+  }
+  
+  .sigPad {
+	width: 100%;
+	height: 100%;
+  }
+  
+  .buttons {
+	width: 100%;
+	height: 30px;
+  }
+  
+  .sigImage {
+	background-size: 200px 50px;
+	width: 200px;
+	height: 50px;
+	background-color: white;
+  }
+
+  .row{
+	  font-size: large;
+  }
+  
+
+.form-view{
+	padding-left: 22px;
+	padding-top: 30px;
+	
+
+}
+.select{
+	width: 250px;
+	
+	
+}
+/* .css-107lb6w-singleValue{
+
+	color: red;
+} */
+.edit{
+	outline: none;
+	border: none;
+	
+
+}
+.row label{
+	color: #337ab7;
+}
+.imagess{
+	height: 200px;
+	width: 200px;
+
+	margin: auto;
+}
+ .imagess .profile{
+	
+	height: 150px;
+	width: 150px; 
+	background-color: white;
+	border: #333;
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.profile:hover{
+	opacity: 0.7;
+	
+}
+.view_img{
+	height: 500px;
+	width: 500px;
+	background-color: white;
+	border: #333;
+	margin: auto;
+	overflow: hidden;
+	
+} 
+.modal-content, #caption {  
+	-animation-name: zoom;
+	-animation-duration: 0.6s;
+	animation-name: zoom;
+	animation-duration: 2.6s;
+  }
+/* .thumb {
+    height: 100px;
+    width: 100px;
+	position: absolute;
+
+} */
+/* .data
+{
+
+	height: 530px;
+	width: 100%;
+ 
+  background-color:#337ab7;
+  position: relative;
+  bottom: 530px;
+} */
+.form-group span{
+	color: red;
+}
+/* .new{
+	border: none;} */
+	.area {
+		border: none;
+		background-color: transparent;
+		resize: none;
+		outline: none;
+	}
+
+	.wizard {
+		
+		margin-top: 20px;
+		background-color:#bfd0df;
+	
+		
+		
+		}
+	  .close{
+		
+		 position: absolute;
+		
+		 color: black;
+	font-size: 35px;
+	cursor: pointer;
+	
+		 
+	  }
+
+	  .cont .imgs{
+		/* content:''; */
+    
+		background-position: center; 
+		background-repeat: no-repeat;
+		background-size: cover;
+		filter: brightness(20%);
+	
+		
+		width: 100%;
+		height: 100%;
+		position: fixed;
+	  top: 0;
+	  left: 0;
+	}
+	.heading{
+		height: 70px;
+		width: 100%;
+		background-color:transparent;
+		/* border: none; */
+	}
+	
+	.menuss a{
+		/* color: #337ab7; */
+		font-weight: 500;
+		font-size: 20px;
+		color: white;
+		position: relative;
+		
+	}
+	.menuss span{
+		color: white;
+		margin-right: 10px;
+		cursor: pointer;
+	}
+	.uname{
+		color: white;
+	}
+	.uname span {
+		color: #3598dc;
+	}
+	
+	.submenu a{
+		
+		
+		font-family:fantasy;
+	}
+
+	.lables label{
+		color: white;
+		margin-left: 10px;
+		margin-top: 10px;
+	}
+
+	.lables button{
+		
+		margin-left: 10px;
+		margin-top: 10px;
+	}
+
+
+	.ageFilterWizard{
+		height: auto;
+		width: 100%;
+		/* margin-top: 10px; */
+		margin-left: 10px;
+		/* background-color: red;
+		 */
+	}
+.age{
+	margin-top: 10px;
+	margin-right: 20px;
+	
+}
+
+	.selects{
+	margin-left: 10px;
+	margin-right: 10px;
+	padding-top: 10px;
+	}
+	.material{
+		margin-left: 10px;
+		margin-right: 10px;
+		padding-top: 20px;
+		}
+	.logout a{
+		
+		font-size: 15px;
+		color: #df2525;
+		margin-right: 10px;
+		cursor: pointer;
+		
+	}
+	div.heading{
+	padding-top: 10px;
+	padding-left: 12px;
+	}
+	
+	.menu{
+		height: 100px;
+		width: 100%;
+	}
+
+	.menu a{
+		position: relative;
+		top: 10px;
+		font-size: 20px;
+		font-weight: 600;
+	}
+	.form-group button {
+		color: black;
+		padding-bottom: 20px;
+	}
+
+	.signup-form form .form-group a{
+		font-size: 12px;
+		
+	}
+	.reg_click{
+		padding-left: 20px;
+		
+	}
+
+	input {
+		color: black;
+		width: 250px;
+		background-color: white;
+	}
+	.ques{
+		color: white;
+		
+		padding-top: 20px;
+	
+	}
+	.survey{
+		
+		padding-top: 20px;
+	}
+	.text_area{
+		width: 100%;
+		background-color: transparent;
+		color: white;
+	}
+	.ques_label label{
+		font-size: 20px;
+		font-weight: 700;
+		
+	}
+	.ques_label span{
+		color: white;
+		cursor: pointer;
+		padding-left: 8px;
+		
+	}
+	.ques{
+		padding-left: 10px;
+		color:white;
+	}
+	.question{
+		padding-left: 12px;
+	}
+	.login_input input{
+		background-color: transparent;
+		border: none;
+		outline: none;
+		border-bottom:2px solid white;
+		color: white;
+		
+	}
+	.login_btn{
+		height: 30px;
+		width: 100px;
+		border-radius: 10px;
+	}
+	select{
+		position: relative;
+		
+		color:black;
+		width: 150px;
+		height: 30px;
+		
+	}
+
+	textarea{
+
+		position: relative;
+		background-color: transparent;
+		color: white;
+		
+	}
+	.rm_icon{
+		
+		color: #fff;
+		
+	}
+	
+/* .Change_pass {
+	
+	position: absolute;
+	background-color: white;
+	width: 380px;
+}
+.Change_pass #password{
+background-color: transparent;
+		border: none;
+		outline: none;
+		border-bottom:2px solid black;
+}
+
+.topnav span{
+	color: white;
+}*/
+
+
+.forgotPassword{
+	height: 280px;
+	width: 350px;
+	margin: auto;
+	position: relative;
+	background-color: transparent;
+	/* background-color: red;  */
+  	/* background-image: linear-gradient(to right, #4dd2ff ,#99ffcc);
+  	 */
+	border-style: solid;
+  	border-color:white;
+
+}
+.forgotPassword h3{
+	color: white;
+	font-size: 25px;
+	text-align: center;
+	text-decoration: underline;
+}
+.forgotPassword label{
+	color: #337ab7;
+	font-size: 20px;
+	margin-left: 25px;
+	padding-top: 15px;
+}
+.forgotPassword_input input{
+		background-color: transparent;
+		border: none;
+		outline: none;
+		border-bottom:2px solid white;
+		color: white;
+		
+		position: relative;
+		left: 15px;
+		
+	}
+	.forgotPassword_input1  {
+		width: 30px;
+		background-color: transparent;
+		border: none;
+		outline: none;
+		border-bottom:2px solid white;
+		color: white;
+		position: relative;
+		left: 35px;
+		
+	}
+	.forgotPassword_input2  {
+		width: 30px;
+		background-color: transparent;
+		border: none;
+		outline: none;
+		border-bottom:2px solid white;
+		color: white;
+		position: relative;
+		left: 55px;
+		
+	}
+	.forgotPassword_input3  {
+		width: 30px;
+		background-color: transparent;
+		border: none;
+		outline: none;
+		border-bottom:2px solid white;
+		color: white;
+		position: relative;
+		left: 75px;
+		
+	}
+	.forgotPassword_input4  {
+		width: 30px;
+		background-color: transparent;
+		border: none;
+		outline: none;
+		border-bottom:2px solid white;
+		color: white;
+		position: relative;
+		left: 95px;
+		
+	}
+	.forgotPassword_input5  {
+		width: 30px;
+		background-color: transparent;
+		border: none;
+		outline: none;
+		border-bottom:2px solid white;
+		color: white;
+		position: relative;
+		left: 115px;
+		
+	}
+	.forgotPassword_input6  {
+		width: 30px;
+		background-color: transparent;
+		border: none;
+		outline: none;
+		border-bottom:2px solid white;
+		color: white;
+		position: relative;
+		left: 135px;
+		
+	}
+
+	.forgotPassword span{
+		color: #337ab7;
+		cursor: pointer;
+		margin-left: 20px;
+	}
+	
+	/* .change_password_input [type=password]{
+		background-color: transparent;
+		border: none;
+		outline: none;
+		border-bottom:2px solid white;
+		color: white;
+		margin-top: 35px;
+		margin-left: 30px;
+} */
+
+.change_password_input{
+	margin-top: 40px;
+	margin-left: 30px;
+	
+}
+.change_password_input input{
+	border: none;
+	outline: none;
+	background-color: transparent;
+	color: white;
+	border-bottom:2px solid white;
+
+}
+
+.change_password_input span{
+	color: #3598dc;
+	cursor: pointer;
+}
+.oldpass_change .next{
+	margin-top: 50px;
+	margin-left: 260px;
+	
+
+}
+
+
+.newpass_change .cancel{
+	margin-left: 50px;
+	margin-top: 50px;
+	
+}
+.newpass_change .submit{
+	margin-left: 100px;
+	
+}
+
+
+
+.forgotPassword .next_btn{
+margin-left: 250px;
+margin-top: 30px;
+/* position: absolute; */
+}
+.forgotPassword .cancel_btns{
+	margin-left: 45px;
+	margin-top: 30px;
+	position: absolute;
+	
+}
+.forgotPassword .input{
+	background-color: transparent;
+		border: none;
+		outline: none;
+		border-bottom:2px solid white;
+		color: white;
+		
+		position: relative;
+		left: 15px;
+		
+	
+}
+.forgotPassword .otp_prev{
+		padding-left: 30px;
+		padding-top: 20px;
+		position: absolute;
+		color: white;
+		cursor: pointer;
+		
+	}
+
+	.otp_next .resend{
+		
+		margin-left: 30px;
+		margin-top: 30px;
+		position: absolute;
+	
+	}
+
+	.otp{
+		
+		margin-left: 250px;
+	margin-top: 30px;
+	
+	}
+
+ 
+
+	.forgotPassword .submit_next{
+		padding-left: 250px;
+		padding-top: 20px;
+	
+	}
+
+	input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+
+.wiz_cross{
+	color: black;
+	font-size: 28px;
+	cursor: pointer;
+	padding-right: 20px;
+
+
+}
+
+.timer{
+	color: white;
+	padding-left: 30px;
+}
+
+
+
+
+	  
