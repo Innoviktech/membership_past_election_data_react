@@ -8,6 +8,8 @@ import { useMessage } from "../Components/MessageModel/useMessage";
 import HeaderNavbar from "../Components/HeaderNavbar";
 import LoadingModal from "../Components/LoadingModal/LoadingModal";
 
+import "./ManifestoPromises.scss";
+
 // 🔹 Reusable Tree Component
 const TreeItem = ({ label, count, children }) => {
   const [open, setOpen] = useState(false);
@@ -93,22 +95,36 @@ const ManifestoPromises = () => {
 
 							const groupedData = Object.values(
 							  y.promises?.reduce((acc, p, index) => {
-								if (!acc[p.title]) {
-								  acc[p.title] = {
-									key: p.title,
+								const groupKey = `${y.id}::${p.title}`;
+
+								if (!acc[groupKey]) {
+								  const groupIndex = Object.keys(acc).length; // section index
+								  acc[groupKey] = {
+									key: groupKey,
 									title: p.title,
+									__isGroup: true,
+									__groupIndex: groupIndex,
 									children: [],
 								  };
 								}
-								acc[p.title].children.push({
+
+								const localRowIndex = acc[groupKey].children.length; // index within this group
+
+								acc[groupKey].children.push({
 								  key: p.id,
 								  no: index + 1,
 								  description: p.detail_description || "-",
 								  status: p.status,
+								  __isLeaf: true,
+								  __groupIndex: acc[groupKey].__groupIndex,
+								  __localIndex: localRowIndex, // 🔹 index inside the section
 								});
+
 								return acc;
 							  }, {})
 							);
+
+							
 						  const columns = isMobile
 							? [
 								{
@@ -116,10 +132,10 @@ const ManifestoPromises = () => {
 								  key: "details",
 								  render: (_, record) => (
 									<div className="p-3 border rounded-lg shadow-sm bg-white mb-3">
-									  <p><strong>ID:</strong> {record.no}</p>
-									  <p><strong>Title:</strong> {record.title}</p>
-									  <p><strong>Description:</strong> {record.description}</p>
-									  <p>
+									    {record.no && (<p><strong>S.No:</strong> {record.no}</p>)}
+										{record.title && (<p><strong>Title:</strong> {record.title}</p>)}
+										{record.description && (<p><strong>Description:</strong> {record.description}</p>)}
+									  {record.status && (<p>
 										<strong>Status:</strong>{" "}
 										<Tag
 										  color={
@@ -132,14 +148,14 @@ const ManifestoPromises = () => {
 										>
 										  {record.status}
 										</Tag>
-									  </p>
+									  </p>)}
 									</div>
 								  ),
 								},
 							  ]
 							: [
 								{
-								  title: "ID",
+								  title: "S.No",
 								  dataIndex: "no",
 								  key: "no",
 								},
@@ -182,6 +198,21 @@ const ManifestoPromises = () => {
 								}}
 								className="mt-4 sm:mt-6"
 								scroll={{ x: true }}
+								  rowClassName={(record) => {
+									// If it is a group header
+									if (record.__isGroup) {
+									  return "section-header";
+									}
+
+									// If it is a leaf row inside a section
+									if (record.__isLeaf) {
+									  return record.__localIndex % 2 === 0
+										? "section-row-light"
+										: "section-row-dark";
+									}
+
+									return "";
+								  }}
 							  />
 							</TreeItem>
 						  );
