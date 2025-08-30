@@ -7,6 +7,7 @@ import SpinnerService from "../Components/Spinner/SpinnerService";
 import { useMessage } from "../Components/MessageModel/useMessage";
 import HeaderNavbar from "../Components/HeaderNavbar";
 import LoadingModal from "../Components/LoadingModal/LoadingModal";
+import { useTranslation } from '../Components/LanguageSwitch/useTranslation';
 
 import "./ManifestoPromises.scss";
 
@@ -44,6 +45,7 @@ const ManifestoPromises = () => {
   const [manifesto, setManifesto] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const { t } = useTranslation();
   
   const { useBreakpoint } = Grid;
   const screens = useBreakpoint();
@@ -74,11 +76,11 @@ const ManifestoPromises = () => {
       <div className="main-container p-4">
         <main className="main-content">
           <div className="content-wrapper w-full md:w-11/12 lg:w-10/12 xl:w-9/12 mx-auto">
-            <center><h2 className="text-xl font-bold mb-4">Manifesto Promises</h2></center>
+            <center><h2 className="text-xl font-bold mb-4">{t('MANIFESTO.ManifestoPromises')}</h2></center>
 
             {/* Tree View */}
             <div className="tree-view bg-white shadow-md rounded p-4">
-              {manifesto.length === 0 && <p>No manifesto promises found.</p>}
+              {manifesto.length === 0 && <p>{t('MANIFESTO.NoManifestoPromises')}</p>}
               {manifesto.map((m) => (
 				  <TreeItem key={m.id} label={m.party_type} count={m.total_count}>
 					{m.elections?.map((e) => (
@@ -132,11 +134,11 @@ const ManifestoPromises = () => {
 								  key: "details",
 								  render: (_, record) => (
 									<div className="p-3 border rounded-lg shadow-sm bg-white mb-3">
-									    {record.no && (<p><strong>S.No:</strong> {record.no}</p>)}
-										{record.title && (<p><strong>Title:</strong> {record.title}</p>)}
-										{record.description && (<p><strong>Description:</strong> {record.description}</p>)}
+									    {record.no && (<p><strong>{t('MANIFESTO.SNo')}:</strong> {record.no}</p>)}
+										{record.title && (<p><strong>{t('MANIFESTO.Title')}:</strong> {record.title}</p>)}
+										{record.description && (<p><strong>{t('MANIFESTO.Description')}:</strong> {record.description}</p>)}
 									  {record.status && (<p>
-										<strong>Status:</strong>{" "}
+										<strong>{t('MANIFESTO.Status')}:</strong>{" "}
 										<Tag
 										  color={
 											record.status === "Completed"
@@ -155,22 +157,22 @@ const ManifestoPromises = () => {
 							  ]
 							: [
 								{
-								  title: "S.No",
+								  title: t('MANIFESTO.SNo'),
 								  dataIndex: "no",
 								  key: "no",
 								},
 								{
-								  title: "Title",
+								  title: t('MANIFESTO.Title'),
 								  dataIndex: "title",
 								  key: "title",
 								},
 								{
-								  title: "Description",
+								  title: t('MANIFESTO.Description'),
 								  dataIndex: "description",
 								  key: "description",
 								},
 								{
-								  title: "Status",
+								  title: t('MANIFESTO.Status'),
 								  dataIndex: "status",
 								  key: "status",
 								  render: (status) => {

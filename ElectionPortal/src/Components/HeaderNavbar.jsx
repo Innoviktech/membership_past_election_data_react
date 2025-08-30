@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import './HeaderNavbar.scss'; // Create this CSS file
+import './HeaderNavbar.scss';
+import LanguageDropdown from './LanguageSwitch/LanguageDropdown';
+import { useTranslation } from './LanguageSwitch/useTranslation';
 
 const HeaderNavbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -8,6 +10,7 @@ const HeaderNavbar = () => {
   const location = useLocation();
   const mobileMenuRef = useRef(null);
   const menuButtonRef = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -63,57 +66,65 @@ const HeaderNavbar = () => {
 
         {/* Centered Title */}
         <div className="navbar-title">
-          <h1>ELECTION PORTAL</h1>
+          <h1>{t('NAVBAR.AppName')}</h1>
         </div>
 
-        {/* Navigation Links - Desktop */}
-        {isDesktop && (
-          <nav className="navbar-links">
-            <Link
-              to="/voter-services"
-              className={isActive('/') || isActive('/voter-services') ? 'active' : ''}
-            >
-              Home
-            </Link>
-            <Link 
-              to="/manifesto-promises" 
-              className={isActive('/manifesto-promises') ? 'active' : ''}
-            >
-              Manifesto Promises
-            </Link>
-            <Link 
-              to="/services" 
-              className={isActive('/services') ? 'active' : ''}
-            >
-              Services
-            </Link>
-            <Link 
-              to="/about" 
-              className={isActive('/about') ? 'active' : ''}
-            >
-              About
-            </Link>
-            <Link 
-              to="/help" 
-              className={isActive('/help') ? 'active' : ''}
-            >
-              Help
-            </Link>
-          </nav>
-        )}
+        {/* Right Section: Language Toggle and Navigation/Menu */}
+        <div className="navbar-right">
+          {/* Language Toggle */}
+          <div className="navbar-language">
+            <LanguageDropdown />
+          </div>
 
-        {/* Mobile Menu Button */}
-        {!isDesktop && (
-          <button 
-            ref={menuButtonRef}
-            className="mobile-menu-button"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-expanded={isMobileMenuOpen}
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? '✕' : '☰'}
-          </button>
-        )}
+          {/* Navigation Links - Desktop */}
+          {isDesktop && (
+            <nav className="navbar-links">
+              <Link
+                to="/voter-services"
+                className={isActive('/') || isActive('/voter-services') ? 'active' : ''}
+              >
+                {t('NAVBAR.Home')}
+              </Link>
+              <Link 
+                to="/manifesto-promises" 
+                className={isActive('/manifesto-promises') ? 'active' : ''}
+              >
+                {t('NAVBAR.ManifestoPromises')}
+              </Link>
+              <Link 
+                to="/services" 
+                className={isActive('/services') ? 'active' : ''}
+              >
+                {t('NAVBAR.Services')}
+              </Link>
+              <Link 
+                to="/about" 
+                className={isActive('/about') ? 'active' : ''}
+              >
+                {t('NAVBAR.About')}
+              </Link>
+              <Link 
+                to="/help" 
+                className={isActive('/help') ? 'active' : ''}
+              >
+                {t('NAVBAR.Help')}
+              </Link>
+            </nav>
+          )}
+
+          {/* Mobile Menu Button */}
+          {!isDesktop && (
+            <button 
+              ref={menuButtonRef}
+              className="mobile-menu-button"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-expanded={isMobileMenuOpen}
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? '✕' : '☰'}
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Mobile Menu Dropdown */}
@@ -127,35 +138,35 @@ const HeaderNavbar = () => {
               className={isActive('/') || isActive('/voter-services') ? 'active' : ''}
               onClick={() => setIsMobileMenuOpen(false)}
             >
-            Home
+            {t('NAVBAR.Home')}
           </Link>
           <Link 
             to="/manifesto-promises" 
             className={isActive('/manifesto-promises') ? 'active' : ''}
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Manifesto Promises
+            {t('NAVBAR.ManifestoPromises')}
           </Link>
           <Link 
             to="/services" 
             className={isActive('/services') ? 'active' : ''}
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Services
+            {t('NAVBAR.Services')}
           </Link>
           <Link 
             to="/about" 
             className={isActive('/about') ? 'active' : ''}
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            About
+            {t('NAVBAR.About')}
           </Link>
           <Link 
             to="/help" 
             className={isActive('/help') ? 'active' : ''}
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Help
+            {t('NAVBAR.Help')}
           </Link>
         </nav>
       )}

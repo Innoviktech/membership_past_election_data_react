@@ -5,6 +5,7 @@ import './App.scss'
 import SpinnerProvider from './Components/Spinner/SpinnerProvider'
 import { Outlet } from 'react-router-dom'
 import { MessageProvider } from './Components/MessageModel/MessageContext'
+import { LanguageProvider } from './Components/LanguageSwitch/LanguageContext'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -26,9 +27,11 @@ function App() {
   return (
     <>
       <SpinnerProvider>
-        <MessageProvider>
-          <Outlet />
-        </MessageProvider>
+        <LanguageProvider>
+          <MessageProvider>
+            <Outlet />
+          </MessageProvider>
+        </LanguageProvider>
       </SpinnerProvider>
     </>
   )
