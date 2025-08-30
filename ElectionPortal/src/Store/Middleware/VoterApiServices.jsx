@@ -1,4 +1,5 @@
-import axios from "axios";
+// import axios from "axios";
+import axios from "../../Auth/AxiosIntercepto";
 import url from "../../constants/url";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -106,7 +107,7 @@ export const getPdfPageCount = createAsyncThunk(
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },
-                    timeout: 30000,
+                    // timeout: 30000,
                 }
             );
             return response.data;
@@ -145,18 +146,18 @@ export const convertUploadedPdf = createAsyncThunk(
     }
 );
 
-// export const convertUploadedPdf = createAsyncThunk(
-//     'dashboard/convertUploadedPdf',
-//     async (arg, { rejectWithValue }) => {
-//         try {
-//             const response = await axios.post(
-//                 url.upload_and_convert_pdfs.url,
-//                 { data: arg }
-//             );
-//             return response.data;
-//         } catch (err) {
-//             const error = err.response?.data?.error || err.message;
-//             return rejectWithValue(error);
-//         }
-//     }
-// )
+export const storePaymentDetails = createAsyncThunk(
+    'dashboard/storePaymentDetails',
+    async (arg, { rejectWithValue }) => {
+        try {
+            const response = await axios.post(
+                url.store_payment_details.url,
+                arg
+            );
+            return response.data;
+        } catch (err) {
+            const error = err.response?.data?.error || err.message;
+            return rejectWithValue(error);
+        }
+    }
+)

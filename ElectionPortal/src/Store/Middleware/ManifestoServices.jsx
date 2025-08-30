@@ -1,4 +1,5 @@
-import axios from "axios";
+// import axios from "axios";
+import axios from "../../Auth/AxiosIntercepto";
 import url from "../../constants/url";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
