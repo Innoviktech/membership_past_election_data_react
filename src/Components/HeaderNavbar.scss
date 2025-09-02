@@ -1,0 +1,348 @@
+/* Base Styles */
+.navbar {
+  background-color: #2c3e50;
+  color: white;
+  padding: 1.5rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 1100;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+//   max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Right Section Container */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  // gap: 1.5rem;
+  z-index: 2;
+}
+
+.navbar-language {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo img {
+  height: 50px;
+  width: auto;
+}
+
+.navbar-title {
+  position: absolute;
+  left: 16%;
+  letter-spacing: 2px;
+  transform: translateX(-50%);
+}
+
+.navbar-title h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+}
+
+/* Desktop Navigation */
+.navbar-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navbar-links a:hover {
+  color: #46acef;
+}
+
+/* Active link styles */
+.navbar-links a.active,
+.mobile-menu a.active {
+  color: #3498db;
+  font-weight: bold;
+  position: relative;
+}
+
+/* Optional: Add an underline indicator */
+.navbar-links a.active::after,
+.mobile-menu a.active::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #3498db;
+}
+
+/* Desktop specific active styles */
+.navbar-links a.active {
+  padding-bottom: 5px;
+}
+
+/* Mobile Navigation */
+.mobile-menu-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1001;
+  
+  &:active, &:focus {
+    color: #3498db;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+.mobile-menu {
+  display: flex;
+  flex-direction: column;
+  background-color: #2c3e50;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 80px; /* Adjust based on your navbar height */
+  z-index: 1100;
+  transform: translateY(-150%);
+  transition: transform 0.3s ease;
+}
+
+.mobile-menu[aria-hidden="false"] {
+  transform: translateY(0);
+}
+
+.mobile-menu a {
+  color: white;
+  text-decoration: none;
+  padding: 1rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.mobile-menu a:hover {
+  background-color: #445c74;
+}
+
+.toggle-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: 900;
+}
+
+.language-toggle {
+  display: flex;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1.125rem; // 18px
+  padding: 0.5rem;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+  
+  &:hover::before {
+    transform: scaleX(1);
+  }
+  
+  .language-option {
+    position: relative;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+    
+    &:hover {
+      color: #3b82f6;
+      
+      &::after {
+        width: 80%;
+      }
+    }
+    
+    &.active {
+      font-weight: 600;
+      color: #3b82f6;
+      background: rgba(255, 255, 255, 0.8);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      
+      &::after {
+        width: 80%;
+      }
+    }
+  }
+  
+  .divider {
+    color: #ced4da;
+    margin: 0 0.5rem;
+    position: relative;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      bottom: -4px;
+      width: 1px;
+      background: #dee2e6;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+}
+
+// Animation for language switch
+@keyframes languagePulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.language-option {
+  animation: languagePulse 0.3s ease-out;
+}
+
+// RTL support for Tamil
+[dir="rtl"] .language-toggle {
+  flex-direction: row-reverse;
+}
+
+// Responsive design
+@media (max-width: 640px) {
+  .language-toggle {
+    font-size: 1rem;
+    
+    .language-option {
+      padding: 0.4rem 0.8rem;
+    }
+  }
+}
+
+// Dark mode support
+@media (prefers-color-scheme: dark) {
+  .language-toggle {
+    background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    
+    .language-option {
+      color: #e2e8f0;
+      
+      &:hover {
+        color: #3b82f6;
+      }
+      
+      &.active {
+        color: #3b82f6;
+        background: rgba(255, 255, 255, 0.1);
+      }
+    }
+    
+    .divider {
+      color: #718096;
+      
+      &::before {
+        background: #4a5568;
+      }
+    }
+  }
+}
+
+// Focus states for accessibility
+.language-option:focus {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .navbar-links {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+  }
+
+  .navbar-title {
+    position: absolute;
+    left: 41%;
+    letter-spacing: 1px;
+    transform: translateX(-50%);
+  }
+  
+  .navbar-title h1 {
+    font-size: 1.2rem;
+  }
+  
+  .navbar-logo img {
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-title h1 {
+    font-size: 1rem;
+  }
+  
+  .mobile-menu {
+    top: 70px; /* Adjust for smaller navbar height */
+  }
+}

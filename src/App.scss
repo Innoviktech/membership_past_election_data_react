@@ -1,0 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'sans-serif', 'Noto Sans Tamil', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+body {
+  padding-top: 104px;
+}
+
+@media (max-width: 768px) {
+  body {
+  padding-top: 82px;
+}
+}
