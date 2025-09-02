@@ -35,7 +35,7 @@ export default {
     NoConstituenciesFound: "தொகுதிகள் எதுவும் கிடைக்கவில்லை",
     SearchPollingBooths: "வாக்குச்சாவடிகளைத் தேடு...",
     NoPollingBoothsFound: "வாக்குச்சாவடிகள் எதுவும் கிடைக்கவில்லை",
-    UploadConvertToEditable: "பதிவேற்றி, தொகுக்கக்கூடிய கோப்பாக மாற்று",
+    UploadConvertToEditable: "பட அடிப்படையிலான PDF-ஐ பதிவேற்றி, திருத்தக்கூடிய PDF-ஆக மாற்றவும்.",
     ChooseFileTitle: "கோப்பைத் தேர்ந்தெடு அல்லது இங்கே இழுத்து விடு",
     SupportsPDF: "10MB வரை PDF மட்டுமே ஆதரவு",
     ChooseFile: "கோப்புகளைத் தேர்ந்தெடு",

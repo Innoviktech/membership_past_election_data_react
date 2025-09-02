@@ -36,7 +36,7 @@ export default {
     NoConstituenciesFound: "No constituencies found",
     SearchPollingBooths: "Search polling booths...",
     NoPollingBoothsFound: "No polling booths found",
-    UploadConvertToEditable: "Upload & Convert to Editable File",
+    UploadConvertToEditable: "Upload Image Based PDF & Convert to Editable PDF",
     ChooseFileTitle: "Choose File or Drag & Drop",
     SupportsPDF: "Supports PDF only up to 10MB",
     ChooseFile: "Choose Files",
