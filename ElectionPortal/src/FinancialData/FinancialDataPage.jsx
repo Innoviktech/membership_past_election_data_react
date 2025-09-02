@@ -4,7 +4,7 @@ import DataDashboard from './DataDashboard';
 import InitialView from './InitialView';
 import './FinancialData.css';
 import HeaderNavbar from '../Components/HeaderNavbar';
-import url from '../api/url.js'; // Adjust the path to where your url.jsx is located
+import url from '../constants/url.jsx'; // Adjust the path to where your url.jsx is located
 
 // Fallback data (same as before)
 const fallbackData = {
