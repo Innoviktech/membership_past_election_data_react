@@ -92,6 +92,12 @@ const HeaderNavbar = () => {
                 {t('NAVBAR.ManifestoPromises')}
               </Link>
               <Link 
+  to="/financial-data" 
+  className={isActive('/financial-data') ? 'active' : ''}
+>
+  {t('NAVBAR.FinancialData')}
+</Link>
+              <Link 
                 to="/services" 
                 className={isActive('/services') ? 'active' : ''}
               >
@@ -147,6 +153,14 @@ const HeaderNavbar = () => {
           >
             {t('NAVBAR.ManifestoPromises')}
           </Link>
+  {/* ----- REPLACE WITH THIS ----- */}
+<Link 
+  to="/financial-data" 
+  className={isActive('/financial-data') ? 'active' : ''}
+  onClick={() => setIsMobileMenuOpen(false)}
+>
+  {t('NAVBAR.FinancialData')}
+</Link>
           <Link 
             to="/services" 
             className={isActive('/services') ? 'active' : ''}
