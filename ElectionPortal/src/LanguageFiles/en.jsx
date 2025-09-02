@@ -3,6 +3,7 @@ export default {
     AppName: "ELECTION PORTAL",
     Home: "Home",
     ManifestoPromises: "Manifesto Promises",
+    FinancialData: "Financial Data",
     Services: "Services",
     About: "About",
     Help: "Help",

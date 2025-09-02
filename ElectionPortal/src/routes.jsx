@@ -5,7 +5,13 @@ import { useEffect } from "react";
 import App from "./App";
 import { useTranslation } from '../src/Components/LanguageSwitch/useTranslation';
 
-// Wrapper component for pages with title
+// Import existing page components
+import FinancialDataPage from "./FinancialData/FinancialDataPage";
+// 1. IMPORT THE NEW API DEMO PAGE
+
+
+
+// Wrapper component for pages with title (no changes here)
 const PageWithTitle = ({ element, titleKey }) => {
   const { t } = useTranslation();
   
@@ -34,7 +40,13 @@ const router = createHashRouter([
       {
         path: '/manifesto-promises',
         element: <PageWithTitle element={<ManifestoPromises />} titleKey="NAVBAR.ManifestoPromises" />
-      }
+      },
+      {
+        path: '/financial-data',
+        element: <PageWithTitle element={<FinancialDataPage />} titleKey="NAVBAR.FinancialData" />
+      },
+      // 2. ADD THE NEW ROUTE FOR THE API DEMO PAGE HERE
+      
     ]
   }
 ]);
