@@ -4,7 +4,7 @@ const BASE_URL = import.meta.env.VITE_ORIGIN === "diff" ? "/api" : "http://68.17
 const url = {
   getFinancialDataByState: {
   method: "GET",
-  url: `${BASE_URL}/api/financial`,
+  url: `${BASE_URL}/api/financial/`,
 },
   get_state: {
     method: "GET",
