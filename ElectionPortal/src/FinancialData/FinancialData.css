@@ -450,3 +450,78 @@
   from { opacity: 0; transform: translateY(-10px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+.tracked-request-details {
+  background-color: #f4f7fb;  /* Light gray background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.tracked-request-details h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.tracked-request-details h2::before {
+  content: '📦'; /* Icon before title */
+  font-size: 28px;
+  margin-right: 10px;
+}
+
+.tracked-request-details ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.tracked-request-details li {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 8px;
+}
+
+.tracked-request-details li strong {
+  color: #007bff;
+}
+
+.tracked-request-details .tracking-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.tracked-request-details .tracking-item span {
+  font-weight: 600;
+  color: #333;
+}
+
+.tracked-request-details .tracking-item-value {
+  font-weight: 400;
+  color: #666;
+}
+
+.tracked-request-details li span {
+  font-weight: 600;
+  color: #333;
+}
+
+.tracked-request-details li {
+  font-size: 16px;
+  margin-bottom: 12px;
+  background-color: #ffffff;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.tracked-request-details li + li {
+  margin-top: 10px;
+}
