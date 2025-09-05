@@ -5,7 +5,15 @@ const url = {
   getFinancialDataByState: {
   method: "GET",
   url: `${BASE_URL}/api/financial/`,
-},
+  },
+  create_request: {
+  method: "POST",
+  url: `${BASE_URL}/Create_Request_Form`,
+  },
+  getrequestdetails: {
+    method: "GET",
+    url: `${BASE_URL}/get_request_details`,
+  },
   get_state: {
     method: "GET",
     url: `${BASE_URL}/get_state`,
