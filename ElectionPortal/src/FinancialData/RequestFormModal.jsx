@@ -63,13 +63,33 @@ const RequestFormModal = ({ isOpen, onClose, stateId, stateName }) => {
     }
   };
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(trackingId);
-    toast.success("Tracking ID copied!", {
-      position: "bottom-center",
-      icon: "✅",
-    });
-  };
+  const handleCopy = async () => {
+	  if (typeof navigator !== "undefined" && navigator.clipboard) {
+		try {
+		  await navigator.clipboard.writeText(trackingId);
+		  toast.success("Tracking ID copied!", {
+			position: "bottom-center",
+			icon: "✅",
+		  });
+		} catch (err) {
+		  console.error("Failed to copy:", err);
+		  toast.error("Failed to copy ID", { position: "bottom-center" });
+		}
+	  } else {
+		// fallback for older browsers / non-HTTPS
+		const textarea = document.createElement("textarea");
+		textarea.value = trackingId;
+		document.body.appendChild(textarea);
+		textarea.select();
+		document.execCommand("copy");
+		document.body.removeChild(textarea);
+
+		toast.success("Tracking ID copied", {
+		  position: "bottom-center",
+		  icon: "✅",
+		});
+	  }
+	};
 
   if (!isOpen) return null;
 
