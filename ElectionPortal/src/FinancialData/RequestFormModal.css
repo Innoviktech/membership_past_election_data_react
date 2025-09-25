@@ -1,0 +1,129 @@
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-box {
+  background: #fff;
+  padding: 30px 25px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  text-align: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-box h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.modal-box input,
+.modal-box textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.submit-btn {
+  background-color: #6a2e2e;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background-color: #e0e0e0;
+  color: #333;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* 🎉 Success message */
+.modal-box h3 {
+  margin-bottom: 8px;
+  color: #2c3e50;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.modal-box p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.tracking-id-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 16px 0;
+  font-size: 1rem;
+}
+
+.tracking-id-text {
+  font-family: monospace;
+  word-break: break-word;
+}
+
+.copy-icon {
+  cursor: pointer;
+  color: #1a73e8; /* Google blue */
+  transition: transform 0.2s ease;
+}
+
+.copy-icon:hover {
+  transform: scale(1.1);
+  color: #0d47a1;
+}
+
+
+/* Success buttons aligned center */
+.modal-buttons.success-view {
+  justify-content: center;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+/* OK button */
+.ok-btn {
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.ok-btn:hover {
+  background-color: #27ae60;
+}

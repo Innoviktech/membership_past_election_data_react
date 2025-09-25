@@ -9,10 +9,15 @@ const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActionPaths: ['payload.headers'],
-        ignoredPaths: ['voter.states.headers']
-      }
+      serializableCheck: false,
+      // serializableCheck: {
+      //   ignoredActionPaths: ['payload.headers'],
+      //   ignoredPaths: [
+      //     'voter.states.headers',
+      //     'meta.arg',
+      //     'meta'
+      //   ],
+      // }
     })
 });
 

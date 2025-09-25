@@ -5,9 +5,13 @@ import './App.scss'
 import SpinnerProvider from './Components/Spinner/SpinnerProvider'
 import { Outlet } from 'react-router-dom'
 import { MessageProvider } from './Components/MessageModel/MessageContext'
+import { LanguageProvider } from './Components/LanguageSwitch/LanguageContext'
+import useCanonical from './Hooks/useCanonical'
+import useMetaTags from './Hooks/useMetaTags'
 
 function App() {
-  const [count, setCount] = useState(0)
+  useCanonical();
+  useMetaTags();
   // This will run once when component mounts (after refresh)
   useEffect(() => {
     // Scroll to top immediately
@@ -26,9 +30,11 @@ function App() {
   return (
     <>
       <SpinnerProvider>
-        <MessageProvider>
-          <Outlet />
-        </MessageProvider>
+        <LanguageProvider>
+          <MessageProvider>
+            <Outlet />
+          </MessageProvider>
+        </LanguageProvider>
       </SpinnerProvider>
     </>
   )

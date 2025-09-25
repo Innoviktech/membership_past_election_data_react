@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import './HeaderNavbar.scss'; // Create this CSS file
+import './HeaderNavbar.scss';
+import LanguageDropdown from './LanguageSwitch/LanguageDropdown';
+import { useTranslation } from './LanguageSwitch/useTranslation';
 
 const HeaderNavbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -8,6 +10,7 @@ const HeaderNavbar = () => {
   const location = useLocation();
   const mobileMenuRef = useRef(null);
   const menuButtonRef = useRef(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -63,57 +66,71 @@ const HeaderNavbar = () => {
 
         {/* Centered Title */}
         <div className="navbar-title">
-          <h1>ELECTION PORTAL</h1>
+          <h1>{t('NAVBAR.AppName')}</h1>
         </div>
 
-        {/* Navigation Links - Desktop */}
-        {isDesktop && (
-          <nav className="navbar-links">
-            {/* <Link 
-              to="/voter-services" 
-              className={isActive('/voter-services') ? 'active' : ''}
-            >
-              Voter Services
-            </Link> */}
-            <Link 
-              to="/election-info" 
-              className={isActive('/election-info') ? 'active' : ''}
-            >
-              Election Info
-            </Link>
-            <Link 
-              to="/manifesto-promises" 
-              className={isActive('/manifesto-promises') ? 'active' : ''}
-            >
-              Manifesto Promises
-            </Link>
-            {/* <Link 
-              to="/results" 
-              className={isActive('/results') ? 'active' : ''}
-            >
-              Results
-            </Link> */}
-            {/* <Link 
-              to="/contact" 
-              className={isActive('/contact') ? 'active' : ''}
-            >
-              Contact
-            </Link> */}
-          </nav>
-        )}
+        {/* Right Section: Language Toggle and Navigation/Menu */}
+        <div className="navbar-right">
+          {/* Language Toggle */}
+          <div className="navbar-language">
+            <LanguageDropdown />
+          </div>
 
-        {/* Mobile Menu Button */}
-        {!isDesktop && (
-          <button 
-            ref={menuButtonRef}
-            className="mobile-menu-button"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-expanded={isMobileMenuOpen}
-            aria-label="Toggle menu"
-          >
-            {isMobileMenuOpen ? '✕' : '☰'}
-          </button>
-        )}
+          {/* Navigation Links - Desktop */}
+          {isDesktop && (
+            <nav className="navbar-links">
+              <Link
+                to="/voter-services"
+                className={isActive('/') || isActive('/voter-services') ? 'active' : ''}
+              >
+                {t('NAVBAR.Home')}
+              </Link>
+              <Link 
+                to="/manifesto-promises" 
+                className={isActive('/manifesto-promises') ? 'active' : ''}
+              >
+                {t('NAVBAR.ManifestoPromises')}
+              </Link>
+              <Link 
+  to="/financial-data" 
+  className={isActive('/financial-data') ? 'active' : ''}
+>
+  {t('NAVBAR.FinancialData')}
+</Link>
+              <Link 
+                to="/services" 
+                className={isActive('/services') ? 'active' : ''}
+              >
+                {t('NAVBAR.Services')}
+              </Link>
+              <Link 
+                to="/about" 
+                className={isActive('/about') ? 'active' : ''}
+              >
+                {t('NAVBAR.About')}
+              </Link>
+              <Link 
+                to="/help" 
+                className={isActive('/help') ? 'active' : ''}
+              >
+                {t('NAVBAR.Help')}
+              </Link>
+            </nav>
+          )}
+
+          {/* Mobile Menu Button */}
+          {!isDesktop && (
+            <button 
+              ref={menuButtonRef}
+              className="mobile-menu-button"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-expanded={isMobileMenuOpen}
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? '✕' : '☰'}
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Mobile Menu Dropdown */}
@@ -122,41 +139,49 @@ const HeaderNavbar = () => {
           ref={mobileMenuRef}
           className="mobile-menu"
           aria-hidden={!isMobileMenuOpen}>
-          {/* <Link 
-            to="/voter-services" 
-            className={isActive('/voter-services') ? 'active' : ''}
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Voter Services
-          </Link> */}
-          <Link 
-            to="/election-info" 
-            className={isActive('/election-info') ? 'active' : ''}
-            onClick={() => setIsMobileMenuOpen(false)}
-          >
-            Election Info
+          <Link
+              to="/voter-services"
+              className={isActive('/') || isActive('/voter-services') ? 'active' : ''}
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+            {t('NAVBAR.Home')}
           </Link>
           <Link 
             to="/manifesto-promises" 
             className={isActive('/manifesto-promises') ? 'active' : ''}
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Manifesto Promises
+            {t('NAVBAR.ManifestoPromises')}
           </Link>
-          {/* <Link 
-            to="/results" 
-            className={isActive('/results') ? 'active' : ''}
+  {/* ----- REPLACE WITH THIS ----- */}
+<Link 
+  to="/financial-data" 
+  className={isActive('/financial-data') ? 'active' : ''}
+  onClick={() => setIsMobileMenuOpen(false)}
+>
+  {t('NAVBAR.FinancialData')}
+</Link>
+          <Link 
+            to="/services" 
+            className={isActive('/services') ? 'active' : ''}
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Results
-          </Link> */}
-          {/* <Link 
-            to="/contact" 
-            className={isActive('/contact') ? 'active' : ''}
+            {t('NAVBAR.Services')}
+          </Link>
+          <Link 
+            to="/about" 
+            className={isActive('/about') ? 'active' : ''}
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Contact
-          </Link> */}
+            {t('NAVBAR.About')}
+          </Link>
+          <Link 
+            to="/help" 
+            className={isActive('/help') ? 'active' : ''}
+            onClick={() => setIsMobileMenuOpen(false)}
+          >
+            {t('NAVBAR.Help')}
+          </Link>
         </nav>
       )}
       {/* Overlay for mobile */}

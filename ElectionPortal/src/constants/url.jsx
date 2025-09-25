@@ -1,7 +1,19 @@
-const BASE_URL = "http://68.178.175.207:8001";
+const BASE_URL = import.meta.env.VITE_ORIGIN === "diff" ? "/api" : "http://68.178.175.207:8001";
 
 
 const url = {
+  getFinancialDataByState: {
+  method: "GET",
+  url: `${BASE_URL}/api/financial/`,
+  },
+  create_request: {
+  method: "POST",
+  url: `${BASE_URL}/Create_Request_Form`,
+  },
+  getrequestdetails: {
+    method: "GET",
+    url: `${BASE_URL}/get_request_details`,
+  },
   get_state: {
     method: "GET",
     url: `${BASE_URL}/get_state`,
@@ -26,6 +38,18 @@ const url = {
     method: "GET",
     url: `${BASE_URL}/polling_station_editable_pdf`,
   },
+  pdf_page_count: {
+    method: "POST",
+    url: `${BASE_URL}/pdf_page_count`,
+  },
+  upload_and_convert_pdfs: {
+    method: "POST",
+    url: `${BASE_URL}/upload_and_convert_pdfs`,
+  },
+  store_payment_details: {
+    method: "POST",
+    url: `${BASE_URL}/store_payment_details`,
+  },
   getAllParty: {
     method: "GET",
     url: `${BASE_URL}/get_all_party`,
@@ -46,7 +70,18 @@ const url = {
     method: "POST",
     url: `${BASE_URL}/get_all_manifesto_promises`,
   },
-  
+  isAuthenticate: {
+    method: "GET",
+    url: `${BASE_URL}/isAuthenticate`,
+  },
+  getCSRF: {
+    method: "GET",
+    url: `${BASE_URL}/csrf/`,
+  },
+  apiSecureLogin: {
+    method: "POST",
+    url: `${BASE_URL}/api/login/`,
+  },
 };
 
 
